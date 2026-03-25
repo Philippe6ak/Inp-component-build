@@ -54,6 +54,19 @@ const StyledNavLink = styled(NavLink)`
   &.active:visited svg {
     color: var(--color-brand-600);
   }
+
+  @media (max-width: 768px) {
+    &:link,
+    &:visited {
+      /* justify-content: center; */
+      gap: 0;
+      padding: 1.2rem;
+    }
+
+    & span {
+      display: none;
+    }
+  }
 `;
 
 function MainNav() {

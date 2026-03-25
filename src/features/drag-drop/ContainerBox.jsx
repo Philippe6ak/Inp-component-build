@@ -28,8 +28,4 @@ function ContainerBox({ children }) {
   );
 }
 
-ContainerBox.propTypes = {
-  children: PropTypes.node,
-};
-
 export default ContainerBox;
