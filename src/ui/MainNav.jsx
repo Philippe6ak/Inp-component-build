@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
 import {
   HiClipboardDocument,
   HiInboxArrowDown,
@@ -11,116 +10,55 @@ import {
   HiOutlineUsers,
 } from "react-icons/hi2";
 
-const NavList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-`;
+const navLinkBaseClassName =
+  "group flex items-center gap-[1.2rem] rounded-sm px-[2.4rem] py-[1.2rem] text-[1.6rem] font-medium text-grey-600 transition-all duration-300 hover:bg-grey-50 hover:text-grey-800 active:bg-grey-50 active:text-grey-800 max-md:gap-0 max-md:p-[1.2rem]";
 
-const StyledNavLink = styled(NavLink)`
-  &:link,
-  &:visited {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
+const navLinkActiveClassName = "bg-grey-50 text-grey-800";
 
-    color: var(--color-grey-600);
-    font-size: 1.6rem;
-    font-weight: 500;
-    padding: 1.2rem 2.4rem;
-    transition: all 0.3s;
-  }
+const navIconBaseClassName =
+  "h-[2.4rem] w-[2.4rem] text-grey-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600";
 
-  /* This works because react-router places the active class on the active NavLink */
-  &:hover,
-  &:active,
-  &.active:link,
-  &.active:visited {
-    color: var(--color-grey-800);
-    background-color: var(--color-grey-50);
-    border-radius: var(--border-radius-sm);
-  }
+const navIconActiveClassName = "text-brand-600";
 
-  & svg {
-    width: 2.4rem;
-    height: 2.4rem;
-    color: var(--color-grey-400);
-    transition: all 0.3s;
-  }
-
-  &:hover svg,
-  &:active svg,
-  &.active:link svg,
-  &.active:visited svg {
-    color: var(--color-brand-600);
-  }
-
-  @media (max-width: 768px) {
-    &:link,
-    &:visited {
-      /* justify-content: center; */
-      gap: 0;
-      padding: 1.2rem;
-    }
-
-    & span {
-      display: none;
-    }
-  }
-`;
+const navItems = [
+  { to: "/dashboard", label: "Home", Icon: HiOutlineHome },
+  { to: "/bookings", label: "Bookings", Icon: HiOutlineCalendarDays },
+  { to: "/cabins", label: "Cabins", Icon: HiOutlineHomeModern },
+  { to: "/users", label: "Users", Icon: HiOutlineUsers },
+  { to: "/settings", label: "Settings", Icon: HiOutlineCog6Tooth },
+  { to: "/table", label: "Table", Icon: HiOutlineTableCells },
+  { to: "/drag-drop", label: "Drag & Drop", Icon: HiInboxArrowDown },
+  {
+    to: "/reusable-buttons",
+    label: "Reusable Buttons",
+    Icon: HiClipboardDocument,
+  },
+];
 
 function MainNav() {
   return (
     <nav>
-      <NavList>
-        <li>
-          <StyledNavLink to="/dashboard">
-            <HiOutlineHome /> <span>Home</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/bookings">
-            <HiOutlineCalendarDays />
-            <span>Bookings</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/cabins">
-            <HiOutlineHomeModern />
-            <span>Cabins</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/users">
-            <HiOutlineUsers />
-            <span>Users</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/settings">
-            <HiOutlineCog6Tooth />
-            <span>Settings</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/table">
-            <HiOutlineTableCells />
-            <span>Table</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/drag-drop">
-            <HiInboxArrowDown />
-            <span>Drag & Drop</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/reusable-buttons">
-            <HiClipboardDocument />
-            <span>Reusable Buttons</span>
-          </StyledNavLink>
-        </li>
-      </NavList>
+      <ul className="flex flex-col gap-[0.8rem]">
+        {navItems.map(({ to, label, Icon }) => (
+          <li key={to}>
+            <NavLink
+              to={to}
+              className={({ isActive }) =>
+                `${navLinkBaseClassName} ${isActive ? navLinkActiveClassName : ""}`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <Icon
+                    className={`${navIconBaseClassName} ${isActive ? navIconActiveClassName : ""}`}
+                  />
+                  <span className="max-md:hidden">{label}</span>
+                </>
+              )}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 }
