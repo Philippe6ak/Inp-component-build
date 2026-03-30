@@ -157,8 +157,10 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  /* padding: 0;
+  margin: 0; 
+  NOT NEEDED IN TAILWIND PROJECTS SINCE WE USE PRESET UTILITY CLASSES FOR SPACING
+  */
 
   /* Smooth dark mode transitions */
   transition:

@@ -1,63 +1,62 @@
 import { NavLink } from "react-router-dom";
 import {
-  HiClipboardDocument,
-  HiInboxArrowDown,
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlineHomeModern,
-  HiOutlineTableCells,
   HiOutlineUsers,
 } from "react-icons/hi2";
 
-const navLinkBaseClassName =
-  "group flex items-center gap-[1.2rem] rounded-sm px-[2.4rem] py-[1.2rem] text-[1.6rem] font-medium text-grey-600 transition-all duration-300 hover:bg-grey-50 hover:text-grey-800 active:bg-grey-50 active:text-grey-800 max-md:gap-0 max-md:p-[1.2rem]";
-
-const navLinkActiveClassName = "bg-grey-50 text-grey-800";
-
-const navIconBaseClassName =
-  "h-[2.4rem] w-[2.4rem] text-grey-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600";
-
-const navIconActiveClassName = "text-brand-600";
-
-const navItems = [
-  { to: "/dashboard", label: "Home", Icon: HiOutlineHome },
-  { to: "/bookings", label: "Bookings", Icon: HiOutlineCalendarDays },
-  { to: "/cabins", label: "Cabins", Icon: HiOutlineHomeModern },
-  { to: "/users", label: "Users", Icon: HiOutlineUsers },
-  { to: "/settings", label: "Settings", Icon: HiOutlineCog6Tooth },
-  { to: "/table", label: "Table", Icon: HiOutlineTableCells },
-  { to: "/drag-drop", label: "Drag & Drop", Icon: HiInboxArrowDown },
-  {
-    to: "/reusable-buttons",
-    label: "Reusable Buttons",
-    Icon: HiClipboardDocument,
-  },
-];
+const navLinkClass = [
+  // Base layout
+  "flex items-center gap-[12px]",
+  "px-[24px] py-[12px]",
+  "transition-all duration-300",
+  // Base text
+  "text-grey-600 text-[1.6rem] font-medium",
+  // Hover & active — background + text color + border radius
+  "hover:bg-grey-50 hover:text-grey-800 hover:rounded-[var(--border-radius-sm)]",
+  "[&.active]:bg-grey-50 [&.active]:text-grey-800 [&.active]:rounded-[var(--border-radius-sm)]",
+  // SVG default color
+  "[&_svg]:w-[24px] [&_svg]:h-[24px] [&_svg]:text-grey-400 [&_svg]:transition-all [&_svg]:duration-300",
+  // SVG hover & active color
+  "hover:[&_svg]:text-brand-600 [&.active_svg]:text-brand-600",
+].join(" ");
 
 function MainNav() {
   return (
     <nav>
-      <ul className="flex flex-col gap-[0.8rem]">
-        {navItems.map(({ to, label, Icon }) => (
-          <li key={to}>
-            <NavLink
-              to={to}
-              className={({ isActive }) =>
-                `${navLinkBaseClassName} ${isActive ? navLinkActiveClassName : ""}`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  <Icon
-                    className={`${navIconBaseClassName} ${isActive ? navIconActiveClassName : ""}`}
-                  />
-                  <span className="max-md:hidden">{label}</span>
-                </>
-              )}
-            </NavLink>
-          </li>
-        ))}
+      <ul className="flex flex-col gap-[8px]">
+        <li>
+          <NavLink to="/dashboard" className={navLinkClass}>
+            <HiOutlineHome />
+            <span>Home</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/bookings" className={navLinkClass}>
+            <HiOutlineCalendarDays />
+            <span>Bookings</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/cabins" className={navLinkClass}>
+            <HiOutlineHomeModern />
+            <span>Cabins</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/users" className={navLinkClass}>
+            <HiOutlineUsers />
+            <span>Users</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/settings" className={navLinkClass}>
+            <HiOutlineCog6Tooth />
+            <span>Settings</span>
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
