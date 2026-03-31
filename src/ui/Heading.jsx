@@ -1,32 +1,20 @@
-import styled, { css } from "styled-components";
+import clsx from "clsx";
 
-const Heading = styled.h1`
-  ${(props) =>
-    props.as === "h1" &&
-    css`
-      font-size: 3rem;
-      font-weight: 600;
-    `}
-  ${(props) =>
-    props.as === "h2" &&
-    css`
-      font-size: 2rem;
-      font-weight: 600;
-    `} 
-  ${(props) =>
-    props.as === "h3" &&
-    css`
-      font-size: 2rem;
-      font-weight: 500;
-    `}
-  ${(props) =>
-    props.as === "h4" &&
-    css`
-      font-size: 3rem;
-      font-weight: 600;
-      text-align: center;
-    `}
-  line-height: 1.4;
-`;
+function Heading({ as: Tag = "h1", children, className = "" }) {
+  return (
+    <Tag
+      className={clsx(
+        "leading-[1.4]",
+        Tag === "h1" && "text-[30px] font-semibold",
+        Tag === "h2" && "text-[20px] font-semibold",
+        Tag === "h3" && "text-[20px] font-medium",
+        Tag === "h4" && "text-[30px] font-semibold text-center",
+        className,
+      )}
+    >
+      {children}
+    </Tag>
+  );
+}
 
 export default Heading;

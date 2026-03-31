@@ -1,27 +1,22 @@
-import styled from "styled-components";
-import Logout from "../features/authentication/Logout";
-import ButtonIcon from "./ButtonIcon";
 import { HiOutlineUser } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import Logout from "../features/authentication/Logout";
+import ButtonIcon from "./ButtonIcon";
 import DarkModeToggle from "./DarkModeToggle";
-
-const StyledHeaderMenu = styled.ul`
-  display: flex;
-  gap: 0.4rem;
-`;
 
 function HeaderMenu() {
   const navigate = useNavigate();
 
   return (
-    <StyledHeaderMenu>
+    <ul className="flex gap-[0.4rem]">
       <li>
-        <ButtonIcon>
-          <HiOutlineUser
-            onClick={() => {
-              navigate("/account");
-            }}
-          />
+        <ButtonIcon
+          onClick={() => {
+            navigate("/account");
+          }}
+          aria-label="Go to account settings"
+        >
+          <HiOutlineUser />
         </ButtonIcon>
       </li>
       <li>
@@ -30,7 +25,7 @@ function HeaderMenu() {
       <li>
         <Logout />
       </li>
-    </StyledHeaderMenu>
+    </ul>
   );
 }
 

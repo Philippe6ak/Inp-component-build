@@ -8,18 +8,14 @@ import {
 } from "react-icons/hi2";
 
 const navLinkClass = [
-  // Base layout
-  "flex items-center gap-[12px]",
-  "px-[24px] py-[12px]",
+  "flex items-center justify-center md:justify-start",
+  "md:gap-[12px]",
+  "px-[12px] py-[12px] md:px-[24px]",
   "transition-all duration-300",
-  // Base text
   "text-grey-600 text-[1.6rem] font-medium",
-  // Hover & active — background + text color + border radius
   "hover:bg-grey-50 hover:text-grey-800 hover:rounded-[var(--border-radius-sm)]",
   "[&.active]:bg-grey-50 [&.active]:text-grey-800 [&.active]:rounded-[var(--border-radius-sm)]",
-  // SVG default color
   "[&_svg]:w-[24px] [&_svg]:h-[24px] [&_svg]:text-grey-400 [&_svg]:transition-all [&_svg]:duration-300",
-  // SVG hover & active color
   "hover:[&_svg]:text-brand-600 [&.active_svg]:text-brand-600",
 ].join(" ");
 
@@ -30,31 +26,31 @@ function MainNav() {
         <li>
           <NavLink to="/dashboard" className={navLinkClass}>
             <HiOutlineHome />
-            <span>Home</span>
+            <span className="hidden md:block">Home</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="/bookings" className={navLinkClass}>
             <HiOutlineCalendarDays />
-            <span>Bookings</span>
+            <span className="hidden md:block">Bookings</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="/cabins" className={navLinkClass}>
             <HiOutlineHomeModern />
-            <span>Cabins</span>
+            <span className="hidden md:block">Cabins</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="/users" className={navLinkClass}>
             <HiOutlineUsers />
-            <span>Users</span>
+            <span className="hidden md:block">Users</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="/settings" className={navLinkClass}>
             <HiOutlineCog6Tooth />
-            <span>Settings</span>
+            <span className="hidden md:block">Settings</span>
           </NavLink>
         </li>
       </ul>

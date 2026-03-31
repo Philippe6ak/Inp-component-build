@@ -7,7 +7,7 @@ function Logo() {
 
   return (
     <div className="text-center">
-      <img src={src} alt="Logo" className="h-[9.6rem] w-auto" />
+      <img src={src} alt="Logo" className="h-[9.6rem] w-auto hidden md:block" />
     </div>
   );
 }
