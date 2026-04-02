@@ -1,28 +1,20 @@
-import styled from "styled-components";
+import Button from '../../ui/Button';
+import ButtonGroup from '../../ui/ButtonGroup';
+import ButtonText from '../../ui/ButtonText';
+import Heading from '../../ui/Heading';
+import Row from '../../ui/Row';
+import Spinner from '../../ui/Spinner';
+import Tag from '../../ui/Tag';
+import BookingDataBox from './BookingDataBox';
 
-import BookingDataBox from "./BookingDataBox";
-import Row from "../../ui/Row";
-import Heading from "../../ui/Heading";
-import Tag from "../../ui/Tag";
-import ButtonGroup from "../../ui/ButtonGroup";
-import Button from "../../ui/Button";
-import ButtonText from "../../ui/ButtonText";
-import Spinner from "../../ui/Spinner";
-
-import { useMoveBack } from "../../hooks/useMoveBack";
-import { useBooking } from "./useBooking";
-import { useNavigate } from "react-router-dom";
-import { HiArrowUpOnSquare } from "react-icons/hi2";
-import { useCheckout } from "../check-in-out/useCheckout";
-import Modal from "../../ui/Modal";
-import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useDeleteBooking } from "./useDeleteBooking";
-
-const HeadingGroup = styled.div`
-  display: flex;
-  gap: 2.4rem;
-  align-items: center;
-`;
+import { HiArrowUpOnSquare } from 'react-icons/hi2';
+import { useNavigate } from 'react-router-dom';
+import { useMoveBack } from '../../hooks/useMoveBack';
+import ConfirmDelete from '../../ui/ConfirmDelete';
+import Modal from '../../ui/Modal';
+import { useCheckout } from '../check-in-out/useCheckout';
+import { useBooking } from './useBooking';
+import { useDeleteBooking } from './useDeleteBooking';
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
@@ -37,30 +29,30 @@ function BookingDetail() {
   if (isLoading) return <Spinner />;
 
   const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
+    unconfirmed: 'blue',
+    'checked-in': 'green',
+    'checked-out': 'silver',
   };
 
   return (
     <>
       <Row type="horizontal">
-        <HeadingGroup>
+        <div className="flex gap-[2.4rem] items-center">
           <Heading as="h1">Booking #{bookingId}</Heading>
-          <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
-        </HeadingGroup>
+          <Tag type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
+        </div>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
       <BookingDataBox booking={booking} />
 
       <ButtonGroup>
-        {status === "unconfirmed" && (
+        {status === 'unconfirmed' && (
           <Button onClick={() => navigate(`/checkin/${bookingId}`)}>
             Check-in
           </Button>
         )}
-        {status === "checked-in" && (
+        {status === 'checked-in' && (
           <Button
             icon={<HiArrowUpOnSquare />}
             onClick={() => checkout(bookingId)}
@@ -78,7 +70,7 @@ function BookingDetail() {
               resourceName="booking"
               onConfirm={() =>
                 deleteBooking(bookingId, {
-                  onSettled: () => navigate("/bookings"),
+                  onSettled: () => navigate('/bookings'),
                 })
               }
               disabled={isDeleting}
