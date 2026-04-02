@@ -1,23 +1,24 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import {
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlineHomeModern,
+  HiOutlineTableCells,
   HiOutlineUsers,
-} from "react-icons/hi2";
+} from 'react-icons/hi2';
 
 const navLinkClass = [
-  "flex items-center justify-center md:justify-start",
-  "md:gap-[12px]",
-  "px-[12px] py-[12px] md:px-[24px]",
-  "transition-all duration-300",
-  "text-grey-600 text-[1.6rem] font-medium",
-  "hover:bg-grey-50 hover:text-grey-800 hover:rounded-[var(--border-radius-sm)]",
-  "[&.active]:bg-grey-50 [&.active]:text-grey-800 [&.active]:rounded-[var(--border-radius-sm)]",
-  "[&_svg]:w-[24px] [&_svg]:h-[24px] [&_svg]:text-grey-400 [&_svg]:transition-all [&_svg]:duration-300",
-  "hover:[&_svg]:text-brand-600 [&.active_svg]:text-brand-600",
-].join(" ");
+  'flex items-center justify-center md:justify-start',
+  'md:gap-[12px]',
+  'px-[12px] py-[12px] md:px-[24px]',
+  'transition-all duration-300',
+  'text-grey-600 text-[1.6rem] font-medium',
+  'hover:bg-grey-50 hover:text-grey-800 hover:rounded-[var(--border-radius-sm)]',
+  '[&.active]:bg-grey-50 [&.active]:text-grey-800 [&.active]:rounded-[var(--border-radius-sm)]',
+  '[&_svg]:w-[24px] [&_svg]:h-[24px] [&_svg]:text-grey-400 [&_svg]:transition-all [&_svg]:duration-300',
+  'hover:[&_svg]:text-brand-600 [&.active_svg]:text-brand-600',
+].join(' ');
 
 function MainNav() {
   return (
@@ -51,6 +52,12 @@ function MainNav() {
           <NavLink to="/settings" className={navLinkClass}>
             <HiOutlineCog6Tooth />
             <span className="hidden md:block">Settings</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/table" className={navLinkClass}>
+            <HiOutlineTableCells />
+            <span className="hidden md:block">Table</span>
           </NavLink>
         </li>
       </ul>

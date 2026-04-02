@@ -1,23 +1,17 @@
-import styled, { css } from "styled-components";
+import clsx from 'clsx';
 
-const Row = styled.div`
-  display: flex;
-  ${(props) =>
-    props.type === "horizontal" &&
-    css`
-      justify-content: space-between;
-      align-items: center;
-    `}
-  ${(props) =>
-    props.type === "vertical" &&
-    css`
-      flex-direction: column;
-      gap: 1.6rem;
-    `}
-`;
-
-Row.defaultProps = {
-  type: "vertical",
-};
+function Row({ type = 'vertical', children }) {
+  return (
+    <div
+      className={clsx(
+        'flex',
+        type === 'horizontal' && 'justify-between items-center',
+        type === 'vertical' && 'flex-col gap-[1.6rem]'
+      )}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default Row;

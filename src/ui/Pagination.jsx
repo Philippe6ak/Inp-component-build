@@ -1,114 +1,76 @@
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
-import { useSearchParams } from "react-router-dom";
-import styled from "styled-components";
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
+import { useSearchParams } from 'react-router-dom';
+import { PAGE_SIZE } from '../utils/constants';
 
-import { PAGE_SIZE } from "../utils/constants";
-
-const StyledPagination = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const P = styled.p`
-  font-size: 1.4rem;
-  margin-left: 0.8rem;
-
-  & span {
-    font-weight: 600;
-  }
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  gap: 0.6rem;
-`;
-
-const PaginationButton = styled.button`
-  background-color: ${(props) =>
-    props.active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
-  color: ${(props) => (props.active ? " var(--color-brand-50)" : "inherit")};
-  border: none;
-  border-radius: var(--border-radius-sm);
-  font-weight: 500;
-  font-size: 1.4rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1.2rem;
-  transition: all 0.3s;
-
-  &:has(span:last-child) {
-    padding-left: 0.4rem;
-  }
-
-  &:has(span:first-child) {
-    padding-right: 0.4rem;
-  }
-
-  & svg {
-    height: 1.8rem;
-    width: 1.8rem;
-  }
-
-  &:hover:not(:disabled) {
-    background-color: var(--color-brand-600);
-    color: var(--color-brand-50);
-  }
+const paginationButtonClass = `
+  border-none rounded-[var(--border-radius-sm)]
+  font-medium text-[14px]
+  flex items-center justify-center gap-[4px]
+  px-[12px] py-[6px]
+  transition-all duration-300
+  bg-grey-50
+  enabled:hover:bg-brand-600 enabled:hover:text-brand-50
+  [&_svg]:h-[18px] [&_svg]:w-[18px]
+  [&:has(span:last-child)]:pl-[4px]
+  [&:has(span:first-child)]:pr-[4px]
+  disabled:cursor-not-allowed
 `;
 
 function Pagination({ resultCount }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = !searchParams.get("page")
+  const currentPage = !searchParams.get('page')
     ? 1
-    : Number(searchParams.get("page"));
+    : Number(searchParams.get('page'));
 
   const pageCount = Math.ceil(resultCount / PAGE_SIZE);
 
   function nextPage() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
-    searchParams.set("page", next);
+    searchParams.set('page', next);
     setSearchParams(searchParams);
   }
 
   function prevPage() {
     const prev = currentPage === 1 ? 1 : currentPage - 1;
-    searchParams.set("page", prev);
+    searchParams.set('page', prev);
     setSearchParams(searchParams);
   }
 
   if (pageCount <= 1) return null;
 
   return (
-    <StyledPagination>
-      <P>
+    <div className="w-full flex items-center justify-between">
+      <p className="text-[14px] ml-[8px] [&_span]:font-semibold">
         Showing
         <span> {(currentPage - 1) * PAGE_SIZE + 1} </span>
-        to{" "}
+        to{' '}
         <span>
           {currentPage === pageCount
             ? resultCount
-            : currentPage * PAGE_SIZE}{" "}
+            : currentPage * PAGE_SIZE}{' '}
         </span>
         out of
         <span> {resultCount} </span>
         results
-      </P>
-      <Buttons>
-        <PaginationButton onClick={prevPage} disabled={currentPage === 1}>
+      </p>
+
+      <div className="flex gap-[6px]">
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 1}
+          className={paginationButtonClass}
+        >
           <HiChevronLeft /> <span>Previous</span>
-        </PaginationButton>
-        <PaginationButton
+        </button>
+        <button
           onClick={nextPage}
           disabled={currentPage === pageCount}
+          className={paginationButtonClass}
         >
           <span>Next</span> <HiChevronRight />
-        </PaginationButton>
-      </Buttons>
-    </StyledPagination>
+        </button>
+      </div>
+    </div>
   );
 }
 

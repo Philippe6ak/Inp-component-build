@@ -1,28 +1,22 @@
-import styled from "styled-components";
+import clsx from 'clsx';
 
-const StyledSelect = styled.select`
-  font-size: 1.4rem;
-  padding: 0.8rem 1.2rem;
-  border: 1px solid
-    ${(props) =>
-      props.type === "white"
-        ? "var(--color-grey-100)"
-        : "var(--color-grey-300)"};
-  border-radius: var(--border-radius-sm);
-  background-color: var(--color-grey-0);
-  font-weight: 500;
-  box-shadow: var(--shadow-sm);
-`;
-
-function Select({ options, value, onChange, ...props }) {
+function Select({ options, type = 'default', value, onChange, ...props }) {
   return (
-    <StyledSelect value={value} onChange={onChange} {...props}>
+    <select
+      className={clsx(
+        'text-[1.4rem] text-grey-300 px-[1.2rem] py-[0.8rem] rounded-(--border-radius-sm) bg-grey-0 font-medium shadow-(--shadow-sm)',
+        { 'text-grey-100': type === 'white' }
+      )}
+      value={value}
+      onChange={onChange}
+      {...props}
+    >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>
       ))}
-    </StyledSelect>
+    </select>
   );
 }
 

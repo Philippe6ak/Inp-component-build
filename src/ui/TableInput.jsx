@@ -1,14 +1,10 @@
-import styled from "styled-components";
+function TableInput({ ...props }) {
+  return (
+    <input
+      className="border bg-grey-0 px-[1.2rem] py-[0.8rem] shadow-none w-full h-full"
+      {...props}
+    />
+  );
+}
 
-const Input = styled.input`
-  border: 0px;
-  background-color: var(--color-grey-0);
-  /* border-radius: var(--border-radius-sm); */
-  padding: 0.8rem 1.2rem;
-  box-shadow: none;
-  /* box-shadow: var(--shadow-sm); */
-  width: 100%;
-  height: 100%;
-`;
-
-export default Input;
+export default TableInput;

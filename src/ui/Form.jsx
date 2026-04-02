@@ -1,29 +1,23 @@
-import styled, { css } from "styled-components";
-
-const Form = styled.form`
-  ${(props) =>
-    props.type === "regular" &&
-    css`
-      padding: 2.4rem 4rem;
-
-      /* Box */
-      background-color: var(--color-grey-0);
-      border: 1px solid var(--color-grey-100);
-      border-radius: var(--border-radius-md);
-    `}
-
-  ${(props) =>
-    props.type === "modal" &&
-    css`
-      width: 80rem;
-    `}
-    
-  overflow: hidden;
-  font-size: 1.4rem;
-`;
+import clsx from 'clsx';
 
 Form.defaultProps = {
-  type: "regular",
+  type: 'regular',
 };
+
+function Form({ type = 'regular', children, ...props }) {
+  return (
+    <form
+      className={clsx(
+        'overflow-hidden text-[1.4rem]',
+        type === 'regular' &&
+          'px-[4rem] py-[2.4rem] bg-grey-0 border border-grey-100 rounded-md',
+        type === 'modal' && 'w-7xl'
+      )}
+      {...props}
+    >
+      {children}
+    </form>
+  );
+}
 
 export default Form;

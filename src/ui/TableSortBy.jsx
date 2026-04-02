@@ -1,5 +1,4 @@
-// SortBy.jsx
-import Select from "./Select";
+import Select from './Select';
 
 function SortBy({ options, value, onChange }) {
   return (

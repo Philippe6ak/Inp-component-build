@@ -1,16 +1,7 @@
-import styled from "styled-components";
-import { useUser } from "../features/authentication/useUser";
-import Spinner from "./Spinner";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-
-const FullPage = styled.div`
-  height: 100vh;
-  background-color: var(--color-grey-50);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../features/authentication/useUser';
+import Spinner from './Spinner';
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
@@ -22,18 +13,18 @@ function ProtectedRoute({ children }) {
   useEffect(
     function () {
       if (!isAuthenticated && !isLoading) {
-        navigate("/login");
+        navigate('/login');
       }
     },
-    [isAuthenticated, isLoading, navigate],
+    [isAuthenticated, isLoading, navigate]
   );
 
   //3. while loading, show a spinner
   if (isLoading)
     return (
-      <FullPage>
+      <div className="h-screen bg-grey-50 flex items-center justify-center">
         <Spinner />
-      </FullPage>
+      </div>
     );
 
   //4. if authenticated, show the children (the protected page)

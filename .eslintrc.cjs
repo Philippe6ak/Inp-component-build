@@ -12,7 +12,6 @@ module.exports = {
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   settings: { react: { version: "18.2" } },
   rules: {
-    // Show warnings, don't block anything
     "react/prop-types": "warn",
     "no-unused-vars": "warn",
     "react-hooks/exhaustive-deps": "warn",

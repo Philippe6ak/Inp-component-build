@@ -1,16 +1,16 @@
 import {
-  useReactTable,
-  getCoreRowModel,
   flexRender,
-} from "@tanstack/react-table";
-import { useState } from "react";
-import DATA from "./tableData";
-import useProcessedData from "./useProcessedData";
-import FlexibleTable from "../../ui/FlexibleTable";
-import styled from "styled-components";
-import EditableCell from "./EditableCell";
-import StatusCell from "./StatusCell";
-import DateCell from "./DateCell";
+  getCoreRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import { useState } from 'react';
+import styled from 'styled-components';
+import DateCell from './DateCell';
+import EditableCell from './EditableCell';
+import StatusCell from './StatusCell';
+import DATA from './tableData';
+import useProcessedData from './useProcessedData';
+import Table from '../../ui/Table';
 
 // Styled components
 const Resizer = styled.div`
@@ -23,7 +23,7 @@ const Resizer = styled.div`
   user-select: none;
   touch-action: none;
   background: ${(props) =>
-    props.$isResizing ? "transparent" : "var(--color-grey-900)"};
+    props.$isResizing ? 'transparent' : 'var(--color-grey-900)'};
   &:hover {
     background: var(--color-grey-200);
   }
@@ -39,26 +39,26 @@ const HeaderCell = styled.div`
 
 const columns = [
   {
-    accessorKey: "task",
-    header: "Task",
+    accessorKey: 'task',
+    header: 'Task',
     size: 300,
     cell: EditableCell,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: 'status',
+    header: 'Status',
     size: 150,
     cell: StatusCell,
   },
   {
-    accessorKey: "due",
-    header: "Due",
+    accessorKey: 'due',
+    header: 'Due',
     size: 120,
     cell: DateCell,
   },
   {
-    accessorKey: "notes",
-    header: "Notes",
+    accessorKey: 'notes',
+    header: 'Notes',
     size: 300,
     cell: EditableCell,
   },
@@ -72,7 +72,7 @@ function DataTable() {
     data: processedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    columnResizeMode: "onChange",
+    columnResizeMode: 'onChange',
     //todo later: add pagination using getPaginationRowModel
     meta: {
       updateData: (rowId, columnId, value) =>
@@ -85,7 +85,7 @@ function DataTable() {
               };
             }
             return row;
-          }),
+          })
         ),
     },
   });
@@ -93,11 +93,11 @@ function DataTable() {
   const gridTemplate = table
     .getAllColumns()
     .map((col) => `${col.getSize()}px`)
-    .join(" ");
+    .join(' ');
 
   return (
-    <FlexibleTable columns={gridTemplate}>
-      <FlexibleTable.Header>
+    <Table resizable columns={gridTemplate}>
+      <Table.Header>
         {table.getHeaderGroups().map((headerGroup) =>
           headerGroup.headers.map((header) => (
             <HeaderCell key={header.id}>
@@ -106,7 +106,7 @@ function DataTable() {
                   ? null
                   : flexRender(
                       header.column.columnDef.header,
-                      header.getContext(),
+                      header.getContext()
                     )}
               </div>
               <Resizer
@@ -115,23 +115,23 @@ function DataTable() {
                 $isResizing={header.column.getIsResizing()}
               />
             </HeaderCell>
-          )),
+          ))
         )}
-      </FlexibleTable.Header>
+      </Table.Header>
 
-      <FlexibleTable.Body
+      <Table.Body
         data={table.getRowModel().rows}
         render={(row) => (
-          <FlexibleTable.Row key={row.id}>
+          <Table.Row key={row.id}>
             {row.getVisibleCells().map((cell) => (
               <div key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </div>
             ))}
-          </FlexibleTable.Row>
+          </Table.Row>
         )}
       />
-    </FlexibleTable>
+    </Table>
   );
 }
 

@@ -1,71 +1,13 @@
-import { createContext, useContext } from "react";
-import styled from "styled-components";
-
-const StyledTable = styled.div`
-  border: 1px solid var(--color-grey-200);
-  font-size: 1.4rem;
-  background-color: var(--color-grey-0);
-  border-radius: 7px;
-  overflow: hidden;
-  width: 100%;
-`;
-
-const CommonRow = styled.div`
-  display: grid;
-  grid-template-columns: ${(props) => props.columns};
-  column-gap: 2.4rem;
-  align-items: center;
-  transition: none;
-`;
-
-const StyledHeader = styled(CommonRow)`
-  position: relative;
-  padding: 1.6rem 2.4rem;
-  background-color: var(--color-grey-50);
-  border-bottom: 1px solid var(--color-grey-100);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  font-weight: 600;
-  color: var(--color-grey-600);
-`;
-
-const StyledRow = styled(CommonRow)`
-  padding: 1.2rem 2.4rem;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
-
-const StyledBody = styled.section`
-  margin: 0.4rem 0;
-`;
-
-const Footer = styled.footer`
-  background-color: var(--color-grey-50);
-  display: flex;
-  justify-content: center;
-  padding: 1.2rem;
-
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
-  &:not(:has(*)) {
-    display: none;
-  }
-`;
-
-const Empty = styled.p`
-  font-size: 1.6rem;
-  font-weight: 500;
-  text-align: center;
-  margin: 2.4rem;
-`;
+import { createContext, useContext } from 'react';
 
 const TableContext = createContext();
 
 function FlexibleTable({ columns, children }) {
   return (
     <TableContext.Provider value={{ columns }}>
-      <StyledTable>{children}</StyledTable>
+      <div className="border border-grey-200 text-[14px] bg-grey-0 rounded-md overflow-hidden w-full">
+        {children}
+      </div>
     </TableContext.Provider>
   );
 }
@@ -73,24 +15,45 @@ function FlexibleTable({ columns, children }) {
 function Header({ children }) {
   const { columns } = useContext(TableContext);
   return (
-    <StyledHeader role="row" columns={columns}>
+    <div
+      role="row"
+      style={{ gridTemplateColumns: columns }}
+      className="grid gap-x-[24px] items-center relative px-[24px] py-[16px] bg-grey-50 border-b border-grey-100 uppercase tracking-[0.4px] font-semibold text-grey-600"
+    >
       {children}
-    </StyledHeader>
+    </div>
   );
 }
 
 function Row({ children }) {
   const { columns } = useContext(TableContext);
   return (
-    <StyledRow role="row" columns={columns}>
+    <div
+      role="row"
+      style={{ gridTemplateColumns: columns }}
+      className="grid gap-x-[24px] items-center px-[24px] py-[12px] not-last:border-b not-last:border-grey-100"
+    >
       {children}
-    </StyledRow>
+    </div>
   );
 }
 
 function Body({ data, render }) {
-  if (!data.length) return <Empty>No data to display</Empty>;
-  return <StyledBody>{data.map(render)}</StyledBody>;
+  if (!data.length)
+    return (
+      <p className="text-center text-[16px] font-medium m-[24px]">
+        No data to display
+      </p>
+    );
+  return <section className="my-[4px]">{data.map(render)}</section>;
+}
+
+function Footer({ children }) {
+  return (
+    <footer className="bg-grey-50 flex justify-center p-[12px] [&:not(:has(*))]:hidden">
+      {children}
+    </footer>
+  );
 }
 
 FlexibleTable.Header = Header;
