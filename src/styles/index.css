@@ -281,3 +281,9 @@ img {
 .scrollbar-hidden::-webkit-scrollbar {
   width: 0 !important;
 }
+
+/* saleschart is another tricky component since we need to override the default grid line colors   */
+.recharts-grid-override .recharts-cartesian-grid-horizontal line,
+.recharts-grid-override .recharts-cartesian-grid-vertical line {
+  stroke: var(--color-grey-300);
+}

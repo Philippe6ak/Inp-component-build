@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import { useRecentBookings } from "./useRecentBookings";
-import Spinner from "../../ui/Spinner";
-import { useRecentStays } from "./useRecentStays";
-import Stats from "./Stats";
-import { useCabins } from "../cabins/useCabins";
-import SalesChart from "./SalesChart";
-import DurationChart from "./DurationChart";
-import TodayActivity from "../check-in-out/TodayActivity";
+import styled from 'styled-components';
+import { useRecentBookings } from './useRecentBookings';
+import Spinner from '../../ui/Spinner';
+import { useRecentStays } from './useRecentStays';
+import Stats from './Stats';
+import { useCabins } from '../cabins/useCabins';
+import SalesChart from './SalesChart';
+import DurationChart from './DurationChart';
+import TodayActivity from '../check-in-out/TodayActivity';
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -30,7 +30,7 @@ function DashboardLayout() {
   }
 
   return (
-    <StyledDashboardLayout>
+    <div className="grid grid-cols-[1fr_1fr_1fr_1fr] grid-rows-[auto_34rem_auto]">
       <Stats
         bookings={bookings}
         confirmedStays={confirmedStays}
@@ -40,7 +40,7 @@ function DashboardLayout() {
       <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />
       <SalesChart bookings={bookings} numDays={numDays} />
-    </StyledDashboardLayout>
+    </div>
   );
 }
 
