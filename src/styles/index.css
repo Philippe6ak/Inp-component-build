@@ -268,3 +268,16 @@ img {
 .animate-spin-smooth {
   animation: rotate 1.5s infinite linear;
 }
+
+/* another custom styling is for hidding the scrollbar but still allowing scrolling, which is used in the TodayActivity component for the list of activities. */
+
+.scrollbar-hidden {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0 !important;
+}
