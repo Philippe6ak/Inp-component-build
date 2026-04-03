@@ -1,14 +1,14 @@
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
-import Input from "../../ui/Input";
-import Form from "../../ui/Form";
-import Button from "../../ui/Button";
-import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
-import FormRow from "../../ui/formRow";
+import Input from '../../ui/Input';
+import Form from '../../ui/Form';
+import Button from '../../ui/Button';
+import FileInput from '../../ui/FileInput';
+import Textarea from '../../ui/Textarea';
+import FormRow from '../../ui/FormRow';
 
-import { useCreateCabin } from "./useCreateCabin";
-import { useEditCabin } from "./useEditCabin";
+import { useCreateCabin } from './useCreateCabin';
+import { useEditCabin } from './useEditCabin';
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -26,7 +26,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const isWorking = isCreating || isEditing;
 
   function onSumbit(data) {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
+    const image = typeof data.image === 'string' ? data.image : data.image[0];
     // console.log(data);
     if (isEditSession)
       editCabin(
@@ -38,7 +38,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             reset();
             onCloseModal?.();
           },
-        },
+        }
       );
     else
       createCabin(
@@ -49,7 +49,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             reset();
             onCloseModal?.();
           },
-        }, // reset moved here from hook
+        } // reset moved here from hook
       );
   }
 
@@ -60,7 +60,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   return (
     <Form
       onSubmit={handleSubmit(onSumbit, onError)}
-      type={onCloseModal ? "modal" : "regular"}
+      type={onCloseModal ? 'modal' : 'regular'}
     >
       {/* pageBreak mf */}
       <FormRow label="Cabin name" error={errors?.name?.message}>
@@ -68,7 +68,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="text"
           id="name"
           disabled={isWorking}
-          {...register("name", {
+          {...register('name', {
             required: "This wasn't put here for decoration",
           })}
         />
@@ -79,7 +79,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="number"
           id="maxCapacity"
           disabled={isWorking}
-          {...register("maxCapacity", {
+          {...register('maxCapacity', {
             required: "This wasn't put here for decoration",
             min: {
               value: 1,
@@ -94,11 +94,11 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="number"
           id="regularPrice"
           disabled={isWorking}
-          {...register("regularPrice", {
+          {...register('regularPrice', {
             required: "This wasn't put here for decoration",
             min: {
               value: 1,
-              message: "MONEEEEY???",
+              message: 'MONEEEEY???',
             },
           })}
         />
@@ -110,11 +110,11 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           id="discount"
           disabled={isWorking}
           defaultValue={0}
-          {...register("discount", {
+          {...register('discount', {
             required: "This wasn't put here for decoration",
             validate: (value) =>
               Number(value) <= Number(getValues().regularPrice) ||
-              "Idiot sandwitch, you plan to give them money ?",
+              'Idiot sandwitch, you plan to give them money ?',
           })}
         />
       </FormRow>
@@ -128,7 +128,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           id="description"
           disabled={isWorking}
           defaultValue=""
-          {...register("description", {
+          {...register('description', {
             required: "This wasn't put here for decoration",
           })}
         />
@@ -138,7 +138,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <FileInput
           id="image"
           accept="image/*"
-          {...register("image", {
+          {...register('image', {
             required: isEditSession
               ? false
               : "This wasn't put here for decoration",
@@ -156,7 +156,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit cabin" : "Create new cabin"}
+          {isEditSession ? 'Edit cabin' : 'Create new cabin'}
         </Button>
       </FormRow>
     </Form>
