@@ -1,99 +1,31 @@
-import styled from "styled-components";
-import { HiEye, HiPencil, HiSquare2Stack } from "react-icons/hi2";
+import { HiEye, HiPencil, HiSquare2Stack } from 'react-icons/hi2';
 
-import Button from "../../ui/Button";
-import Menus from "../../ui/Menus";
+import Button from '../../ui/Button';
+import Menus from '../../ui/Menus';
 
-const variations = ["primary", "secondary", "danger"];
-const sizes = ["small", "medium", "large"];
-
-const Wrapper = styled.div`
-  display: grid;
-  gap: 2.4rem;
-`;
-
-const DefaultExample = styled.div`
-  display: grid;
-  gap: 1.2rem;
-  padding: 2rem;
-  border: 1px solid var(--color-grey-200);
-  border-radius: var(--border-radius-md);
-  background-color: var(--color-grey-0);
-`;
-
-const ExampleTitle = styled.h3`
-  font-size: 1.8rem;
-  font-weight: 600;
-`;
-
-const Hint = styled.p`
-  font-size: 1.3rem;
-  color: var(--color-grey-500);
-`;
-
-const VariationsGrid = styled.div`
-  display: grid;
-  gap: 1.6rem;
-`;
-
-const VariationCard = styled.div`
-  display: grid;
-  gap: 1.6rem;
-  padding: 2rem;
-  border: 1px solid var(--color-grey-200);
-  border-radius: var(--border-radius-md);
-  background-color: var(--color-grey-0);
-`;
-
-const VariationTitle = styled.h4`
-  font-size: 1.5rem;
-  font-weight: 600;
-  text-transform: capitalize;
-`;
-
-const ButtonsRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-  align-items: center;
-`;
-
-const DropdownCard = styled.div`
-  display: grid;
-  gap: 1.2rem;
-  padding: 2rem;
-  border: 1px solid var(--color-grey-200);
-  border-radius: var(--border-radius-md);
-  background-color: var(--color-grey-0);
-`;
-
-const DropdownPreview = styled.div`
-  width: 100%;
-  min-height: 6rem;
-  padding: 1rem;
-  border: 1px dashed var(--color-grey-300);
-  border-radius: var(--border-radius-md);
-  background-color: var(--color-grey-50);
-`;
+const variations = ['primary', 'secondary', 'danger'];
+const sizes = ['small', 'medium', 'large'];
 
 function ReusableButtonsLayout() {
   return (
-    <Wrapper>
-      <DefaultExample>
-        <ExampleTitle>Default Button</ExampleTitle>
-        <ButtonsRow>
+    <div className="grid gap-[2.4rem]">
+      <div className="grid gap-[1.2rem] rounded-(--border-radius-md) border border-grey-200 bg-(--color-grey-0) p-[2rem]">
+        <h3 className="text-[1.8rem] font-semibold">Default Button</h3>
+        <div className="flex flex-wrap items-center gap-[1.2rem]">
           <Button>Default action</Button>
-        </ButtonsRow>
-        <Hint>
+        </div>
+        <p className="text-[1.3rem] text-grey-500">
           Uses default props: size=&quot;medium&quot; and
           variation=&quot;primary&quot;.
-        </Hint>
-      </DefaultExample>
+        </p>
+      </div>
 
-      <DropdownCard>
-        <ExampleTitle>Dropdown Menu</ExampleTitle>
-        <Hint>Click the three-dot toggle to open a generic actions menu.</Hint>
-        <DropdownPreview>
+      <div className="grid gap-[1.2rem] rounded-(--border-radius-md) border border-grey-200 bg-(--color-grey-0) p-[2rem]">
+        <h3 className="text-[1.8rem] font-semibold">Dropdown Menu</h3>
+        <p className="text-[1.3rem] text-grey-500">
+          Click the three-dot toggle to open a generic actions menu.
+        </p>
+        <div className="min-h-[6rem] w-full rounded-(--border-radius-md) border border-dashed border-grey-300 bg-grey-50 p-[1rem]">
           <Menus>
             <Menus.Menu>
               <Menus.Toggle id="generic-options" />
@@ -105,14 +37,19 @@ function ReusableButtonsLayout() {
               </Menus.List>
             </Menus.Menu>
           </Menus>
-        </DropdownPreview>
-      </DropdownCard>
+        </div>
+      </div>
 
-      <VariationsGrid>
+      <div className="grid gap-[1.6rem]">
         {variations.map((variation) => (
-          <VariationCard key={variation}>
-            <VariationTitle>{variation}</VariationTitle>
-            <ButtonsRow>
+          <div
+            key={variation}
+            className="grid gap-[1.6rem] rounded-(--border-radius-md) border border-grey-200 bg-(--color-grey-0) p-[2rem]"
+          >
+            <h4 className="text-[1.5rem] font-semibold capitalize">
+              {variation}
+            </h4>
+            <div className="flex flex-wrap items-center gap-[1.2rem]">
               {sizes.map((size) => (
                 <Button
                   key={`${variation}-${size}`}
@@ -122,11 +59,11 @@ function ReusableButtonsLayout() {
                   {size}
                 </Button>
               ))}
-            </ButtonsRow>
-          </VariationCard>
+            </div>
+          </div>
         ))}
-      </VariationsGrid>
-    </Wrapper>
+      </div>
+    </div>
   );
 }
 

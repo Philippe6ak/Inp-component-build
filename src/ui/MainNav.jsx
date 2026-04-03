@@ -4,6 +4,7 @@ import {
   HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlineHomeModern,
+  HiOutlineReceiptPercent,
   HiOutlineTableCells,
   HiOutlineUsers,
 } from 'react-icons/hi2';
@@ -58,6 +59,12 @@ function MainNav() {
           <NavLink to="/table" className={navLinkClass}>
             <HiOutlineTableCells />
             <span className="hidden md:block">Table</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/reusable-buttons" className={navLinkClass}>
+            <HiOutlineReceiptPercent />
+            <span className="hidden md:block">Reusable Buttons</span>
           </NavLink>
         </li>
       </ul>
