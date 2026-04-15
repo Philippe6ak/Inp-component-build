@@ -3,7 +3,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import GlobalStyles from './styles/GlobalStyles';
 import { DarkModeProvider } from './context/DarkModeContext';
 import Account from './pages/Account';
 import Booking from './pages/Booking';
@@ -34,7 +33,6 @@ function App() {
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <GlobalStyles />
         <BrowserRouter>
           <Routes>
             <Route

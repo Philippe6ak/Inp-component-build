@@ -1,52 +1,6 @@
-import { useRef } from "react";
-import { format, isValid } from "date-fns";
-import styled from "styled-components";
-import { HiOutlineCalendar, HiX } from "react-icons/hi";
-
-const Container = styled.div`
-  position: relative;
-  width: 100%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  min-height: 36px;
-`;
-
-const DisplayBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--color-grey-600);
-
-  svg {
-    font-size: 1.8rem;
-    color: var(--color-grey-500);
-  }
-`;
-
-const ClearBox = styled.div`
-  position: absolute;
-  right: 0;
-  color: var(--color-red-400);
-  cursor: pointer;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 0 0.5rem;
-
-  &:hover {
-    color: var(--color-red-600);
-  }
-`;
-
-const HiddenInput = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-`;
+import { format, isValid } from 'date-fns';
+import { useRef } from 'react';
+import { HiOutlineCalendar, HiX } from 'react-icons/hi';
 
 function DateCell({ getValue, row, column, table }) {
   const date = getValue();
@@ -54,7 +8,7 @@ function DateCell({ getValue, row, column, table }) {
   const inputRef = useRef(null);
 
   const displayValue =
-    date && isValid(new Date(date)) ? format(new Date(date), "MMM d") : null;
+    date && isValid(new Date(date)) ? format(new Date(date), 'MMM d') : null;
 
   function handleDateChange(e) {
     const newDate = e.target.value;
@@ -73,29 +27,36 @@ function DateCell({ getValue, row, column, table }) {
   }
 
   return (
-    <Container onClick={openPicker}>
-      <HiddenInput
+    <div
+      className="relative w-full cursor-pointer flex items-center min-h-[36px]"
+      onClick={openPicker}
+    >
+      <input
+        className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
         ref={inputRef}
         type="date"
         onChange={handleDateChange}
-        value={displayValue ? format(new Date(date), "yyyy-MM-dd") : ""}
+        value={displayValue ? format(new Date(date), 'yyyy-MM-dd') : ''}
       />
 
       {displayValue ? (
         <>
-          <DisplayBox>
+          <div className="flex items-center gap-[0.5rem] text-grey-600">
             <span>{displayValue}</span>
-          </DisplayBox>
-          <ClearBox onClick={handleClear}>
+          </div>
+          <div
+            className="absolute right-0 text-red-400 cursor-pointer text-[2rem] leading-none p-[0_0.5rem] hover:text-danger-800"
+            onClick={handleClear}
+          >
             <HiX />
-          </ClearBox>
+          </div>
         </>
       ) : (
-        <DisplayBox>
-          <HiOutlineCalendar />
-        </DisplayBox>
+        <div className="flex items-center gap-[0.5rem] text-grey-600">
+          <HiOutlineCalendar className="text-[1.8rem] text-grey-500" />
+        </div>
       )}
-    </Container>
+    </div>
   );
 }
 

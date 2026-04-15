@@ -67,6 +67,12 @@ function MainNav() {
             <span className="hidden md:block">Reusable Buttons</span>
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/drag-drop" className={navLinkClass}>
+            <HiOutlineTableCells />
+            <span className="hidden md:block">Drag & Drop</span>
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

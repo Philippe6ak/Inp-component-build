@@ -3,39 +3,14 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import clsx from 'clsx';
 import { useState } from 'react';
-import styled from 'styled-components';
+import Table from '../../ui/Table';
 import DateCell from './DateCell';
 import EditableCell from './EditableCell';
 import StatusCell from './StatusCell';
 import DATA from './tableData';
 import useProcessedData from './useProcessedData';
-import Table from '../../ui/Table';
-
-// Styled components
-const Resizer = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 5px;
-  cursor: col-resize;
-  user-select: none;
-  touch-action: none;
-  background: ${(props) =>
-    props.$isResizing ? 'transparent' : 'var(--color-grey-900)'};
-  &:hover {
-    background: var(--color-grey-200);
-  }
-`;
-
-const HeaderCell = styled.div`
-  position: relative;
-  padding-right: 8px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-`;
 
 const columns = [
   {
@@ -100,7 +75,10 @@ function DataTable() {
       <Table.Header>
         {table.getHeaderGroups().map((headerGroup) =>
           headerGroup.headers.map((header) => (
-            <HeaderCell key={header.id}>
+            <div
+              className="relative pr-[8px] h-full flex items-center"
+              key={header.id}
+            >
               <div>
                 {header.isPlaceholder
                   ? null
@@ -109,12 +87,17 @@ function DataTable() {
                       header.getContext()
                     )}
               </div>
-              <Resizer
+              <div
+                className={clsx(
+                  'absolute right-0 top-0 h-full w-0.5 cursor-col-resize select-none touch-none',
+                  header.column.getIsResizing()
+                    ? 'bg-transparent'
+                    : 'bg-grey-900 hover:bg-grey-200'
+                )}
                 onMouseDown={header.getResizeHandler()}
                 onTouchStart={header.getResizeHandler()}
-                $isResizing={header.column.getIsResizing()}
               />
-            </HeaderCell>
+            </div>
           ))
         )}
       </Table.Header>

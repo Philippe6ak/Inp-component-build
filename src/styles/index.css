@@ -4,7 +4,8 @@
 
 @theme {
   --spacing: 0.625rem;
-  --font-sans: 'Poppins', sans-serif;
+  --font-sans: 'Segoe UI', sans-serif;
+  /* --font-sans: 'Poppins', sans-serif; */
 
   /* Grey scale — static hex values so Tailwind can generate utility classes */
   --color-grey-0: #fff;
@@ -173,7 +174,8 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Segoe UI', sans-serif;
   color: var(--color-grey-700);
   transition:
     color 0.3s,

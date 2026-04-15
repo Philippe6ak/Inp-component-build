@@ -1,21 +1,8 @@
-import styled from 'styled-components';
-import useTodayActivity from './useTodayActivity';
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
 import Spinner from '../../ui/Spinner';
 import TodayItem from './TodayItem';
-
-const TodayList = styled.ul`
-  overflow: scroll;
-  overflow-x: hidden;
-
-  /* Removing scrollbars for webkit, firefox, and ms, respectively */
-  &::-webkit-scrollbar {
-    width: 0 !important;
-  }
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-`;
+import useTodayActivity from './useTodayActivity';
 
 function TodayActivity() {
   const { activities, isLoading } = useTodayActivity();

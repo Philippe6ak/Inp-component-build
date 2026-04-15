@@ -1,4 +1,12 @@
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
+
+const colorVariants = {
+  blue: 'bg-[var(--color-blue-100)] [&_svg]:text-[var(--color-blue-700)]',
+  green: 'bg-[var(--color-green-100)] [&_svg]:text-[var(--color-green-700)]',
+  indigo: 'bg-[var(--color-indigo-100)] [&_svg]:text-[var(--color-indigo-700)]',
+  yellow: 'bg-[var(--color-yellow-100)] [&_svg]:text-[var(--color-yellow-700)]',
+};
 
 function Stat({ icon, title, value, color }) {
   return (
@@ -6,9 +14,8 @@ function Stat({ icon, title, value, color }) {
       <div
         className={clsx(
           'row-span-full aspect-square rounded-full flex items-center justify-center',
-          `bg-[var(--color-${color}-100)]`,
           `[&_svg]:w-[32px] [&_svg]:h-[32px]`,
-          `[&_svg]:text-[var(--color-${color}-700)]`
+          colorVariants[color]
         )}
       >
         {icon}
@@ -20,5 +27,12 @@ function Stat({ icon, title, value, color }) {
     </div>
   );
 }
+
+Stat.propTypes = {
+  icon: PropTypes.node,
+  title: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  color: PropTypes.oneOf(['blue', 'green', 'indigo', 'yellow']),
+};
 
 export default Stat;

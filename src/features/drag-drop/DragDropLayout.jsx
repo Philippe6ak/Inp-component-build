@@ -1,46 +1,39 @@
-import { DragDropProvider } from "@dnd-kit/react";
+import { DragDropProvider } from '@dnd-kit/react';
 import {
   PointerSensor,
   KeyboardSensor,
   AutoScroller,
   Accessibility,
-} from "@dnd-kit/dom";
+} from '@dnd-kit/dom';
 
-import Draggable from "./Draggable";
-import Droppable from "./Droppable";
-import ContainerBox from "./ContainerBox";
-import { useState } from "react";
-import styled from "styled-components";
-
-const DraggablesColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-`;
+import Draggable from './Draggable';
+import Droppable from './Droppable';
+import ContainerBox from './ContainerBox';
+import { useState } from 'react';
 
 const draggableItems = [
-  { id: "draggable-1", label: "Draggable item 1" },
-  { id: "draggable-2", label: "Draggable item 2" },
-  { id: "draggable-3", label: "Draggable item 3" },
+  { id: 'draggable-1', label: 'Draggable item 1' },
+  { id: 'draggable-2', label: 'Draggable item 2' },
+  { id: 'draggable-3', label: 'Draggable item 3' },
 ];
 
 const itemById = Object.fromEntries(
-  draggableItems.map((item) => [item.id, item]),
+  draggableItems.map((item) => [item.id, item])
 );
 
 function DragDropLayout() {
   const [droppedIds, setDroppedIds] = useState([]);
   const [itemOrder, setItemOrder] = useState(
-    draggableItems.map((item) => item.id),
+    draggableItems.map((item) => item.id)
   );
 
   const orderedItems = itemOrder.map((id) => itemById[id]).filter(Boolean);
 
   const availableItems = orderedItems.filter(
-    (item) => !droppedIds.includes(item.id),
+    (item) => !droppedIds.includes(item.id)
   );
   const droppedItems = orderedItems.filter((item) =>
-    droppedIds.includes(item.id),
+    droppedIds.includes(item.id)
   );
 
   function moveIdBeforeTarget(order, sourceId, targetId) {
@@ -73,7 +66,7 @@ function DragDropLayout() {
 
         if (targetId && itemById[targetId]) {
           setItemOrder((currentOrder) =>
-            moveIdBeforeTarget(currentOrder, sourceId, targetId),
+            moveIdBeforeTarget(currentOrder, sourceId, targetId)
           );
 
           setDroppedIds((currentIds) => {
@@ -89,24 +82,24 @@ function DragDropLayout() {
           return;
         }
 
-        if (target?.id === "droppable") {
+        if (target?.id === 'droppable') {
           setDroppedIds((currentIds) =>
             currentIds.includes(sourceId)
               ? currentIds
-              : [...currentIds, sourceId],
+              : [...currentIds, sourceId]
           );
           return;
         }
 
-        if (target?.id === "container" || !target) {
+        if (target?.id === 'container' || !target) {
           setDroppedIds((currentIds) =>
-            currentIds.filter((id) => id !== sourceId),
+            currentIds.filter((id) => id !== sourceId)
           );
         }
       }}
     >
       <ContainerBox>
-        <DraggablesColumn>
+        <div className="flex flex-col gap-[1.2rem]">
           {availableItems.map((item, index) => (
             <Draggable
               key={item.id}
@@ -116,7 +109,7 @@ function DragDropLayout() {
               group="items"
             />
           ))}
-        </DraggablesColumn>
+        </div>
 
         <Droppable id="droppable">
           {droppedItems.map((item, index) => (
