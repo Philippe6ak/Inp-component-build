@@ -19,6 +19,9 @@ import Table from './pages/Table';
 import Users from './pages/Users';
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
+import Calc from './pages/Calc';
+import Calcul from './pages/Calcul';
+import Patients from './pages/Patients';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +57,24 @@ function App() {
               <Route path="table" element={<Table />} />
               <Route path="drag-drop" element={<DragDrop />} />
               <Route path="reusable-buttons" element={<ReusableButtons />} />
+              <Route path="calc" element={<Calc />} />
+              <Route path="calcul" element={<Calcul />} />
+
+              {/* TEMPORARY REDIRECTS FOR NEW HEALTHCARE ROUTES */}
+              <Route path="patients" element={<Patients />} />
+              <Route path="patients/new" element={<Users />} />
+              <Route path="consultations" element={<Bookings />} />
+              <Route path="consultations/new" element={<Users />} />
+              <Route path="prescriptions" element={<Bookings />} />
+              <Route path="medications" element={<Bookings />} />
+              <Route path="stock" element={<Bookings />} />
+              <Route path="appointments" element={<Bookings />} />
+              <Route path="hospitalizations" element={<Bookings />} />
+              <Route path="pregnancies" element={<Bookings />} />
+              <Route path="referrals" element={<Bookings />} />
+              <Route path="specialties" element={<Users />} />
+              <Route path="diseases" element={<Users />} />
+              <Route path="pricing" element={<Settings />} />
             </Route>
 
             <Route path="login" element={<Login />} />
