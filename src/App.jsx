@@ -22,6 +22,7 @@ import ProtectedRoute from './ui/ProtectedRoute';
 import Calc from './pages/Calc';
 import Calcul from './pages/Calcul';
 import Patients from './pages/Patients';
+import NewConsultation from './pages/NewConsultations';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -64,7 +65,7 @@ function App() {
               <Route path="patients" element={<Patients />} />
               <Route path="patients/new" element={<Users />} />
               <Route path="consultations" element={<Bookings />} />
-              <Route path="consultations/new" element={<Users />} />
+              <Route path="consultations/new" element={<NewConsultation />} />
               <Route path="prescriptions" element={<Bookings />} />
               <Route path="medications" element={<Bookings />} />
               <Route path="stock" element={<Bookings />} />
