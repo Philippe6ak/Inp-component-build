@@ -1,9 +1,9 @@
-import Button from '../../ui/Button';
-import Empty from '../../ui/Empty';
-import Menus from '../../ui/Menus';
-import Modal from '../../ui/Modal';
-import Spinner from '../../ui/Spinner';
-import Table from '../../ui/Table';
+import Button from '../../../ui/Button';
+import Empty from '../../../ui/Empty';
+import Menus from '../../../ui/Menus';
+import Modal from '../../../ui/Modal';
+import Spinner from '../../../ui/Spinner';
+import Table from '../../../ui/Table';
 import NewSpecialty from './NewSpecialty';
 import { useSpecialty } from './useSpecialty';
 import SpecialtyRow from './SpecialtyRow';

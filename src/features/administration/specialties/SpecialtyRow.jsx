@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
-import ConfirmDelete from '../../ui/ConfirmDelete';
-import Menus from '../../ui/Menus';
-import Modal from '../../ui/Modal';
-import Table from '../../ui/Table';
+import ConfirmDelete from '../../../ui/ConfirmDelete';
+import Menus from '../../../ui/Menus';
+import Modal from '../../../ui/Modal';
+import Table from '../../../ui/Table';
 import NewSpecialty from './NewSpecialty';
 import { useDeleteSpecialty } from './useDeleteSpecialty';
 import { useNewSpecialty } from './useNewSpecialty';

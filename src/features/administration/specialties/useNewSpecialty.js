@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { specsService } from '../../services/inphbSpecsService';
+import { specsService } from '../../../services/inphbSpecsService';
 
 export function useNewSpecialty() {
   const queryClient = useQueryClient();

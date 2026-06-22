@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { specsService } from '../../services/inphbSpecsService';
+import { specsService } from '../../../services/inphbSpecsService';
 
 export function useSpecialty() {
   const {

@@ -1,41 +1,20 @@
 import api from '../api/client';
 import { API_ENDPOINTS } from '../api/endpoints';
 
-// export const specsService = {
-//   getSpecialties: async () => {
-//     const data = await api.get(API_ENDPOINTS.SPECIALTIES);
-//     if (data?.status === 'error' || data?.success === false) {
-//       throw new Error(data.message || 'Failed to load specialties');
-//     }
-//     return data;
-//   },
-
-//   addSpecialty: async ({ libelle, code }) => {
-//     const data = await api.post(API_ENDPOINTS.NEWSPECIALTIES, {
-//       libelle,
-//       code,
-//     });
-//     if (data?.status === 'error' || data?.success === false) {
-//       throw new Error(data.message || 'Failed to add specialty');
-//     }
-//     return data;
-//   },
-// };
-
 export const specsService = {
   getSpecialties: async () => {
-    const data = await api.get(API_ENDPOINTS.SPECIALTIES);
+    const data = await api.get(API_ENDPOINTS.GETSPECIALTIES);
     if (data?.status === 'error' || data?.success === false) {
       throw new Error(data.message || 'Failed to load specialties');
     }
     return data;
   },
 
-  // Single function, two behaviors — mirrors your createEditCabin pattern
+  // create or edit in same function
   createEditSpecialty: async ({ libelle, code }, specialites_id) => {
-    // A) CREATE — no id passed
+    //CREATE — when no id passed
     if (!specialites_id) {
-      const data = await api.post(API_ENDPOINTS.NEWSPECIALTIES, {
+      const data = await api.post(API_ENDPOINTS.ADDSPECIALTIES, {
         libelle,
         code,
       });
@@ -45,7 +24,7 @@ export const specsService = {
       return data;
     }
 
-    // B) EDIT — id passed
+    //EDIT — when id passed
     const data = await api.post(API_ENDPOINTS.UPDATESPECIALTIES, {
       specialites_id,
       libelle,

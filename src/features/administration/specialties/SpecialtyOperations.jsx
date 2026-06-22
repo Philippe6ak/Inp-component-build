@@ -1,5 +1,5 @@
-import SortBy from '../../ui/SortBy';
-import TableOperations from '../../ui/TableOperations';
+import SortBy from '../../../ui/SortBy';
+import TableOperations from '../../../ui/TableOperations';
 
 function SpecialtyOperations() {
   return (

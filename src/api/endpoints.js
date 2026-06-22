@@ -31,10 +31,14 @@ export const API_ENDPOINTS = {
 
   //   // Admin
   //   USERS: '/users',
-  SPECIALTIES: '/specialites',
-  NEWSPECIALTIES: '/specialites/ajouter',
+  GETSPECIALTIES: '/specialites',
+  ADDSPECIALTIES: '/specialites/ajouter',
   UPDATESPECIALTIES: `/specialites/update`,
   DELETESPECIALTIES: `/specialites/delete`,
-  //   DISEASES: '/diseases',
+
+  GETDISEASES: '/typesmaladies',
+  ADDDISEASES: '/typesmaladies/ajouter',
+  UPDATEDISEASES: `/typesmaladies/update`,
+  DELETEDISEASES: `/typesmaladies/delete`,
   //   PRICING: '/pricing',
 };
