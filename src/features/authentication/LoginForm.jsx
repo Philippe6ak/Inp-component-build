@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useLogin } from './useLogin';
+// import { useLogin } from './useLogin';
+import { useLoginInp } from './useLoginInp';
 
 import Button from '../../ui/Button';
 import Form from '../../ui/Form';
@@ -8,9 +9,9 @@ import FormRowVertical from '../../ui/FormRowVertical';
 import SpinnerMini from '../../ui/SpinnerMini';
 
 function LoginForm() {
-  const [email, setEmail] = useState('mister@moustache.com');
-  const [password, setPassword] = useState('Munchkins');
-  const { login, isLoggingIn } = useLogin();
+  const [email, setEmail] = useState('leonard.nguessan@inphb.ci');
+  const [password, setPassword] = useState('admin.admin@inphb.ci');
+  const { login, isLoggingIn } = useLoginInp();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,7 +19,7 @@ function LoginForm() {
       return;
     }
     login(
-      { email, password },
+      { login: email, password },
       {
         onSettled: () => {
           setPassword('');
