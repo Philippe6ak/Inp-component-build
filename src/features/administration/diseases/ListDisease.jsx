@@ -4,13 +4,12 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
-
 import NewDisease from './NewDiseaseTyp';
-import { useDiseaseTyp } from './useDiseaseTyp';
-import DiseaseTypRow from './DiseaseTypRow';
+import { useDisease } from './useDiseaseTyp';
+import DiseaseRow from '../diseasestype/DiseaseTypRow';
 
-function ListDiseaseTyp() {
-  const { isLoading, error, diseaseType: diseases } = useDiseaseTyp();
+function ListDisease() {
+  const { isLoading, error, diseaseType: diseases } = useDisease();
 
   if (isLoading) return <Spinner />;
 
@@ -56,10 +55,7 @@ function ListDiseaseTyp() {
           <Table.Body
             data={sortedDiseases}
             render={(diseases) => (
-              <DiseaseTypRow
-                disease={diseases}
-                key={diseases.typesmaladies_id}
-              />
+              <DiseaseRow disease={diseases} key={diseases.typesmaladies_id} />
             )}
           />
         </Table>
@@ -68,4 +64,4 @@ function ListDiseaseTyp() {
   );
 }
 
-export default ListDiseaseTyp;
+export default ListDisease;

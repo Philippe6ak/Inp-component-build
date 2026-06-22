@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { diseaseTypeService } from '../../../services/inphbDiseaseTypeService';
 
-export function useDiseaseTyp() {
+export function useDisease() {
   const {
     isLoading,
     error,

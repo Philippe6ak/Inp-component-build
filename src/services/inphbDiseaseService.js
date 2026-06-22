@@ -2,7 +2,7 @@ import api from '../api/client';
 import { API_ENDPOINTS } from '../api/endpoints';
 
 export const diseaseTypeService = {
-  getTypeDiseases: async () => {
+  getDiseases: async () => {
     const data = await api.get(API_ENDPOINTS.GETTYPEDISEASES);
     if (data?.status === 'error' || data?.success === false) {
       throw new Error(data.message || 'Failed to load diseases');
@@ -11,7 +11,7 @@ export const diseaseTypeService = {
   },
 
   // create or edit in same function
-  createEditTypeDisease: async ({ libelle, code }, typesmaladies_id) => {
+  createEditDisease: async ({ libelle, code }, typesmaladies_id) => {
     //CREATE — when no id passed
     if (!typesmaladies_id) {
       const data = await api.post(API_ENDPOINTS.ADDTYPEDISEASES, {
@@ -36,7 +36,7 @@ export const diseaseTypeService = {
     return data;
   },
 
-  deleteTypeDisease: async (typesmaladies_id) => {
+  deleteDisease: async (typesmaladies_id) => {
     const data = await api.post(API_ENDPOINTS.DELETETYPEDISEASES, {
       typesmaladies_id,
     });

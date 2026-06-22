@@ -5,15 +5,15 @@ import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useEditDiseaseTyp } from './useEditDiseaseTyp';
-import { useNewDiseaseTyp } from './useNewDiseaseTyp';
+import { useEditDisease } from './useEditDiseaseTyp';
+import { useNewDisease } from './useNewDiseaseTyp';
 
-function NewDiseaseTyp({ diseaseToEdit = {}, onCloseModal }) {
+function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
   const { typesmaladies_id: editId, ...editValues } = diseaseToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createDisease, isCreating } = useNewDiseaseTyp();
-  const { editDisease, isEditing } = useEditDiseaseTyp();
+  const { createDisease, isCreating } = useNewDisease();
+  const { editDisease, isEditing } = useEditDisease();
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -105,4 +105,4 @@ function NewDiseaseTyp({ diseaseToEdit = {}, onCloseModal }) {
   );
 }
 
-export default NewDiseaseTyp;
+export default NewDisease;
