@@ -24,6 +24,7 @@ import Calcul from './pages/Calcul';
 import Patients from './pages/Patients';
 import NewConsultation from './pages/NewConsultations';
 import Specialties from './pages/Specialties';
+import DiseasesType from './pages/DiseasesType';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -75,7 +76,7 @@ function App() {
               <Route path="pregnancies" element={<Bookings />} />
               <Route path="referrals" element={<Bookings />} />
               <Route path="specialties" element={<Specialties />} />
-              <Route path="diseases" element={<Diseases />} />
+              <Route path="tdiseases" element={<DiseasesType />} />
               <Route path="pricing" element={<Settings />} />
             </Route>
 

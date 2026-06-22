@@ -1,16 +1,16 @@
 import Row from '../ui/Row';
 import Heading from '../ui/Heading';
-import ListDisease from '../features/administration/diseases/ListDisease';
-function Diseases() {
+import ListDiseaseTyp from '../features/administration/diseasestype/ListDiseaseTyp';
+function DiseasesType() {
   return (
     <>
       <Row type="horizontal">
         <Heading as="h1">Toutes les Maladies</Heading>
         {/* <DiseaseOperations /> */}
       </Row>
-      <ListDisease />
+      <ListDiseaseTyp />
     </>
   );
 }
 
-export default Diseases;
+export default DiseasesType;

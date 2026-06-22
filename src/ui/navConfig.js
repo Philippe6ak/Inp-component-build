@@ -32,7 +32,11 @@ export const menuItems = [
     title: 'Gestion des patients',
     icon: HiOutlineUsers,
     items: [
-      { title: 'Nouveau Patient', path: '/patients/new', icon: HiOutlineUserPlus },
+      {
+        title: 'Nouveau Patient',
+        path: '/patients/new',
+        icon: HiOutlineUserPlus,
+      },
       { title: 'Tous les Patients', path: '/patients', icon: HiOutlineUsers },
     ],
   },
@@ -40,17 +44,33 @@ export const menuItems = [
     title: 'Consultations & Diagnostics',
     icon: HiOutlineClipboard,
     items: [
-      { title: 'Nouvelle Consultation', path: '/consultations/new', icon: HiOutlineChatAlt2 },
-      { title: 'Toutes les Consultations', path: '/consultations', icon: HiOutlineClipboard },
+      {
+        title: 'Nouvelle Consultation',
+        path: '/consultations/new',
+        icon: HiOutlineChatAlt2,
+      },
+      {
+        title: 'Toutes les Consultations',
+        path: '/consultations',
+        icon: HiOutlineClipboard,
+      },
       { title: 'Diagnostics', path: '/diagnostics', icon: HiOutlineMicroscope },
-      { title: 'Prescriptions', path: '/prescriptions', icon: HiOutlineDocumentText },
+      {
+        title: 'Prescriptions',
+        path: '/prescriptions',
+        icon: HiOutlineDocumentText,
+      },
     ],
   },
   {
     title: 'Pharmacie & Stock',
     icon: HiOutlineBeaker,
     items: [
-      { title: 'Nouvelle Fourniture', path: '/supplies/new', icon: HiOutlineShoppingCart },
+      {
+        title: 'Nouvelle Fourniture',
+        path: '/supplies/new',
+        icon: HiOutlineShoppingCart,
+      },
       { title: 'Medications', path: '/medications', icon: HiOutlineBeaker },
       { title: 'Gestion du stock', path: '/stock', icon: HiOutlineCube },
       { title: 'Ventes', path: '/sales', icon: HiOutlineShoppingCart },
@@ -60,16 +80,32 @@ export const menuItems = [
     title: 'Rendez-vous & Planification',
     icon: HiOutlineCalendarDays,
     items: [
-      { title: 'Rendez-vous', path: '/appointments', icon: HiOutlineCalendarDays },
-      { title: 'Vue du calendrier', path: '/calendar', icon: HiOutlineCalendarDays },
+      {
+        title: 'Rendez-vous',
+        path: '/appointments',
+        icon: HiOutlineCalendarDays,
+      },
+      {
+        title: 'Vue du calendrier',
+        path: '/calendar',
+        icon: HiOutlineCalendarDays,
+      },
     ],
   },
   {
     title: 'Hospitalisations',
     icon: HiOutlineBuildingOffice,
     items: [
-      { title: 'Nouvelle Admission', path: '/hospitalizations/new', icon: HiOutlineBuildingOffice },
-      { title: 'Hospitalisations', path: '/hospitalizations', icon: HiOutlineBuildingOffice },
+      {
+        title: 'Nouvelle Admission',
+        path: '/hospitalizations/new',
+        icon: HiOutlineBuildingOffice,
+      },
+      {
+        title: 'Hospitalisations',
+        path: '/hospitalizations',
+        icon: HiOutlineBuildingOffice,
+      },
     ],
   },
   {
@@ -84,7 +120,11 @@ export const menuItems = [
     title: 'Orientation',
     icon: HiOutlineArrowRightCircle,
     items: [
-      { title: 'Références', path: '/referrals', icon: HiOutlineArrowRightCircle },
+      {
+        title: 'Références',
+        path: '/referrals',
+        icon: HiOutlineArrowRightCircle,
+      },
     ],
   },
   {
@@ -93,8 +133,16 @@ export const menuItems = [
     items: [
       { title: 'Utilisateurs', path: '/users', icon: HiOutlineUsers },
       { title: 'Spécialités', path: '/specialties', icon: HiOutlineClipboard },
-      { title: 'Librairie de maladies', path: '/diseases', icon: HiOutlineMicroscope },
-      { title: 'Tarification', path: '/pricing', icon: HiOutlineCurrencyDollar },
+      {
+        title: 'Librairie de maladies',
+        path: '/tdiseases',
+        icon: HiOutlineMicroscope,
+      },
+      {
+        title: 'Tarification',
+        path: '/pricing',
+        icon: HiOutlineCurrencyDollar,
+      },
       { title: 'Paramètres', path: '/settings', icon: HiOutlineCog6Tooth },
     ],
   },
