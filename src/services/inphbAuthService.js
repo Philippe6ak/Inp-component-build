@@ -16,6 +16,7 @@ export const authService = {
     }
 
     setUser(user);
+
     return user;
   },
 
@@ -32,6 +33,6 @@ export const authService = {
   getCurrentUser: () => getUser(),
 
   isAuthenticated: () => {
-    return !!getToken();
+    return !!getUser();
   },
 };

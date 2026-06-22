@@ -33,6 +33,8 @@ export const API_ENDPOINTS = {
   //   USERS: '/users',
   SPECIALTIES: '/specialites',
   NEWSPECIALTIES: '/specialites/ajouter',
+  UPDATESPECIALTIES: `/specialites/update`,
+  DELETESPECIALTIES: `/specialites/delete`,
   //   DISEASES: '/diseases',
   //   PRICING: '/pricing',
 };

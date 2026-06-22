@@ -2,19 +2,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { specsService } from '../../services/inphbSpecsService';
 
-export function useNewSpecialty() {
+export function useDeleteSpecialty() {
   const queryClient = useQueryClient();
 
-  const { mutate: createSpecialty, isPending: isCreating } = useMutation({
-    mutationFn: specsService.createEditSpecialty,
+  const { mutate: deleteSpecialty, isPending: isDeleting } = useMutation({
+    mutationFn: (id) => specsService.deleteSpecialty(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['specialties'] });
-      toast.success('Spécialté ajoutée avec succès');
+      toast.success('Spécialté supprimée avec succès');
     },
     onError: (err) => {
-      toast.error(err.message || "Échec de l'ajout de la spécialité");
+      toast.error(err.message || 'Échec de la suppression de la spécialité');
     },
   });
 
-  return { createSpecialty, isCreating };
+  return { deleteSpecialty, isDeleting };
 }

@@ -1,15 +1,15 @@
-import { useNavigate } from 'react-router-dom';
-
 import Button from '../../ui/Button';
 import Empty from '../../ui/Empty';
 import Menus from '../../ui/Menus';
+import Modal from '../../ui/Modal';
 import Spinner from '../../ui/Spinner';
 import Table from '../../ui/Table';
+import NewSpecialty from './NewSpecialty';
 import { useSpecialty } from './useSpecialty';
+import SpecialtyRow from './SpecialtyRow';
 
 function ListSpecialty() {
   const { isLoading, error, specialties } = useSpecialty();
-  const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
 
@@ -28,32 +28,41 @@ function ListSpecialty() {
     })
   );
 
-  if (!sortedSpecialties.length) return <Empty ressourceName="specialites" />;
-
   return (
     <Menus>
       <div className="mb-[1.6rem] flex justify-end">
-        <Button onClick={() => navigate('/specialties/new')}>
-          Nouvelle specialité
-        </Button>
+        <Modal>
+          <Modal.Open opens="create-specialty">
+            <Button>Nouvelle specialité</Button>
+          </Modal.Open>
+
+          <Modal.Window name="create-specialty">
+            <NewSpecialty />
+          </Modal.Window>
+        </Modal>
       </div>
 
-      <Table columns="1fr 3fr">
-        <Table.Header>
-          <div>Code</div>
-          <div>Libelle</div>
-        </Table.Header>
+      {!sortedSpecialties.length ? (
+        <Empty ressourceName="specialites" />
+      ) : (
+        <Table columns="1fr 3fr 0.5fr">
+          <Table.Header>
+            <div>Code</div>
+            <div>Libelle</div>
+            <div></div>
+          </Table.Header>
 
-        <Table.Body
-          data={sortedSpecialties}
-          render={(specialty, index) => (
-            <Table.Row key={specialty?.id ?? `${specialty?.code}-${index}`}>
-              <div>{specialty?.code}</div>
-              <div>{specialty?.libelle}</div>
-            </Table.Row>
-          )}
-        />
-      </Table>
+          <Table.Body
+            data={sortedSpecialties}
+            render={(specialty) => (
+              <SpecialtyRow
+                specialty={specialty}
+                key={specialty.specialites_id}
+              />
+            )}
+          />
+        </Table>
+      )}
     </Menus>
   );
 }
