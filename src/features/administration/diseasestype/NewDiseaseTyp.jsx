@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ import { useEditDisease } from './useEditDiseaseTyp';
 import { useNewDisease } from './useNewDiseaseTyp';
 
 function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
-  const { typemaladie_id: editId, ...editValues } = diseaseToEdit;
+  const { typesmaladies_id: editId, ...editValues } = diseaseToEdit;
   const isEditSession = Boolean(editId);
 
   const { createDisease, isCreating } = useNewDisease();

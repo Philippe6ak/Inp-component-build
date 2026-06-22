@@ -12,7 +12,6 @@ function SpecialtyRow({ specialty }) {
 
   const code = specialty?.code ?? '';
   const libelle = specialty?.libelle ?? '';
-  const menuId = specialtyId;
 
   const { isDeleting, deleteSpecialty } = useDeleteSpecialty();
   const { createSpecialty } = useNewSpecialty();
@@ -34,9 +33,9 @@ function SpecialtyRow({ specialty }) {
       <div>
         <Modal>
           <Menus.Menu>
-            <Menus.Toggle id={menuId} />
+            <Menus.Toggle id={specialtyId} />
 
-            <Menus.List id={menuId}>
+            <Menus.List id={specialtyId}>
               <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
                 Duplicate
               </Menus.Button>

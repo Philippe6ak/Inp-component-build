@@ -8,7 +8,7 @@ import { useNewDisease } from './useNewDiseaseTyp';
 import NewDisease from './NewDiseaseTyp';
 
 function DiseaseRow({ disease }) {
-  const diseaseId = disease.typemaladie_id;
+  const diseaseId = disease.typesmaladies_id;
 
   const code = disease?.code ?? '';
   const libelle = disease?.libelle ?? '';

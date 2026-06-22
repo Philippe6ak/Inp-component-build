@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { diseaseService } from '../../../services/inphbDiseaseTypeService';
+import { diseaseTypeService } from '../../../services/inphbDiseaseTypeService';
 
 export function useNewDisease() {
   const queryClient = useQueryClient();
 
   const { mutate: createDisease, isPending: isCreating } = useMutation({
-    mutationFn: diseaseService.createEditDisease,
+    mutationFn: diseaseTypeService.createEditDisease,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['disease'] });
+      queryClient.invalidateQueries({ queryKey: ['diseaseType'] });
       toast.success('Maladie ajoutée avec succès');
     },
     onError: (err) => {
