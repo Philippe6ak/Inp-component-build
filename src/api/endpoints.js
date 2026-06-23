@@ -36,10 +36,25 @@ export const API_ENDPOINTS = {
   UPDATESPECIALTIES: `/specialites/update`,
   DELETESPECIALTIES: `/specialites/delete`,
 
-  GETDISEASES: '/typesmaladies',
-  ADDDISEASES: '/typesmaladies/ajouter',
-  UPDATEDISEASES: `/typesmaladies/update`,
-  DELETEDISEASES: `/typesmaladies/delete`,
+  GETTYPEDISEASES: '/typesmaladies',
+  ADDTYPEDISEASES: '/typesmaladies/ajouter',
+  UPDATETYPEDISEASES: `/typesmaladies/update`,
+  DELETETYPEDISEASES: `/typesmaladies/delete`,
+
+  GETDISEASES: '/maladies',
+  ADDDISEASES: '/maladies/ajouter',
+  UPDATEDISEASES: `/maladies/update`,
+  DELETEDISEASES: `/maladies/delete`,
+
+  GETTYPEEXAMENS: '/typesexamens',
+  ADDTYPEEXAMENS: '/typesexamens/ajouter',
+  UPDATETYPEEXAMENS: `/typesexamens/update`,
+  DELETETYPEEXAMENS: `/typesexamens/delete`,
+
+  GETEXAMENS: '/examens',
+  ADDEXAMENS: '/examens/ajouter',
+  UPDATEEXAMENS: `/examens/update`,
+  DELETEEXAMENS: `/examens/delete`,
   //   PRICING: '/pricing',
 
   //EXAMEN
