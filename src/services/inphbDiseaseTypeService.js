@@ -1,7 +1,7 @@
 import api from '../api/client';
 import { API_ENDPOINTS } from '../api/endpoints';
 
-export const diseaseService = {
+export const diseaseTypeService = {
   getDiseases: async () => {
     const data = await api.get(API_ENDPOINTS.GETDISEASES);
     if (data?.status === 'error' || data?.success === false) {

@@ -9,17 +9,17 @@ import { useDisease } from './useDiseaseTyp';
 import DiseaseRow from './DiseaseRowTyp';
 
 function ListDisease() {
-  const { isLoading, error, diseases } = useDisease();
+  const { isLoading, error, diseaseType: diseases } = useDisease();
 
   if (isLoading) return <Spinner />;
 
   if (error) {
-    return <p>Erreur lors du chargement des specialites.</p>;
+    return <p>Erreur lors du chargement des maladies.</p>;
   }
 
   const diseasesData = Array.isArray(diseases)
     ? diseases
-    : diseases?.data || diseases?.specialites || [];
+    : diseases?.data || diseases?.maladies || [];
 
   const sortedDiseases = [...diseasesData].sort((a, b) =>
     String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {

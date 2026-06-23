@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import { diseaseService } from '../../../services/inphbDiseaseTypeService';
+import { diseaseTypeService } from '../../../services/inphbDiseaseTypeService';
 
 export function useDisease() {
   const {
     isLoading,
     error,
-    data: diseases,
+    data: diseaseType,
   } = useQuery({
-    queryKey: ['diseases'],
-    queryFn: diseaseService.getDiseases,
+    queryKey: ['diseaseType'],
+    queryFn: diseaseTypeService.getDiseases,
   });
 
-  return { isLoading, error, diseases };
+  return { isLoading, error, diseaseType };
 }
