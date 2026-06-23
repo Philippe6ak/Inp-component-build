@@ -8,7 +8,7 @@ export function useNewDisease() {
   const { mutate: createDisease, isPending: isCreating } = useMutation({
     mutationFn: diseaseService.createEditDisease,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['disease'] });
+      queryClient.invalidateQueries({ queryKey: ['diseases'] });
       toast.success('Maladie ajoutée avec succès');
     },
     onError: (err) => {

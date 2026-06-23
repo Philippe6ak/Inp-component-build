@@ -41,4 +41,11 @@ export const API_ENDPOINTS = {
   UPDATEDISEASES: `/typesmaladies/update`,
   DELETEDISEASES: `/typesmaladies/delete`,
   //   PRICING: '/pricing',
+
+  //EXAMEN
+
+  GETSEXAMEN: '/typesexamens',
+  ADDEXAMEN: '/typesexamens/ajouter',
+  UPDATEEXAMEN: `/typesexamens/update`,
+  DELETEEXAMEN: `/typesexamens/delete`,
 };

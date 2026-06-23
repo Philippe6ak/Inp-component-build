@@ -4,24 +4,24 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
-import NewDisease from './NewDiseaseTyp';
-import { useDisease } from './useDiseaseTyp';
-import DiseaseRow from './DiseaseRowTyp';
+import NewTypeExam from './NewTypeExam';
+import { useTypeExam } from './useTypeExam';
+import RowTypeExam from './RowTypeExam';
 
-function ListDisease() {
-  const { isLoading, error, diseases } = useDisease();
+function ListTypeExam() {
+  const { isLoading, error, examens } = useTypeExam();
 
   if (isLoading) return <Spinner />;
 
   if (error) {
-    return <p>Erreur lors du chargement des specialites.</p>;
+    return <p>Erreur lors du chargement des examens.</p>;
   }
 
-  const diseasesData = Array.isArray(diseases)
-    ? diseases
-    : diseases?.data || diseases?.specialites || [];
+  const typexamData = Array.isArray(examens)
+    ? examens
+    : examens?.data || examens?.examens || [];
 
-  const sortedDiseases = [...diseasesData].sort((a, b) =>
+  const sortedTypExam = [...typexamData].sort((a, b) =>
     String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {
       numeric: true,
       sensitivity: 'base',
@@ -32,18 +32,18 @@ function ListDisease() {
     <Menus>
       <div className="mb-[1.6rem] flex justify-end">
         <Modal>
-          <Modal.Open opens="create-disease">
-            <Button>Nouvelle Maladie</Button>
+          <Modal.Open opens="create-typexamen">
+            <Button>Nouveau type examen</Button>
           </Modal.Open>
 
-          <Modal.Window name="create-disease">
-            <NewDisease />
+          <Modal.Window name="create-typexamen">
+            <NewTypeExam />
           </Modal.Window>
         </Modal>
       </div>
 
-      {!sortedDiseases.length ? (
-        <Empty ressourceName="diseases" />
+      {!sortedTypExam.length ? (
+        <Empty ressourceName="examens" />
       ) : (
         <Table columns="1fr 3fr 0.5fr">
           <Table.Header>
@@ -53,9 +53,9 @@ function ListDisease() {
           </Table.Header>
 
           <Table.Body
-            data={sortedDiseases}
-            render={(diseases) => (
-              <DiseaseRow disease={diseases} key={diseases.typesmaladies_id} />
+            data={sortedTypExam}
+            render={(examens) => (
+              <RowTypeExam examens={examens} key={examens.typesexamens_id} />
             )}
           />
         </Table>
@@ -64,4 +64,4 @@ function ListDisease() {
   );
 }
 
-export default ListDisease;
+export default ListTypeExam;

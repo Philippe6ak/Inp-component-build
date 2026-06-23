@@ -6,15 +6,15 @@ import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useEditDisease } from './useEditDiseaseTyp';
-import { useNewDisease } from './useNewDiseaseTyp';
+import { useEditExam } from './useEditTypeExam';
+import { useNewTypeExamen } from './useNewTypeExam';
 
-function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
-  const { typemaladies_id: editId, ...editValues } = diseaseToEdit;
+function NewTypeExamen({ typexamToEdit = {}, onCloseModal }) {
+  const { typesexamens_id: editId, ...editValues } = typexamToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createDisease, isCreating } = useNewDisease();
-  const { editDisease, isEditing } = useEditDisease();
+  const { createTypeExam, isCreating } = useNewTypeExamen();
+  const { editExamen, isEditing } = useEditExam();
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -29,8 +29,8 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
 
   function onSubmit(data) {
     if (isEditSession) {
-      editDisease(
-        { newDiseaseData: data, id: editId },
+      editExamen(
+        { newTypeExamData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,12 +42,12 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createDisease(data, {
+    createTypeExam(data, {
       onSuccess: () => {
         reset();
 
         if (onCloseModal) onCloseModal();
-        else navigate('/diseases');
+        else navigate('/typesexamens');
       },
     });
   }
@@ -98,12 +98,12 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
               ? 'Updating...'
               : 'Creating...'
             : isEditSession
-              ? 'Update disease'
-              : 'Create disease'}
+              ? 'Update type exam'
+              : 'Create type exam'}
         </Button>
       </FormRow>
     </Form>
   );
 }
 
-export default NewDisease;
+export default NewTypeExamen;

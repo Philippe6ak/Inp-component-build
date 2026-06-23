@@ -3,25 +3,25 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import { useDeleteDisease } from './useDeleteDiseaseTyp';
-import { useNewDisease } from './useNewDiseaseTyp';
-import NewDisease from './NewDiseaseTyp';
+import { useDeleteTypeExam } from './useDeleteTypeExam';
+import { useNewTypeExamen } from './useNewTypeExam';
+import NewTypeExamen from './NewTypeExam';
 
-function DiseaseRow({ disease }) {
-  const diseaseId = disease.typesmaladies_id;
+function RowTypeExam({ examens }) {
+  const examensId = examens.typesexamens_id;
 
-  const code = disease?.code ?? '';
-  const libelle = disease?.libelle ?? '';
-  const menuId = diseaseId;
+  const code = examens?.code ?? '';
+  const libelle = examens?.libelle ?? '';
+  const menuId = examensId;
 
-  const { isDeleting, deleteDisease } = useDeleteDisease();
-  const { createDisease } = useNewDisease();
+  const { isDeleting, deleteExamen } = useDeleteTypeExam();
+  const { createTypeExam } = useNewTypeExamen();
 
   function handleDuplicate() {
     const duplicatedCode = code ? `${code}-COPY` : '';
     const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
 
-    createDisease({
+    createTypeExam({
       code: duplicatedCode,
       libelle: duplicatedLibelle,
     });
@@ -51,14 +51,14 @@ function DiseaseRow({ disease }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <NewDisease diseaseToEdit={disease} />
+              <NewTypeExamen typexamToEdit={examens} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
-                resourceName="diseases"
+                resourceName="typexamens"
                 disabled={isDeleting}
-                onConfirm={() => deleteDisease(diseaseId)}
+                onConfirm={() => deleteExamen(examensId)}
               />
             </Modal.Window>
           </Menus.Menu>
@@ -68,4 +68,4 @@ function DiseaseRow({ disease }) {
   );
 }
 
-export default DiseaseRow;
+export default RowTypeExam;
