@@ -139,8 +139,9 @@ export const menuItems = [
       },
       {
         title: "Types d'examens",
-        path: '/typeexams',
+        path: '/typesexamens',
         icon: HiOutlineMicroscope,
+      }
       },
     ],
   },
