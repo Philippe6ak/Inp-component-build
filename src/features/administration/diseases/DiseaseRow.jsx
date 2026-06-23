@@ -3,27 +3,25 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import { useDeleteDisease } from '../diseases/useDeleteDiseaseTyp';
-import { useNewDisease } from './useNewDiseaseTyp';
-import NewDisease from '../diseases/NewDiseaseTyp';
+import { useDeleteDisease } from './useDeleteDisease';
+import { useNewDisease } from './useNewDisease';
+import NewDisease from './NewDisease';
 
 function DiseaseRow({ disease }) {
-  const diseaseId = disease.typesmaladies_id;
-
+  const diseaseId = disease.maladies_id;
   const code = disease?.code ?? '';
   const libelle = disease?.libelle ?? '';
+  const libelleTypeMaladie = disease?.type_maladie_libelle ?? '';
   const menuId = diseaseId;
 
   const { isDeleting, deleteDisease } = useDeleteDisease();
   const { createDisease } = useNewDisease();
 
   function handleDuplicate() {
-    const duplicatedCode = code ? `${code}-COPY` : '';
-    const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
-
     createDisease({
-      code: duplicatedCode,
-      libelle: duplicatedLibelle,
+      libelle: libelle ? `Copy of ${libelle}` : 'Copy',
+      code: code ? `${code}-COPY` : '',
+      typesmaladies_id: disease.typesmaladies_id,
     });
   }
 
@@ -31,6 +29,7 @@ function DiseaseRow({ disease }) {
     <Table.Row>
       <div>{code}</div>
       <div>{libelle}</div>
+      <div>{libelleTypeMaladie}</div>
       <div>
         <Modal>
           <Menus.Menu>

@@ -12,8 +12,8 @@ function NewDiseaseTyp({ diseaseToEdit = {}, onCloseModal }) {
   const { typesmaladies_id: editId, ...editValues } = diseaseToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createDisease, isCreating } = useNewDiseaseTyp();
-  const { editDisease, isEditing } = useEditDiseaseTyp();
+  const { createDiseaseTyp, isCreating } = useNewDiseaseTyp();
+  const { editDiseaseType: editDisease, isEditing } = useEditDiseaseTyp();
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -41,7 +41,7 @@ function NewDiseaseTyp({ diseaseToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createDisease(data, {
+    createDiseaseTyp(data, {
       onSuccess: () => {
         reset();
 

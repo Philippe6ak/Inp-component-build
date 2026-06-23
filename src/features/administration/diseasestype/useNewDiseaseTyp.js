@@ -5,16 +5,16 @@ import { diseaseTypeService } from '../../../services/inphbDiseaseTypeService';
 export function useNewDiseaseTyp() {
   const queryClient = useQueryClient();
 
-  const { mutate: createDisease, isPending: isCreating } = useMutation({
+  const { mutate: createDiseaseTyp, isPending: isCreating } = useMutation({
     mutationFn: diseaseTypeService.createEditTypeDisease,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['disease'] });
-      toast.success('Maladie ajoutée avec succès');
+      queryClient.invalidateQueries({ queryKey: ['diseaseType'] });
+      toast.success('Type de maladie ajouté avec succès');
     },
     onError: (err) => {
-      toast.error(err.message || "Échec de l'ajout de la Maladie");
+      toast.error(err.message || "Échec de l'ajout du type de maladie");
     },
   });
 
-  return { createDisease, isCreating };
+  return { createDiseaseTyp, isCreating };
 }
