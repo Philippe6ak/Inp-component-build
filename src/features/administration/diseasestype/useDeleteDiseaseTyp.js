@@ -5,7 +5,7 @@ import { diseaseTypeService } from '../../../services/inphbDiseaseTypeService';
 export function useDeleteDiseaseTyp() {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteDisease, isPending: isDeleting } = useMutation({
+  const { mutate: deleteDiseaseTyp, isPending: isDeleting } = useMutation({
     mutationFn: (id) => diseaseTypeService.deleteTypeDisease(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['diseaseType'] });
@@ -16,5 +16,5 @@ export function useDeleteDiseaseTyp() {
     },
   });
 
-  return { deleteDisease, isDeleting };
+  return { deleteDiseaseTyp, isDeleting };
 }

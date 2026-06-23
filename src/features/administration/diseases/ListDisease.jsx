@@ -4,12 +4,12 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
-import NewDisease from './NewDiseaseTyp';
-import { useDisease } from './useDiseaseTyp';
-import DiseaseRow from '../diseasestype/DiseaseTypRow';
+import NewDisease from './NewDisease';
+import DiseaseRow from './DiseaseRow';
+import { useDisease } from './useDisease';
 
 function ListDisease() {
-  const { isLoading, error, diseaseType: diseases } = useDisease();
+  const { isLoading, error, disease } = useDisease();
 
   if (isLoading) return <Spinner />;
 
@@ -17,9 +17,9 @@ function ListDisease() {
     return <p>Erreur lors du chargement des maladies.</p>;
   }
 
-  const diseasesData = Array.isArray(diseases)
-    ? diseases
-    : diseases?.data || diseases?.maladies || [];
+  const diseasesData = Array.isArray(disease)
+    ? disease
+    : disease?.data || disease?.maladies || [];
 
   const sortedDiseases = [...diseasesData].sort((a, b) =>
     String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {
@@ -45,17 +45,18 @@ function ListDisease() {
       {!sortedDiseases.length ? (
         <Empty ressourceName="diseases" />
       ) : (
-        <Table columns="1fr 3fr 0.5fr">
+        <Table columns="1fr 2fr 2fr 0.5fr">
           <Table.Header>
             <div>Code</div>
             <div>Libelle</div>
+            <div>Type Maladie</div>
             <div></div>
           </Table.Header>
 
           <Table.Body
             data={sortedDiseases}
-            render={(diseases) => (
-              <DiseaseRow disease={diseases} key={diseases.typesmaladies_id} />
+            render={(disease) => (
+              <DiseaseRow disease={disease} key={disease.maladies_id} />
             )}
           />
         </Table>

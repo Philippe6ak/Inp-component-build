@@ -128,6 +128,23 @@ export const menuItems = [
     ],
   },
   {
+    title: 'Repertoire types',
+    icon: HiOutlineArrowRightCircle,
+    items: [
+      {
+        title: 'Types de maladies',
+        path: '/tdiseases',
+        icon: HiOutlineMicroscope,
+      },
+      {
+        title: "Types d'examens",
+        path: '/typeexams',
+        icon: HiOutlineMicroscope,
+      },
+    ],
+  },
+
+  {
     title: 'Administation',
     icon: HiOutlineCog6Tooth,
     items: [
@@ -135,7 +152,7 @@ export const menuItems = [
       { title: 'Spécialités', path: '/specialties', icon: HiOutlineClipboard },
       {
         title: 'Librairie de maladies',
-        path: '/tdiseases',
+        path: '/diseases',
         icon: HiOutlineMicroscope,
       },
       {

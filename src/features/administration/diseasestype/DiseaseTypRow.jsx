@@ -15,14 +15,14 @@ function DiseaseTypRow({ disease }) {
   const libelle = disease?.libelle ?? '';
   const menuId = diseaseId;
 
-  const { isDeleting, deleteDisease } = useDeleteDiseaseTyp();
-  const { createDisease } = useNewDiseaseTyp();
+  const { isDeleting, deleteDiseaseTyp } = useDeleteDiseaseTyp();
+  const { createDiseaseTyp } = useNewDiseaseTyp();
 
   function handleDuplicate() {
     const duplicatedCode = code ? `${code}-COPY` : '';
     const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
 
-    createDisease({
+    createDiseaseTyp({
       code: duplicatedCode,
       libelle: duplicatedLibelle,
     });
@@ -59,7 +59,7 @@ function DiseaseTypRow({ disease }) {
               <ConfirmDelete
                 resourceName="diseases"
                 disabled={isDeleting}
-                onConfirm={() => deleteDisease(diseaseId)}
+                onConfirm={() => deleteDiseaseTyp(diseaseId)}
               />
             </Modal.Window>
           </Menus.Menu>
