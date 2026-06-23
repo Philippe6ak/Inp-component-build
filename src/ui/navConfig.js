@@ -134,14 +134,13 @@ export const menuItems = [
     items: [
       {
         title: 'Types de maladies',
-        path: '/tdiseases',
+        path: '/typediseases',
         icon: HiOutlineMicroscope,
       },
       {
         title: "Types d'examens",
         path: '/typesexamens',
         icon: HiOutlineMicroscope,
-      }
       },
     ],
   },
@@ -157,11 +156,11 @@ export const menuItems = [
         path: '/diseases',
         icon: HiOutlineMicroscope,
       },
-      {
-        title: "Librairie d'examen",
-        path: '/typesexamens',
-        icon: GiMedicalThermometer,
-      },
+      // {
+      //   title: "Librairie d'examen",
+      //   path: '/typesexamens',
+      //   icon: GiMedicalThermometer,
+      // },
       {
         title: 'Tarification',
         path: '/pricing',

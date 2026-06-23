@@ -4,6 +4,7 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
+
 import NewTypeExam from './NewTypeExam';
 import { useTypeExam } from './useTypeExam';
 import RowTypeExam from './RowTypeExam';

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { diseaseTypeService } from '../../../services/inphbDiseaseTypeService';
 
-export function useEditDiseaseTyp() {
+export function useEditDiseaseType() {
   const queryClient = useQueryClient();
 
   const { mutate: editDiseaseType, isPending: isEditing } = useMutation({

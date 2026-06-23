@@ -5,15 +5,16 @@ import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useEditDiseaseTyp } from './useEditDiseaseTyp';
-import { useNewDiseaseTyp } from './useNewDiseaseTyp';
 
-function NewDiseaseTyp({ diseaseToEdit = {}, onCloseModal }) {
+import { useEditDiseaseType } from './useEditDiseaseType';
+import { useNewDiseaseType } from './useNewDiseaseType';
+
+function NewDiseaseType({ diseaseToEdit = {}, onCloseModal }) {
   const { typesmaladies_id: editId, ...editValues } = diseaseToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createDiseaseTyp, isCreating } = useNewDiseaseTyp();
-  const { editDiseaseType: editDisease, isEditing } = useEditDiseaseTyp();
+  const { createDiseaseType, isCreating } = useNewDiseaseType();
+  const { editDiseaseType: editDisease, isEditing } = useEditDiseaseType();
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -41,7 +42,7 @@ function NewDiseaseTyp({ diseaseToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createDiseaseTyp(data, {
+    createDiseaseType(data, {
       onSuccess: () => {
         reset();
 
@@ -105,4 +106,4 @@ function NewDiseaseTyp({ diseaseToEdit = {}, onCloseModal }) {
   );
 }
 
-export default NewDiseaseTyp;
+export default NewDiseaseType;

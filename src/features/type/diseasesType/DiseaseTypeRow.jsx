@@ -3,26 +3,26 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
+import NewDiseaseType from './NewDiseaseType';
 
-import { useDeleteDiseaseTyp } from './useDeleteDiseaseTyp';
-import { useNewDiseaseTyp } from './useNewDiseaseTyp';
-import NewDiseaseTyp from './NewDiseaseTyp';
+import { useDeleteDiseaseType } from './useDeleteDiseaseType';
+import { useNewDiseaseType } from './useNewDiseaseType';
 
-function DiseaseTypRow({ disease }) {
+function DiseaseTypeRow({ disease }) {
   const diseaseId = disease.typesmaladies_id;
 
   const code = disease?.code ?? '';
   const libelle = disease?.libelle ?? '';
   const menuId = diseaseId;
 
-  const { isDeleting, deleteDiseaseTyp } = useDeleteDiseaseTyp();
-  const { createDiseaseTyp } = useNewDiseaseTyp();
+  const { isDeleting, deleteDiseaseType } = useDeleteDiseaseType();
+  const { createDiseaseType } = useNewDiseaseType();
 
   function handleDuplicate() {
     const duplicatedCode = code ? `${code}-COPY` : '';
     const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
 
-    createDiseaseTyp({
+    createDiseaseType({
       code: duplicatedCode,
       libelle: duplicatedLibelle,
     });
@@ -52,14 +52,14 @@ function DiseaseTypRow({ disease }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <NewDiseaseTyp diseaseToEdit={disease} />
+              <NewDiseaseType diseaseToEdit={disease} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
                 resourceName="diseases"
                 disabled={isDeleting}
-                onConfirm={() => deleteDiseaseTyp(diseaseId)}
+                onConfirm={() => deleteDiseaseType(diseaseId)}
               />
             </Modal.Window>
           </Menus.Menu>
@@ -69,4 +69,4 @@ function DiseaseTypRow({ disease }) {
   );
 }
 
-export default DiseaseTypRow;
+export default DiseaseTypeRow;

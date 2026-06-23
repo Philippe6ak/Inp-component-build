@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
@@ -9,7 +8,7 @@ import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 import { useEditDisease } from './useEditDisease';
 import { useNewDisease } from './useNewDisease';
-import { useDiseaseTyp } from '../diseasestype/useDiseaseTyp';
+import { useDiseaseType } from '../../type/diseasesType/useDiseaseType';
 
 function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
   const { maladies_id: editId, ...editValues } = diseaseToEdit;
@@ -17,7 +16,7 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
 
   const { createDisease, isCreating } = useNewDisease();
   const { editDisease, isEditing } = useEditDisease();
-  const { diseaseType, isLoading: isLoadingTypes } = useDiseaseTyp();
+  const { diseaseType, isLoading: isLoadingTypes } = useDiseaseType();
   const navigate = useNavigate();
 
   const typeOptions =
@@ -74,6 +73,7 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
     <Form
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? 'modal' : 'regular'}
+      onClick={(e) => e.stopPropagation()}
     >
       <FormRow label="Libellé" error={errors?.libelle?.message}>
         <Input
@@ -98,27 +98,29 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
       </FormRow>
 
       <FormRow label="Type" error={errors?.typesmaladies_id?.message}>
-        <Controller
-          name="typesmaladies_id"
-          control={control}
-          rules={{ required: 'Le type est requis' }}
-          render={({ field }) => (
-            <Select
-              inputId="typesmaladies_id"
-              options={typeOptions}
-              isLoading={isLoadingTypes}
-              isDisabled={isWorking || isLoadingTypes}
-              defaultValue={defaultTypeOption}
-              menuPortalTarget={menuPortalTarget}
-              styles={{ menuPortal: (base) => ({ ...base, zIndex: 2000 }) }}
-              menuPosition="fixed"
-              menuShouldScrollIntoView={false}
-              onChange={(selected) => field.onChange(selected?.value ?? null)}
-              onBlur={field.onBlur}
-              value={typeOptions.find((o) => o.value === field.value) ?? null}
-            />
-          )}
-        />
+        <div onClick={(e) => e.stopPropagation()}>
+          <Controller
+            name="typesmaladies_id"
+            control={control}
+            rules={{ required: 'Le type est requis' }}
+            render={({ field }) => (
+              <Select
+                inputId="typesmaladies_id"
+                options={typeOptions}
+                isLoading={isLoadingTypes}
+                isDisabled={isWorking || isLoadingTypes}
+                defaultValue={defaultTypeOption}
+                // menuPortalTarget={menuPortalTarget}
+                styles={{ menuPortal: (base) => ({ ...base, zIndex: 2000 }) }}
+                menuPosition="fixed"
+                menuShouldScrollIntoView={false}
+                onChange={(selected) => field.onChange(selected?.value ?? null)}
+                onBlur={field.onBlur}
+                value={typeOptions.find((o) => o.value === field.value) ?? null}
+              />
+            )}
+          />
+        </div>
       </FormRow>
 
       <FormRow>

@@ -4,13 +4,13 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
+import NewDiseaseType from './NewDiseaseType';
 
-import NewDisease from './NewDiseaseTyp';
-import { useDiseaseTyp } from './useDiseaseTyp';
-import DiseaseTypRow from './DiseaseTypRow';
+import { useDiseaseType } from './useDiseaseType';
+import DiseaseTypeRow from './DiseaseTypeRow';
 
-function ListDiseaseTyp() {
-  const { isLoading, error, diseaseType: diseases } = useDiseaseTyp();
+function ListDiseaseType() {
+  const { isLoading, error, diseaseType: diseases } = useDiseaseType();
 
   if (isLoading) return <Spinner />;
 
@@ -34,11 +34,11 @@ function ListDiseaseTyp() {
       <div className="mb-[1.6rem] flex justify-end">
         <Modal>
           <Modal.Open opens="create-disease">
-            <Button>Nouvelle Maladie</Button>
+            <Button>Nouveau type de Maladie</Button>
           </Modal.Open>
 
           <Modal.Window name="create-disease">
-            <NewDisease />
+            <NewDiseaseType />
           </Modal.Window>
         </Modal>
       </div>
@@ -56,7 +56,7 @@ function ListDiseaseTyp() {
           <Table.Body
             data={sortedDiseases}
             render={(diseases) => (
-              <DiseaseTypRow
+              <DiseaseTypeRow
                 disease={diseases}
                 key={diseases.typesmaladies_id}
               />
@@ -68,4 +68,4 @@ function ListDiseaseTyp() {
   );
 }
 
-export default ListDiseaseTyp;
+export default ListDiseaseType;

@@ -78,7 +78,7 @@ function App() {
               <Route path="pregnancies" element={<Bookings />} />
               <Route path="referrals" element={<Bookings />} />
               <Route path="specialties" element={<Specialties />} />
-              <Route path="tdiseases" element={<DiseasesType />} />
+              <Route path="typediseases" element={<DiseasesType />} />
               <Route path="typesexamens" element={<TypeExam />} />
               <Route path="diseases" element={<Diseases />} />
               <Route path="pricing" element={<Settings />} />

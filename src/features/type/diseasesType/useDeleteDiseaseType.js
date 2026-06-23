@@ -2,19 +2,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { diseaseTypeService } from '../../../services/inphbDiseaseTypeService';
 
-export function useNewDiseaseTyp() {
+export function useDeleteDiseaseType() {
   const queryClient = useQueryClient();
 
-  const { mutate: createDiseaseTyp, isPending: isCreating } = useMutation({
-    mutationFn: diseaseTypeService.createEditTypeDisease,
+  const { mutate: deleteDiseaseType, isPending: isDeleting } = useMutation({
+    mutationFn: (id) => diseaseTypeService.deleteTypeDisease(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['diseaseType'] });
-      toast.success('Type de maladie ajouté avec succès');
+      toast.success('Maladie supprimée avec succès');
     },
     onError: (err) => {
-      toast.error(err.message || "Échec de l'ajout du type de maladie");
+      toast.error(err.message || 'Échec de la suppression de la maladie');
     },
   });
 
-  return { createDiseaseTyp, isCreating };
+  return { deleteDiseaseType, isDeleting };
 }

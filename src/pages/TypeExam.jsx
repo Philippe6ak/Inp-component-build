@@ -1,7 +1,7 @@
 import Row from '../ui/Row';
 import Heading from '../ui/Heading';
-import ListTypeExam from '../features/administration/typeexamen/ListTypeExam';
-import DiseaseOperations from '../features/administration/diseasestype/DiseaseOperationTyp';
+import ListTypeExam from '../features/type/examenType/ListTypeExam';
+import DiseaseOperations from '../features/type/diseasesType/DiseaseOperationType';
 
 function TypeExam() {
   return (

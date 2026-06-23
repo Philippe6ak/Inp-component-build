@@ -1,6 +1,6 @@
 import Row from '../ui/Row';
 import Heading from '../ui/Heading';
-import ListDiseaseTyp from '../features/administration/diseasestype/ListDiseaseTyp';
+import ListDiseaseType from '../features/type/diseasesType/ListDiseaseType';
 function DiseasesType() {
   return (
     <>
@@ -8,7 +8,7 @@ function DiseasesType() {
         <Heading as="h1">Toutes les Maladies</Heading>
         {/* <DiseaseOperations /> */}
       </Row>
-      <ListDiseaseTyp />
+      <ListDiseaseType />
     </>
   );
 }
