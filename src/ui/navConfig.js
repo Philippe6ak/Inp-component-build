@@ -16,6 +16,7 @@ import {
   HiOutlineUserPlus,
   HiOutlineUsers,
 } from 'react-icons/hi2';
+import { GiMedicalThermometer } from 'react-icons/gi';
 
 // Aliases for semantic naming
 const HiOutlineClipboard = HiOutlineClipboardDocumentList;
@@ -154,6 +155,11 @@ export const menuItems = [
         title: 'Librairie de maladies',
         path: '/diseases',
         icon: HiOutlineMicroscope,
+      },
+      {
+        title: "Librairie d'examen",
+        path: '/typesexamens',
+        icon: GiMedicalThermometer,
       },
       {
         title: 'Tarification',
