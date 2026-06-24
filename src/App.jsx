@@ -25,9 +25,10 @@ import Patients from './pages/Patients';
 import NewConsultation from './pages/NewConsultations';
 import Specialties from './pages/Specialties';
 import DiseasesType from './pages/DiseasesType';
-import TypeExam from './pages/TypeExam';
+import ExamenType from './pages/ExamenType';
 import Diseases from './pages/Diseases';
 import Examen from './pages/Examen';
+import TypeMedecine from './pages/MedecineType';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,7 +81,8 @@ function App() {
               <Route path="referrals" element={<Bookings />} />
               <Route path="specialties" element={<Specialties />} />
               <Route path="typediseases" element={<DiseasesType />} />
-              <Route path="typesexamens" element={<TypeExam />} />
+              <Route path="typesexamens" element={<ExamenType />} />
+              <Route path="typemedicines" element={<TypeMedecine />} />
               <Route path="diseases" element={<Diseases />} />
               <Route path="examens" element={<Examen />} />
               <Route path="pricing" element={<Settings />} />

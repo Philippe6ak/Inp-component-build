@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export function useOutsideClick(handler, listenCapturing = true) {
   const ref = useRef();
@@ -7,17 +7,17 @@ export function useOutsideClick(handler, listenCapturing = true) {
     function () {
       function handleClick(e) {
         if (ref.current && !ref.current.contains(e.target)) {
-          handler();
+          handler(e.target);
         }
       }
 
-      document.addEventListener("click", handleClick, listenCapturing);
+      document.addEventListener('click', handleClick, listenCapturing);
       //true is to avoid event bubbling and capture the click event in the capturing phase before it reaches the modal
 
       return () =>
-        document.removeEventListener("click", handleClick, listenCapturing);
+        document.removeEventListener('click', handleClick, listenCapturing);
     },
-    [handler, listenCapturing],
+    [handler, listenCapturing]
   );
 
   return ref;

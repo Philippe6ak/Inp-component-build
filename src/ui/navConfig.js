@@ -142,6 +142,11 @@ export const menuItems = [
         path: '/typesexamens',
         icon: HiOutlineMicroscope,
       },
+      {
+        title: 'Types de médicaments',
+        path: '/typemedicines',
+        icon: HiOutlineBeaker,
+      },
     ],
   },
 
