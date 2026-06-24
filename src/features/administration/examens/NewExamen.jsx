@@ -51,40 +51,12 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
           code: editValues.code ?? '',
           typesexamens_id: editValues.typesexamens_id ?? null,
           couts_id: editValues.couts_id ?? null,
-
-          // couts_id: editValues.couts_id ?? null,
         }
       : {},
   });
   const { errors } = formState;
   const isWorking = isCreating || isEditing;
 
-  /* function onSubmit(data) {
-
-    
-    if (isEditSession) {
-      editExamen(
-        { newExamenData: data, id: editId },
-        {
-          onSuccess: () => {
-            reset();
-            onCloseModal?.();
-          },
-        }
-      );
-
-      return;
-    }
-
-    createExamen(data, {
-      onSuccess: () => {
-        reset();
-
-        if (onCloseModal) onCloseModal();
-        else navigate('/examens');
-      },
-    });
-  }*/
   function onSubmit(data) {
     const selectedCost = data.couts_id;
 
@@ -201,7 +173,9 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
           <Controller
             name="couts_id"
             control={control}
-            rules={{ required: 'Le coût est requis' }}
+            rules={{
+              validate: (value) => (value ? true : 'Le coût est requis'),
+            }}
             render={({ field }) => (
               <CreatableSelect
                 options={costOptions}
