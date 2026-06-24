@@ -27,7 +27,18 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
-  const ref = useOutsideClick(close);
+
+  // Ignore clicks inside portalled dropdowns (e.g. react-select menus)
+  const smartClose = (target) => {
+    if (
+      target?.closest('[role="listbox"]') ||
+      target?.closest('[role="option"]')
+    )
+      return;
+    close();
+  };
+
+  const ref = useOutsideClick(smartClose);
 
   if (name !== openName) return null;
 

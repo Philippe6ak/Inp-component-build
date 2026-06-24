@@ -58,9 +58,20 @@ export const API_ENDPOINTS = {
   //   PRICING: '/pricing',
 
   //EXAMEN
-
   GETSEXAMEN: '/typesexamens',
   ADDEXAMEN: '/typesexamens/ajouter',
   UPDATEEXAMEN: `/typesexamens/update`,
   DELETEEXAMEN: `/typesexamens/delete`,
+
+  // TYPE MEDECINE
+  GETTYPEMEDECINE: '/typesmedicaments',
+  ADDTYPEMEDECINE: '/typesmedicaments/ajouter',
+  UPDATETYPEMEDECINE: `/typesmedicaments/update`,
+  DELETETYPEMEDECINE: `/typesmedicaments/delete`,
+
+  // MEDECINE
+  GETMEDECINE: '/medicaments',
+  ADDMEDECINE: '/medicaments/ajouter',
+  UPDATEMEDECINE: `/medicaments/update`,
+  DELETEMEDECINE: `/medicaments/delete`,
 };

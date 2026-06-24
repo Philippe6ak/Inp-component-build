@@ -98,29 +98,27 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
       </FormRow>
 
       <FormRow label="Type" error={errors?.typesmaladies_id?.message}>
-        <div onClick={(e) => e.stopPropagation()}>
-          <Controller
-            name="typesmaladies_id"
-            control={control}
-            rules={{ required: 'Le type est requis' }}
-            render={({ field }) => (
-              <Select
-                inputId="typesmaladies_id"
-                options={typeOptions}
-                isLoading={isLoadingTypes}
-                isDisabled={isWorking || isLoadingTypes}
-                defaultValue={defaultTypeOption}
-                // menuPortalTarget={menuPortalTarget}
-                styles={{ menuPortal: (base) => ({ ...base, zIndex: 2000 }) }}
-                menuPosition="fixed"
-                menuShouldScrollIntoView={false}
-                onChange={(selected) => field.onChange(selected?.value ?? null)}
-                onBlur={field.onBlur}
-                value={typeOptions.find((o) => o.value === field.value) ?? null}
-              />
-            )}
-          />
-        </div>
+        <Controller
+          name="typesmaladies_id"
+          control={control}
+          rules={{ required: 'Le type est requis' }}
+          render={({ field }) => (
+            <Select
+              inputId="typesmaladies_id"
+              options={typeOptions}
+              isLoading={isLoadingTypes}
+              isDisabled={isWorking || isLoadingTypes}
+              defaultValue={defaultTypeOption}
+              menuPortalTarget={menuPortalTarget}
+              styles={{ menuPortal: (base) => ({ ...base, zIndex: 2000 }) }}
+              menuPosition="fixed"
+              menuShouldScrollIntoView={false}
+              onChange={(selected) => field.onChange(selected?.value ?? null)}
+              onBlur={field.onBlur}
+              value={typeOptions.find((o) => o.value === field.value) ?? null}
+            />
+          )}
+        />
       </FormRow>
 
       <FormRow>
