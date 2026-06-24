@@ -156,6 +156,11 @@ export const menuItems = [
         path: '/diseases',
         icon: HiOutlineMicroscope,
       },
+      {
+        title: 'Librairie des examens',
+        path: '/examens',
+        icon: HiOutlineMicroscope,
+      },
       // {
       //   title: "Librairie d'examen",
       //   path: '/typesexamens',

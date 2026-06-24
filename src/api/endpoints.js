@@ -31,6 +31,7 @@ export const API_ENDPOINTS = {
 
   //   // Admin
   //   USERS: '/users',
+
   GETSPECIALTIES: '/specialites',
   ADDSPECIALTIES: '/specialites/ajouter',
   UPDATESPECIALTIES: `/specialites/update`,
@@ -51,16 +52,24 @@ export const API_ENDPOINTS = {
   UPDATETYPEEXAMENS: `/typesexamens/update`,
   DELETETYPEEXAMENS: `/typesexamens/delete`,
 
+  //EXAMEN
+
   GETEXAMENS: '/examens',
   ADDEXAMENS: '/examens/ajouter',
   UPDATEEXAMENS: `/examens/update`,
   DELETEEXAMENS: `/examens/delete`,
   //   PRICING: '/pricing',
 
-  //EXAMEN
+  //TYPE EXAMEN
 
   GETSEXAMEN: '/typesexamens',
   ADDEXAMEN: '/typesexamens/ajouter',
   UPDATEEXAMEN: `/typesexamens/update`,
   DELETEEXAMEN: `/typesexamens/delete`,
+
+  //COUTS
+  GETCOUTS: '/couts',
+  ADDCOUTS: '/couts/ajouter',
+  UPDATECOUTS: '/couts/update',
+  DELETECOUTS: '/couts/delete',
 };
