@@ -24,20 +24,17 @@ function ListDiseaseType() {
     ? diseases
     : diseases?.data || diseases?.maladies || [];
 
+  //the following is sorting shenenegans for sorting using values, just take it at face value and don't ask :D
   const sortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = sortBy.split('-');
-
   const sortedDiseases = [...diseasesData].sort((a, b) => {
     if (!['code', 'libelle'].includes(field)) return 0;
-
     const firstValue = String(a?.[field] ?? '');
     const secondValue = String(b?.[field] ?? '');
-
     const result = firstValue.localeCompare(secondValue, undefined, {
       numeric: true,
       sensitivity: 'base',
     });
-
     return direction === 'desc' ? -result : result;
   });
 

@@ -39,7 +39,7 @@ apiClient.interceptors.response.use(
       message: error.message,
     });
     if (error.response?.status === 401) {
-      clearSuperloginToken(); // token may have expired — force a fresh one next call
+      clearSuperloginToken();
       console.log('We got a fresh new token');
     }
     const message = error.response?.data?.message || error.message;
