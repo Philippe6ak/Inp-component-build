@@ -27,6 +27,7 @@ import Specialties from './pages/Specialties';
 import DiseasesType from './pages/DiseasesType';
 import ExamenType from './pages/ExamenType';
 import Diseases from './pages/Diseases';
+import Examen from './pages/Examen';
 import TypeMedecine from './pages/MedecineType';
 
 const queryClient = new QueryClient({
@@ -83,6 +84,7 @@ function App() {
               <Route path="typesexamens" element={<ExamenType />} />
               <Route path="typemedicines" element={<TypeMedecine />} />
               <Route path="diseases" element={<Diseases />} />
+              <Route path="examens" element={<Examen />} />
               <Route path="pricing" element={<Settings />} />
             </Route>
 
