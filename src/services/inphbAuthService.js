@@ -1,6 +1,7 @@
 import api from '../api/client';
 import { API_ENDPOINTS } from '../api/endpoints';
-import { setUser, removeUser, getUser, getToken } from '../utils/helpers';
+import { clearSuperloginToken } from './inphbSuperloginService';
+import { setUser, removeUser, getUser } from '../utils/helpers';
 
 export const authService = {
   login: async (login, password) => {
@@ -26,6 +27,7 @@ export const authService = {
     } catch (error) {
       // ignore
     } finally {
+      clearSuperloginToken();
       removeUser();
     }
   },

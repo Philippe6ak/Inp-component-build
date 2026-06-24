@@ -4,12 +4,14 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
+import { useSearchParams } from 'react-router-dom';
 import NewDiseaseType from './NewDiseaseType';
 
 import { useDiseaseType } from './useDiseaseType';
 import DiseaseTypeRow from './DiseaseTypeRow';
 
 function ListDiseaseType() {
+  const [searchParams] = useSearchParams();
   const { isLoading, error, diseaseType: diseases } = useDiseaseType();
 
   if (isLoading) return <Spinner />;
@@ -22,12 +24,19 @@ function ListDiseaseType() {
     ? diseases
     : diseases?.data || diseases?.maladies || [];
 
-  const sortedDiseases = [...diseasesData].sort((a, b) =>
-    String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {
+  //the following is sorting shenenegans for sorting using values, just take it at face value and don't ask :D
+  const sortBy = searchParams.get('sortBy') || 'code-asc';
+  const [field, direction] = sortBy.split('-');
+  const sortedDiseases = [...diseasesData].sort((a, b) => {
+    if (!['code', 'libelle'].includes(field)) return 0;
+    const firstValue = String(a?.[field] ?? '');
+    const secondValue = String(b?.[field] ?? '');
+    const result = firstValue.localeCompare(secondValue, undefined, {
       numeric: true,
       sensitivity: 'base',
-    })
-  );
+    });
+    return direction === 'desc' ? -result : result;
+  });
 
   return (
     <Menus>
