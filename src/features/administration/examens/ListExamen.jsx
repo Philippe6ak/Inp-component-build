@@ -8,10 +8,11 @@ import Table from '../../../ui/Table';
 import NewExamen from './NewExamen';
 import ExamensRow from './ExamensRow';
 import { UseExamen } from './useExam';
+import { useSearchParams } from 'react-router-dom';
 
 function ListExamen() {
   const { isLoading, error, examen } = UseExamen();
-
+  const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
 
   if (error) {
@@ -22,13 +23,18 @@ function ListExamen() {
     ? examen
     : examen?.data || examen?.examens || [];
 
-  const sortedExamens = [...examensData].sort((a, b) =>
-    String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {
+  const SortBy = searchParams.get('sortBy') || 'code-asc';
+  const [field, direction] = SortBy.split('-');
+  const sortedExamens = [...examensData].sort((a, b) => {
+    if (!['code', 'libelle'].includes(field)) return 0;
+    const firstValue = String(a?.[field] ?? '');
+    const secondValue = String(b?.[field] ?? '');
+    const result = firstValue.localeCompare(secondValue, undefined, {
       numeric: true,
       sensitivity: 'base',
-    })
-  );
-
+    });
+    return direction === 'desc' ? -result : result;
+  });
   return (
     <Menus>
       <div className="mb-[1.6rem] flex justify-end">
@@ -46,7 +52,7 @@ function ListExamen() {
       {!sortedExamens.length ? (
         <Empty ressourceName="examens" />
       ) : (
-        <Table columns="1fr 3fr 0.5fr">
+        <Table columns="1fr 2fr 2fr 1fr 0.5fr ">
           <Table.Header>
             <div>Code</div>
             <div>Libelle</div>

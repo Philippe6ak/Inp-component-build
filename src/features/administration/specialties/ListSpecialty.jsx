@@ -7,9 +7,11 @@ import Table from '../../../ui/Table';
 import NewSpecialty from './NewSpecialty';
 import { useSpecialty } from './useSpecialty';
 import SpecialtyRow from './SpecialtyRow';
+import { useSearchParams } from 'react-router-dom';
 
 function ListSpecialty() {
   const { isLoading, error, specialties } = useSpecialty();
+  const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
 
@@ -21,12 +23,18 @@ function ListSpecialty() {
     ? specialties
     : specialties?.data || specialties?.specialites || [];
 
-  const sortedSpecialties = [...specialtiesData].sort((a, b) =>
-    String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {
+  const sortBy = searchParams.get('sortBy') || 'code-asc';
+  const [field, direction] = sortBy.split('-');
+  const sortedSpecialties = [...specialtiesData].sort((a, b) => {
+    if (!['code', 'libelle'].includes(field)) return 0;
+    const firstValue = String(a?.[field] ?? '');
+    const secondValue = String(b?.[field] ?? '');
+    const result = firstValue.localeCompare(secondValue, undefined, {
       numeric: true,
       sensitivity: 'base',
-    })
-  );
+    });
+    return direction === 'desc' ? -result : result;
+  });
 
   return (
     <Menus>

@@ -1,7 +1,7 @@
-import SortBy from '../../../ui/SortBy';
-import TableOperations from '../../../ui/TableOperations';
+import SortBy from '../ui/SortBy';
+import TableOperations from '../ui/TableOperations';
 
-function DiseaseOperationsTyp() {
+function SortOperations() {
   return (
     <>
       <TableOperations>
@@ -19,4 +19,4 @@ function DiseaseOperationsTyp() {
   );
 }
 
-export default DiseaseOperationsTyp;
+export default SortOperations;

@@ -81,7 +81,4 @@ export const API_ENDPOINTS = {
 
   // MEDECINE
   GETMEDECINE: '/medicaments',
-  ADDMEDECINE: '/medicaments/ajouter',
-  UPDATEMEDECINE: `/medicaments/update`,
-  DELETEMEDECINE: `/medicaments/delete`,
 };

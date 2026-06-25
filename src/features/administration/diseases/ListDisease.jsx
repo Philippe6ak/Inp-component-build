@@ -7,9 +7,11 @@ import Table from '../../../ui/Table';
 import NewDisease from './NewDisease';
 import DiseaseRow from './DiseaseRow';
 import { useDisease } from './useDisease';
+import { useSearchParams } from 'react-router-dom';
 
 function ListDisease() {
   const { isLoading, error, disease } = useDisease();
+  const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
 
@@ -21,12 +23,18 @@ function ListDisease() {
     ? disease
     : disease?.data || disease?.maladies || [];
 
-  const sortedDiseases = [...diseasesData].sort((a, b) =>
-    String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {
+  const sortBy = searchParams.get('sortBy') || 'code-asc';
+  const [field, direction] = sortBy.split('-');
+  const sortedDiseases = [...diseasesData].sort((a, b) => {
+    if (!['code', 'libelle'].includes(field)) return 0;
+    const firstValue = String(a?.[field] ?? '');
+    const secondValue = String(b?.[field] ?? '');
+    const result = firstValue.localeCompare(secondValue, undefined, {
       numeric: true,
       sensitivity: 'base',
-    })
-  );
+    });
+    return direction === 'desc' ? -result : result;
+  });
 
   return (
     <Menus>

@@ -7,7 +7,7 @@ import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 import { UseNewExamen } from './useNewExamen';
 import { useTypeExam } from '../../type/examenType/useTypeExam';
-import { UseCreateCost } from '../couts/useCreateCost';
+//import { UseCreateCost } from '../couts/useCreateCost';
 import { UseCosts } from '../couts/useCosts';
 import { UseEditExamen } from './useEditExamen';
 import CreatableSelect from 'react-select/creatable';
@@ -19,7 +19,6 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
   const { createExamen, isCreating } = UseNewExamen();
   const { editExamen, isEditing } = UseEditExamen();
   const { examens: typeExamen, isLoading } = useTypeExam();
-  const { createCouts, isCreatingCouts } = UseCreateCost();
   const { couts, isLoading: isLoadingCost } = UseCosts();
 
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
   const costOptions =
     couts?.data?.map((t) => ({
       value: t.couts_id,
-      label: t.cout_montant,
+      label: t.montant,
     })) ?? [];
 
   const defaultCostOption = isEditSession
@@ -50,7 +49,7 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
           libelle: editValues.libelle ?? '',
           code: editValues.code ?? '',
           typesexamens_id: editValues.typesexamens_id ?? null,
-          couts_id: editValues.couts_id ?? null,
+          couts_id: defaultCostOption,
         }
       : {},
   });
@@ -58,64 +57,46 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
   const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
-    const selectedCost = data.couts_id;
-
-    const saveExam = (couts_id) => {
-      const payload = {
-        libelle: data.libelle,
-        code: data.code,
-        typesexamens_id: data.typesexamens_id,
-        couts_id,
-      };
-
-      if (isEditSession) {
-        editExamen(
-          {
-            newExamenData: payload,
-            id: editId,
-          },
-          {
-            onSuccess: () => {
-              reset();
-              onCloseModal?.();
-            },
-          }
-        );
-      } else {
-        createExamen(payload, {
-          onSuccess: () => {
-            reset();
-
-            if (onCloseModal) onCloseModal();
-            else navigate('/examens');
-          },
-        });
-      }
+    const payload = {
+      libelle: data.libelle,
+      code: data.code,
+      typesexamens_id: data.typesexamens_id,
+      montant: Number(data.couts_id.label),
     };
 
-    // coût existant
-    if (!selectedCost?.__isNew__) {
-      saveExam(selectedCost.value);
+    if (isEditSession) {
+      editExamen(
+        {
+          newExamenData: payload,
+          id: editId,
+        },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
+        }
+      );
+
       return;
     }
 
-    // nouveau coût
-    createCouts(
-      {
-        cout_montant: Number(selectedCost.label),
-      },
-      {
-        onSuccess: (response) => {
-          const couts_id = response?.data?.couts_id ?? response?.couts_id;
+    createExamen(payload, {
+      onSuccess: () => {
+        reset();
 
-          saveExam(couts_id);
-        },
-      }
-    );
+        if (onCloseModal) onCloseModal();
+        else navigate('/examens');
+      },
+    });
   }
+
   function onError(formErrors) {
     console.log(formErrors);
   }
+
+  console.log('couts', couts);
+  console.log('costOptions', costOptions);
 
   return (
     <Form
@@ -143,15 +124,15 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Type" error={errors?.examens_id?.message}>
+      <FormRow label="Type" error={errors?.typesexamens_id?.message}>
         <div onClick={(e) => e.stopPropagation()}>
           <Controller
-            name="examens_id"
+            name="typesexamens_id"
             control={control}
             rules={{ required: 'Le type est requis' }}
             render={({ field }) => (
               <Select
-                inputId="examens_id"
+                inputId="typesexamens_id"
                 options={typeOptions}
                 isLoading={isLoading}
                 isDisabled={isWorking || isLoading}
@@ -180,7 +161,6 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
               <CreatableSelect
                 options={costOptions}
                 isLoading={isLoadingCost}
-                isDisabled={isWorking || isCreatingCouts}
                 value={field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}

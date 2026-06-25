@@ -11,7 +11,7 @@ export const coutsService = {
   },
 
   // create or edit in same function
-  createEditCost: async ({ cout_montant }, couts_id) => {
+  /*createEditCost: async ({ cout_montant }, couts_id) => {
     //CREATE — when no id passed
     if (!couts_id) {
       const data = await api.post(API_ENDPOINTS.ADDCOUTS, {
@@ -32,7 +32,7 @@ export const coutsService = {
       throw new Error(data.message || 'Failed to update cost');
     }
     return data;
-  },
+  },*/
 
   deleteCost: async (couts_id) => {
     const data = await api.post(API_ENDPOINTS.DELETECOUTS, {

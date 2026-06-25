@@ -23,7 +23,7 @@ function examenRow({ examen }) {
       libelle: libelle ? `Copy of ${libelle}` : 'Copy',
       code: code ? `${code}-COPY` : '',
       typesexamens_id: examen.typesexamens_id,
-      couts_id: examen.couts_id,
+      montant: examen.cout_montant,
     });
   }
 
