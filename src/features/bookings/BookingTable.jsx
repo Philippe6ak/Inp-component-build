@@ -7,8 +7,6 @@ import { useBookings } from './useBookings';
 import Pagination from '../../ui/Pagination';
 
 function BookingTable() {
-  //for testing bug, need to call after the useBookings hook
-
   const { bookings, isLoading, count } = useBookings();
   if (isLoading) return <Spinner />;
 

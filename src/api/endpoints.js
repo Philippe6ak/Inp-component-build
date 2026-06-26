@@ -4,11 +4,20 @@ export const API_ENDPOINTS = {
   LOGOUT: '/logout',
   ME: '/me',
 
+  GETUSERS: '/users',
+  ADDUSER: '/users/ajouter',
+  GETAGENTS: '/agents',
+
   // A ajouter plus tard
   //   PATIENTS: '/patients',
   //   PATIENT: (id) => `/patients/${id}`,
 
   //   // Consultations
+  GETTYPECONSULTATIONS: '/typesconsultations',
+  ADDTYPECONSULTATIONS: '/typesconsultations/ajouter',
+  UPDATETYPECONSULTATIONS: `/typesconsultations/update`,
+  DELETETYPECONSULTATIONS: `/typesconsultations/delete`,
+
   //   CONSULTATIONS: '/consultations',
   //   CONSULTATION: (id) => `/consultations/${id}`,
 
