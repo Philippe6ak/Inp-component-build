@@ -29,6 +29,8 @@ import ExamenType from './pages/ExamenType';
 import Diseases from './pages/Diseases';
 import Examen from './pages/Examen';
 import TypeMedecine from './pages/MedecineType';
+import ConsultationType from './pages/ConsultationType';
+import ListUsers from './features/administration/users/ListUsers';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,7 +60,7 @@ function App() {
               <Route path="booking/:bookingId" element={<Booking />} />
               <Route path="checkin/:bookingId" element={<Checkin />} />
               <Route path="cabins" element={<Cabins />} />
-              <Route path="users" element={<Users />} />
+              <Route path="users" element={<ListUsers />} />
               <Route path="settings" element={<Settings />} />
               <Route path="account" element={<Account />} />
               <Route path="table" element={<Table />} />
@@ -83,9 +85,11 @@ function App() {
               <Route path="typediseases" element={<DiseasesType />} />
               <Route path="typesexamens" element={<ExamenType />} />
               <Route path="typemedicines" element={<TypeMedecine />} />
+              <Route path="typesconsultations" element={<ConsultationType />} />
               <Route path="diseases" element={<Diseases />} />
               <Route path="examens" element={<Examen />} />
               <Route path="pricing" element={<Settings />} />
+              <Route path="users" element={<ListUsers />} />
             </Route>
 
             <Route path="login" element={<Login />} />
