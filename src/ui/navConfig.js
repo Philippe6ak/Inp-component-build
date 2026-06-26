@@ -72,7 +72,7 @@ export const menuItems = [
         path: '/supplies/new',
         icon: HiOutlineShoppingCart,
       },
-      { title: 'Medications', path: '/medications', icon: HiOutlineBeaker },
+      { title: 'Medicaments', path: '/medicaments', icon: HiOutlineBeaker },
       { title: 'Gestion du stock', path: '/stock', icon: HiOutlineCube },
       { title: 'Ventes', path: '/sales', icon: HiOutlineShoppingCart },
     ],
