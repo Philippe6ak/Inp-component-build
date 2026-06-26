@@ -5,27 +5,27 @@ import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 
-import NewExamen from './NewExamen';
-import ExamensRow from './ExamensRow';
-import { UseExamen } from './useExam';
+import NewMedicament from './NewMedicament';
+import MedicamentRow from './MedicamentsRow';
+import { UseMedications } from './useMedicament';
 import { useSearchParams } from 'react-router-dom';
 
-function ListExamen() {
-  const { isLoading, error, examen } = UseExamen();
+function ListMedicament() {
+  const { isLoading, error, medicament } = UseMedications();
   const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
 
   if (error) {
-    return <p>Erreur lors du chargement des Examens.</p>;
+    return <p>Erreur lors du chargement des Medicaments.</p>;
   }
 
-  const examensData = Array.isArray(examen)
-    ? examen
-    : examen?.data || examen?.examens || [];
+  const medicamentData = Array.isArray(medicament)
+    ? medicament
+    : medicament?.data || medicament?.medicaments || [];
 
   const SortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = SortBy.split('-');
-  const sortedExamens = [...examensData].sort((a, b) => {
+  const sortedMedicaments = [...medicamentData].sort((a, b) => {
     if (!['code', 'libelle'].includes(field)) return 0;
     const firstValue = String(a?.[field] ?? '');
     const secondValue = String(b?.[field] ?? '');
@@ -39,32 +39,35 @@ function ListExamen() {
     <Menus>
       <div className="mb-[1.6rem] flex justify-end">
         <Modal>
-          <Modal.Open opens="create-examen">
-            <Button>Nouveau Examen</Button>
+          <Modal.Open opens="create-medicament">
+            <Button>Nouveau Medicament</Button>
           </Modal.Open>
 
-          <Modal.Window name="create-examen">
-            <NewExamen />
+          <Modal.Window name="create-medicament">
+            <NewMedicament />
           </Modal.Window>
         </Modal>
       </div>
 
-      {!sortedExamens.length ? (
-        <Empty ressourceName="examens" />
+      {!sortedMedicaments.length ? (
+        <Empty ressourceName="medicament" />
       ) : (
-        <Table columns="1fr 2fr 2fr 1.5fr 0.5fr ">
+        <Table columns="1fr 2fr 2fr 2fr 0.5fr ">
           <Table.Header>
             <div>Code</div>
             <div>Libelle</div>
-            <div>Type Examen</div>
-            <div>Couts Examen</div>
+            <div>Type medicament</div>
+            <div>Couts Medicament</div>
             <div></div>
           </Table.Header>
 
           <Table.Body
-            data={sortedExamens}
-            render={(examen) => (
-              <ExamensRow examen={examen} key={examen.examens_id} />
+            data={sortedMedicaments}
+            render={(medicament) => (
+              <MedicamentRow
+                medicament={medicament}
+                key={medicament.medicaments_id}
+              />
             )}
           />
         </Table>
@@ -73,4 +76,4 @@ function ListExamen() {
   );
 }
 
-export default ListExamen;
+export default ListMedicament;
