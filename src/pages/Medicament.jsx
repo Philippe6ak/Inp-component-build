@@ -1,18 +1,18 @@
 import Row from '../ui/Row';
 import Heading from '../ui/Heading';
-import ListTypeMedecine from '../features/type/medecineType/ListMedecineType';
+import ListMedicament from '../features/Pharmacie/medicament/ListMedicament';
 import SortOperations from './SortOperations';
 
-function TypeMedecine() {
+function Medicament() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Tous les Médicaments</Heading>
+        <Heading as="h1">Tous les Medicaments</Heading>
         <SortOperations />
       </Row>
-      <ListTypeMedecine />
+      <ListMedicament />
     </>
   );
 }
 
-export default TypeMedecine;
+export default Medicament;

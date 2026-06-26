@@ -12,7 +12,7 @@ export const examenService = {
 
   // create or edit in same function
   createEditexamen: async (
-    { libelle, code, typesexamens_id, couts_id },
+    { libelle, code, typesexamens_id, montant },
     examens_id
   ) => {
     //CREATE — when no id passed
@@ -21,11 +21,12 @@ export const examenService = {
         libelle,
         code,
         typesexamens_id,
-        couts_id,
+        montant,
       });
       if (data?.status === 'error' || data?.success === false) {
         throw new Error(data.message || 'Failed to create exam');
       }
+
       return data;
     }
 
@@ -35,7 +36,7 @@ export const examenService = {
       libelle,
       code,
       typesexamens_id,
-      couts_id,
+      montant,
     });
     if (data?.status === 'error' || data?.success === false) {
       throw new Error(data.message || 'Failed to update exam');

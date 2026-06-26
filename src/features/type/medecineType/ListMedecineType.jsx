@@ -8,9 +8,11 @@ import NewMedecineType from './NewMedecineType';
 
 import { useMedecineType } from './useMedecineType';
 import MedecineTypeRow from './MedecineTypeRow';
+import { useSearchParams } from 'react-router-dom';
 
 function ListMedecineType() {
   const { isLoading, error, medecineType: medecines } = useMedecineType();
+  const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
 
@@ -22,12 +24,18 @@ function ListMedecineType() {
     ? medecines
     : medecines?.data || medecines?.typesmedicaments || [];
 
-  const sortedMedecines = [...medecinesData].sort((a, b) =>
-    String(a?.code ?? '').localeCompare(String(b?.code ?? ''), undefined, {
+  const sortBy = searchParams.get('sortBy') || 'code-asc';
+  const [field, direction] = sortBy.split('-');
+  const sortedMedecines = [...medecinesData].sort((a, b) => {
+    if (!['code', 'libelle'].includes(field)) return 0;
+    const firstValue = String(a?.[field] ?? '');
+    const secondValue = String(b?.[field] ?? '');
+    const result = firstValue.localeCompare(secondValue, undefined, {
       numeric: true,
       sensitivity: 'base',
-    })
-  );
+    });
+    return direction === 'desc' ? -result : result;
+  });
 
   return (
     <Menus>

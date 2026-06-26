@@ -1,14 +1,14 @@
 import Row from '../ui/Row';
 import Heading from '../ui/Heading';
 import ListSpecialty from '../features/administration/specialties/ListSpecialty';
-import SpecialtyOperations from '../features/administration/specialties/SpecialtyOperations';
+import SortOperations from './SortOperations';
 
 function Specialties() {
   return (
     <>
       <Row type="horizontal">
         <Heading as="h1">Toutes les Spécialités</Heading>
-        <SpecialtyOperations />
+        <SortOperations />
       </Row>
       <ListSpecialty />
     </>

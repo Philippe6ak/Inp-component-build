@@ -5,32 +5,33 @@ import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { UseNewExamen } from './useNewExamen';
-import { useTypeExam } from '../../type/examenType/useTypeExam';
-//import { UseCreateCost } from '../couts/useCreateCost';
-import { UseCosts } from '../couts/useCosts';
-import { UseEditExamen } from './useEditExamen';
-import CreatableSelect from 'react-select/creatable';
 
-function NewExamen({ examenToEdit = {}, onCloseModal }) {
-  const { examens_id: editId, ...editValues } = examenToEdit;
+import { UseNewMedications } from './useNewMedicament';
+import CreatableSelect from 'react-select/creatable';
+import { useMedecineType } from '../../type/medecineType/useMedecineType';
+import { UseEditMedications } from './useEditMedicament';
+import { UseCosts } from '../../administration/couts/useCosts';
+
+function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
+  const { medicaments_id: editId, ...editValues } = medicamentToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createExamen, isCreating } = UseNewExamen();
-  const { editExamen, isEditing } = UseEditExamen();
-  const { examens: typeExamen, isLoading } = useTypeExam();
+  const { createMedication, isCreating } = UseNewMedications();
+  const { editMedication, isEditing } = UseEditMedications();
+  const { medecineType, isLoading } = useMedecineType();
   const { couts, isLoading: isLoadingCost } = UseCosts();
 
   const navigate = useNavigate();
 
   const typeOptions =
-    typeExamen?.data?.map((t) => ({
-      value: t.typesexamens_id,
+    medecineType?.data?.map((t) => ({
+      value: t.typesmedicaments_id,
       label: t.libelle,
     })) ?? [];
 
   const defaultTypeOption = isEditSession
-    ? (typeOptions.find((o) => o.value === editValues.typesexamens_id) ?? null)
+    ? (typeOptions.find((o) => o.value === editValues.typesmedicaments_id) ??
+      null)
     : null;
 
   const costOptions =
@@ -48,7 +49,7 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
       ? {
           libelle: editValues.libelle ?? '',
           code: editValues.code ?? '',
-          typesexamens_id: editValues.typesexamens_id ?? null,
+          typesmedicaments_id: editValues.typesmedicaments_id ?? null,
           couts_id: defaultCostOption,
         }
       : {},
@@ -60,14 +61,14 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
     const payload = {
       libelle: data.libelle,
       code: data.code,
-      typesexamens_id: data.typesexamens_id,
+      typesmedicaments_id: data.typesmedicaments_id,
       montant: Number(data.couts_id.label),
     };
 
     if (isEditSession) {
-      editExamen(
+      editMedication(
         {
-          newExamenData: payload,
+          newMedicationsData: payload,
           id: editId,
         },
         {
@@ -81,12 +82,12 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createExamen(payload, {
+    createMedication(payload, {
       onSuccess: () => {
         reset();
 
         if (onCloseModal) onCloseModal();
-        else navigate('/examens');
+        else navigate('/medicament');
       },
     });
   }
@@ -94,9 +95,6 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
   function onError(formErrors) {
     console.log(formErrors);
   }
-
-  console.log('couts', couts);
-  console.log('costOptions', costOptions);
 
   return (
     <Form
@@ -124,15 +122,15 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Type" error={errors?.typesexamens_id?.message}>
+      <FormRow label="Type" error={errors?.typesmedicaments_id?.message}>
         <div onClick={(e) => e.stopPropagation()}>
           <Controller
-            name="typesexamens_id"
+            name="typesmedicaments_id"
             control={control}
             rules={{ required: 'Le type est requis' }}
             render={({ field }) => (
               <Select
-                inputId="typesexamens_id"
+                inputId="typesmedicaments_id"
                 options={typeOptions}
                 isLoading={isLoading}
                 isDisabled={isWorking || isLoading}
@@ -187,12 +185,12 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
               ? 'Updating...'
               : 'Creating...'
             : isEditSession
-              ? 'Update exam'
-              : 'Create exam'}
+              ? 'Update medecine'
+              : 'Create medecine'}
         </Button>
       </FormRow>
     </Form>
   );
 }
 
-export default NewExamen;
+export default NewMedicament;

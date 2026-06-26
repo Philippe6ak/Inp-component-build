@@ -3,27 +3,27 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import { UseDeleteExamen } from './useDeleteExamen';
-import { UseNewExamen } from './useNewExamen';
-import NewExamen from './NewExamen';
+import { UseDeleteMedication } from './useDeleteMedicament';
+import { UseNewMedications } from './useNewMedicament';
+import NewMedicament from './NewMedicament';
 
-function examenRow({ examen }) {
-  const examenId = examen.examens_id;
-  const code = examen?.code ?? '';
-  const libelle = examen?.libelle ?? '';
-  const libelleTypeExamen = examen?.type_examen_libelle ?? '';
-  const coutsmontant = examen?.cout_montant ?? '';
-  const menuId = examenId;
+function MedicamentRow({ medicament }) {
+  const medicamentId = Number(medicament.medicaments_id);
+  const code = medicament?.code ?? '';
+  const libelle = medicament?.libelle ?? '';
+  const libelleTypeMedicament = medicament?.type_medicament_libelle ?? '';
+  const coutsmontant = medicament?.cout_montant ?? '';
+  const menuId = medicamentId;
 
-  const { isDeleting, deleteExamen } = UseDeleteExamen();
-  const { createExamen } = UseNewExamen();
+  const { isDeleting, deleteMedicament } = UseDeleteMedication();
+  const { createMedication } = UseNewMedications();
 
   function handleDuplicate() {
-    createExamen({
+    createMedication({
       libelle: libelle ? `Copy of ${libelle}` : 'Copy',
       code: code ? `${code}-COPY` : '',
-      typesexamens_id: examen.typesexamens_id,
-      montant: examen.cout_montant,
+      typesmedicaments_id: Number(medicament.typesmedicaments_id),
+      montant: medicament.cout_montant,
     });
   }
 
@@ -31,7 +31,7 @@ function examenRow({ examen }) {
     <Table.Row>
       <div>{code}</div>
       <div>{libelle}</div>
-      <div>{libelleTypeExamen}</div>
+      <div>{libelleTypeMedicament}</div>
       <div>{coutsmontant}</div>
       <div>
         <Modal>
@@ -53,14 +53,14 @@ function examenRow({ examen }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <NewExamen examenToEdit={examen} />
+              <NewMedicament medicamentToEdit={medicament} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
-                resourceName="examens"
+                resourceName="medicament"
                 disabled={isDeleting}
-                onConfirm={() => deleteExamen(examenId)}
+                onConfirm={() => deleteMedicament(medicament)}
               />
             </Modal.Window>
           </Menus.Menu>
@@ -70,4 +70,4 @@ function examenRow({ examen }) {
   );
 }
 
-export default examenRow;
+export default MedicamentRow;
