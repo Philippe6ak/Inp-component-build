@@ -11,7 +11,7 @@ import { UsePermissions } from './UsePermissions';
 import PermissionsRow from './PermissionsRow';
 import { useSearchParams } from 'react-router-dom';
 
-function ListPermissions() {
+function PermissionsLayout() {
   const { isLoading, error, permissions } = UsePermissions();
   const [searchParams] = useSearchParams();
 
@@ -42,22 +42,6 @@ function ListPermissions() {
 
   return (
     <Menus>
-      <div className="mb-[1.6rem] flex justify-end">
-        <Modal>
-          <Modal.Open opens="create-permissions">
-            <Button>Nouvelle Permission</Button>
-            <Button variation="secondary" size="medium">
-              + Nouvelle permission
-            </Button>
-          </Modal.Open>
-
-          <Modal.Window name="create-permissions">
-            <NewPermissions />
-          </Modal.Window>
-        </Modal>
-        <Button size="medium">Gérer les rôles</Button>
-      </div>
-
       {!sortedPermissions.length ? (
         <Empty ressourceName="permissions" />
       ) : (
@@ -91,4 +75,4 @@ function ListPermissions() {
   );
 }
 
-export default ListPermissions;
+export default PermissionsLayout;

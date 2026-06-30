@@ -6,8 +6,10 @@ function PermissionsTableOperations() {
     <TableOperations>
       <SortBy
         options={[
-          { value: 'name-desc', label: 'Sort by role (Z-A)' },
-          { value: 'name-asc', label: 'Sort by role (A-Z)' },
+          { value: 'all', label: 'Toutes les ressources' },
+          { value: 'users', label: 'Utilisateurs' },
+          { value: 'roles', label: 'Rôles' },
+          { value: 'dashboard', label: 'Dashboard' },
         ]}
       />
     </TableOperations>
