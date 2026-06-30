@@ -3,14 +3,17 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
+import Checkbox from '../../../ui/Checkbox';
+import ButtonIcon from '../../../ui/ButtonIcon';
+import Tag from '../../../ui/Tag';
 import { useDeletePermissions } from './useDeletePermissions';
 import NewPermissions from './NewPermissions';
 import { useNewPermissions } from './useNewPermissions';
 
-function PermissionsRow({ permissions }) {
-  const permissionsId = permissions.permissions_id;
-  const name = permissions?.name ?? '';
-  const menuId = permissionsId;
+function PermissionsRow({ permission }) {
+  const permissionId = permission.permissions_id;
+  const name = permission?.name ?? '';
+  const menuId = permissionId;
 
   const { isDeleting, deletePermissions } = useDeletePermissions();
   const { createPermissions } = useNewPermissions();
@@ -23,8 +26,13 @@ function PermissionsRow({ permissions }) {
 
   return (
     <Table.Row>
+      <Checkbox id={`permission-${permissionId}`} />
       <div>{name}</div>
-      <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div className="flex gap-[0.8rem] justify-end">
         <Modal>
           <Menus.Menu>
             <Menus.Toggle id={menuId} />
@@ -44,14 +52,14 @@ function PermissionsRow({ permissions }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <NewPermissions permissionsToEdit={permissions} />
+              <NewPermissions permissionsToEdit={permission} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
                 resourceName="permissions"
                 disabled={isDeleting}
-                onConfirm={() => deletePermissions(permissions)}
+                onConfirm={() => deletePermissions(permission)}
               />
             </Modal.Window>
           </Menus.Menu>

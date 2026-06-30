@@ -1,18 +1,17 @@
 import Row from '../ui/Row';
-import Heading from '../ui/Heading';
-import ListPermissions from '../features/administration/permissions/listPermissions';
+import PermissionsHeader from '../features/administration/permissions/PermissionsHeader';
+import PermissionsLayout from '../features/administration/permissions/PermissionsLayout';
 import PermissionsTableOperations from '../features/administration/permissions/PermissionsOperations';
 
-function Diseases() {
+function Permissions() {
   return (
-    <>
-      <Row type="horizontal">
-        <Heading as="h1">Toutes les Permissions</Heading>
-        <PermissionsTableOperations />
-      </Row>
-      <ListPermissions />
-    </>
+    <Row type="vertical">
+      <PermissionsHeader />
+      {/* <PermissionsTableOperations /> */}
+      <PermissionsLayout />
+      {/* <ListPermissions /> */}
+    </Row>
   );
 }
 
-export default Diseases;
+export default Permissions;
