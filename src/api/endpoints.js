@@ -93,4 +93,9 @@ export const API_ENDPOINTS = {
   ADDMEDECINE: '/medicaments/ajouter',
   UPDATEMEDECINE: `/medicaments/update`,
   DELETEMEDECINE: `/medicaments/delete`,
+
+  GETPERMISSIONS: '/permissions',
+  ADDPERMISSIONS: '/permissions/ajouter',
+  UPDATEPERMISSIONS: `/permissions/update`,
+  DELETEPERMISSIONS: `/permissions/delete`,
 };

@@ -16,7 +16,7 @@ import {
   HiOutlineUserPlus,
   HiOutlineUsers,
 } from 'react-icons/hi2';
-import { GiMedicalThermometer } from 'react-icons/gi';
+import { GiMedicalThermometer, GiPadlock } from 'react-icons/gi';
 
 // Aliases for semantic naming
 const HiOutlineClipboard = HiOutlineClipboardDocumentList;
@@ -161,6 +161,9 @@ export const menuItems = [
     items: [
       { title: 'Utilisateurs', path: '/users', icon: HiOutlineUsers },
       { title: 'Spécialités', path: '/specialties', icon: HiOutlineClipboard },
+
+      { title: 'Permissions', path: '/permissions', icon: GiPadlock },
+
       {
         title: 'Librairie de maladies',
         path: '/diseases',
