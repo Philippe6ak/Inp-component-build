@@ -1,17 +1,17 @@
 import SortBy from '../../ui/SortBy';
 import TableOperations from '../../ui/TableOperations';
 
-function PatientsTableOperations() {
+function RolesTableOperations() {
   return (
     <TableOperations>
       <SortBy
         options={[
-          { value: 'nom-desc', label: 'Sort by name (Z-A)' },
-          { value: 'nom-asc', label: 'Sort by name (A-Z)' },
+          { value: 'role-desc', label: 'Sort by role (Z-A)' },
+          { value: 'role-asc', label: 'Sort by role (A-Z)' },
         ]}
       />
     </TableOperations>
   );
 }
 
-export default PatientsTableOperations;
+export default RolesTableOperations;
