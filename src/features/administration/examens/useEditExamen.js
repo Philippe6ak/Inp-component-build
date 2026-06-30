@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { examenService } from '../../../services/inphbexamenService';
+import { examenService } from '../../../services/inphbExamenService';
 
 export function UseEditExamen() {
   const queryClient = useQueryClient();

@@ -93,4 +93,10 @@ export const API_ENDPOINTS = {
   ADDMEDECINE: '/medicaments/ajouter',
   UPDATEMEDECINE: `/medicaments/update`,
   DELETEMEDECINE: `/medicaments/delete`,
+
+  // ROLES
+  GETROLES: '/roles',
+  ADDROLES: '/roles/ajouter',
+  UPDATEROLES: `/roles/update`,
+  DELETEROLES: `/roles/delete`,
 };
