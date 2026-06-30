@@ -33,6 +33,7 @@ import Medicament from './pages/Medicament';
 import ConsultationType from './pages/ConsultationType';
 import ListUsers from './features/administration/users/ListUsers';
 import Permissions from './pages/Permissions';
+import Roles from './pages/Roles';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -94,6 +95,7 @@ function App() {
               <Route path="medicaments" element={<Medicament />} />
               <Route path="users" element={<ListUsers />} />
               <Route path="permissions" element={<Permissions />} />
+              <Route path="roles" element={<Roles />} />
             </Route>
 
             <Route path="login" element={<Login />} />

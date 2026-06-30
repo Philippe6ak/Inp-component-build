@@ -98,4 +98,9 @@ export const API_ENDPOINTS = {
   ADDPERMISSIONS: '/permissions/ajouter',
   UPDATEPERMISSIONS: `/permissions/update`,
   DELETEPERMISSIONS: `/permissions/delete`,
+  // ROLES
+  GETROLES: '/roles',
+  ADDROLES: '/roles/ajouter',
+  UPDATEROLES: `/roles/update`,
+  DELETEROLES: `/roles/delete`,
 };
