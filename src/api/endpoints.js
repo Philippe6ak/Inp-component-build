@@ -94,6 +94,10 @@ export const API_ENDPOINTS = {
   UPDATEMEDECINE: `/medicaments/update`,
   DELETEMEDECINE: `/medicaments/delete`,
 
+  GETPERMISSIONS: '/permissions',
+  ADDPERMISSIONS: '/permissions/ajouter',
+  UPDATEPERMISSIONS: `/permissions/update`,
+  DELETEPERMISSIONS: `/permissions/delete`,
   // ROLES
   GETROLES: '/roles',
   ADDROLES: '/roles/ajouter',
