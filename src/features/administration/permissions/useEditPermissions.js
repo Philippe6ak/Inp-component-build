@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { PermissionsService } from '../../../services/inphbpermissionsService';
+import { permissionsService } from '../../../services/inphbPermissionsService';
 
 export function useEditPermissions() {
   const queryClient = useQueryClient();
 
   const { mutate: editPermissions, isPending: isEditing } = useMutation({
     mutationFn: ({ newPermissionsData, id }) =>
-      PermissionsService.createEditPermissions(newPermissionsData, id),
+      permissionsService.createEditPermissions(newPermissionsData, id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['permissions'] });
       toast.success('Permission mise à jour avec succès');

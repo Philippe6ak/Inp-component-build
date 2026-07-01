@@ -4,8 +4,6 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
 import Checkbox from '../../../ui/Checkbox';
-import ButtonIcon from '../../../ui/ButtonIcon';
-import Tag from '../../../ui/Tag';
 import { useDeletePermissions } from './useDeletePermissions';
 import NewPermissions from './NewPermissions';
 import { useNewPermissions } from './useNewPermissions';

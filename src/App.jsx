@@ -34,6 +34,7 @@ import ConsultationType from './pages/ConsultationType';
 import ListUsers from './features/administration/users/ListUsers';
 import Permissions from './pages/Permissions';
 import Roles from './pages/Roles';
+import RolePermissions from './features/administration/roles/RolePermissions';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -96,6 +97,10 @@ function App() {
               <Route path="users" element={<ListUsers />} />
               <Route path="permissions" element={<Permissions />} />
               <Route path="roles" element={<Roles />} />
+              <Route
+                path="roles/:roleId/permissions"
+                element={<RolePermissions />}
+              />
             </Route>
 
             <Route path="login" element={<Login />} />

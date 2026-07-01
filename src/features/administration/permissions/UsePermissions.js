@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { PermissionsService } from '../../../services/inphbpermissionsService';
+import { permissionsService } from '../../../services/inphbPermissionsService';
 
-export function UsePermissions() {
+export function usePermissions() {
   const {
     isLoading,
     error,
     data: permissions,
   } = useQuery({
     queryKey: ['permissions'],
-    queryFn: PermissionsService.getPermissions,
+    queryFn: permissionsService.getPermissions,
   });
 
   return { isLoading, error, permissions };

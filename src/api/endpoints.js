@@ -103,4 +103,5 @@ export const API_ENDPOINTS = {
   ADDROLES: '/roles/ajouter',
   UPDATEROLES: `/roles/update`,
   DELETEROLES: `/roles/delete`,
+  ASSIGNPERMISSIONSTOROLE: `/roles/permissions`,
 };

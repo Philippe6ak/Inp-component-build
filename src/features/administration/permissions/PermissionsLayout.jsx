@@ -1,18 +1,15 @@
 import Menus from '../../../ui/Menus';
-import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import Empty from '../../../ui/Empty';
-import Button from '../../../ui/Button';
 import Pagination from '../../../ui/Pagination';
 import Checkbox from '../../../ui/Checkbox';
-import NewPermissions from './NewPermissions';
-import { UsePermissions } from './UsePermissions';
+import { usePermissions } from './usePermissions';
 import PermissionsRow from './PermissionsRow';
 import { useSearchParams } from 'react-router-dom';
 
 function PermissionsLayout() {
-  const { isLoading, error, permissions } = UsePermissions();
+  const { isLoading, error, permissions } = usePermissions();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
