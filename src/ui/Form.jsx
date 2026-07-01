@@ -8,10 +8,11 @@ function Form({ type = 'regular', children, ...props }) {
   return (
     <form
       className={clsx(
-        'overflow-hidden text-[1.4rem]',
+        'overflow-hidden',
         type === 'regular' &&
-          'px-[4rem] py-[2.4rem] bg-grey-0 border border-grey-100 rounded-md',
-        type === 'modal' && 'w-7xl'
+          'text-[1.4rem] px-[4rem] py-[2.4rem] bg-grey-0 border border-grey-100 rounded-md',
+        type === 'modal' && 'text-[1.4rem] w-7xl',
+        type === 'login' && 'text-[1.6rem]'
       )}
       {...props}
     >
