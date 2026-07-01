@@ -12,6 +12,7 @@ import Row from '../../../ui/Row';
 import Spinner from '../../../ui/Spinner';
 
 function normalizePermissionsResponse(permissions) {
+  if (Array.isArray(permissions)) return permissions;
   if (Array.isArray(permissions?.data)) return permissions.data;
   if (Array.isArray(permissions?.permissions)) return permissions.permissions;
   return [];
@@ -76,6 +77,30 @@ function extractAssignedPermissionKeys(role) {
   return [...new Set(permissionKeys)];
 }
 
+function getPermissionId(permission) {
+  if (!permission || typeof permission !== 'object') return null;
+
+  if (
+    permission.permissions_id !== undefined &&
+    permission.permissions_id !== null
+  ) {
+    return permission.permissions_id;
+  }
+
+  if (
+    permission.permission_id !== undefined &&
+    permission.permission_id !== null
+  ) {
+    return permission.permission_id;
+  }
+
+  if (permission.id !== undefined && permission.id !== null) {
+    return permission.id;
+  }
+
+  return null;
+}
+
 function RolePermissions() {
   const navigate = useNavigate();
   const { roleId } = useParams();
@@ -104,37 +129,44 @@ function RolePermissions() {
     [roleId, rolesData]
   );
 
-  const sortedPermissions = useMemo(
-    () =>
-      [...permissionsData].sort((firstPermission, secondPermission) =>
-        String(firstPermission?.name ?? '').localeCompare(
-          String(secondPermission?.name ?? ''),
-          undefined,
-          { numeric: true, sensitivity: 'base' }
-        )
-      ),
-    [permissionsData]
-  );
+  const sortedPermissions = useMemo(() => {
+    const normalizedPermissions = permissionsData
+      .map((permission) => ({
+        ...permission,
+        __permissionId: getPermissionId(permission),
+      }))
+      .filter((permission) => permission.__permissionId !== null);
+
+    return normalizedPermissions.sort((firstPermission, secondPermission) =>
+      String(firstPermission?.name ?? '').localeCompare(
+        String(secondPermission?.name ?? ''),
+        undefined,
+        { numeric: true, sensitivity: 'base' }
+      )
+    );
+  }, [permissionsData]);
 
   const permissionIdMap = useMemo(
     () =>
       new Map(
         sortedPermissions.map((permission) => [
-          String(permission.permissions_id),
-          permission.permissions_id,
+          String(permission.__permissionId),
+          permission.__permissionId,
         ])
       ),
     [sortedPermissions]
   );
 
   const availablePermissionKeys = useMemo(
-    () => sortedPermissions.map((permission) => String(permission.permissions_id)),
+    () =>
+      sortedPermissions.map((permission) => String(permission.__permissionId)),
     [sortedPermissions]
   );
 
   useEffect(() => {
-    const nextSelectedPermissions = extractAssignedPermissionKeys(selectedRole)
-      .filter((permissionKey) => permissionIdMap.has(permissionKey));
+    const nextSelectedPermissions = extractAssignedPermissionKeys(
+      selectedRole
+    ).filter((permissionKey) => permissionIdMap.has(permissionKey));
 
     setSelectedPermissionKeys(nextSelectedPermissions);
   }, [selectedRole, permissionIdMap]);
@@ -143,9 +175,7 @@ function RolePermissions() {
 
   if (rolesError || permissionsError) {
     return (
-      <p>
-        Erreur lors du chargement des donnees de roles et permissions.
-      </p>
+      <p>Erreur lors du chargement des donnees de roles et permissions.</p>
     );
   }
 
@@ -273,13 +303,13 @@ function RolePermissions() {
 
                 <div className="divide-y divide-grey-100">
                   {sortedPermissions.map((permission) => {
-                    const permissionKey = String(permission.permissions_id);
+                    const permissionKey = String(permission.__permissionId);
                     const isSelected =
                       selectedPermissionKeys.includes(permissionKey);
 
                     return (
                       <div
-                        key={permission.permissions_id}
+                        key={permissionKey}
                         className="grid grid-cols-[minmax(280px,1.4fr)_minmax(180px,0.9fr)_140px] items-center gap-4 px-6 py-4"
                       >
                         <div className="min-w-0">
@@ -289,12 +319,12 @@ function RolePermissions() {
                         </div>
 
                         <div className="text-sm text-grey-500">
-                          {permission.permissions_id}
+                          {permission.__permissionId}
                         </div>
 
                         <div className="flex justify-center">
                           <Checkbox
-                            id={`assign-permission-${permission.permissions_id}`}
+                            id={`assign-permission-${permissionKey}`}
                             checked={isSelected}
                             onChange={() =>
                               handleTogglePermission(permissionKey)
@@ -310,12 +340,7 @@ function RolePermissions() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-grey-600">
-              Les permissions selectionnees seront envoyees sous forme de liste
-              pour ce role.
-            </p>
-
+          <div className="flex flex-col gap-3 justify-end">
             <div className="flex gap-3">
               <Button
                 type="button"

@@ -52,10 +52,10 @@ export const roleService = {
         ? []
         : [permissions_id];
 
-    const data = await api.post(API_ENDPOINTS.ASSIGNPERMISSIONSTOROLE, [
+    const data = await api.post(API_ENDPOINTS.ASSIGNPERMISSIONSTOROLE, {
       roles_id,
-      normalizedPermissions,
-    ]);
+      permissions_id: normalizedPermissions,
+    });
     if (data?.status === 'error' || data?.success === false) {
       throw new Error(data.message || 'Failed to assign permissions to role');
     }

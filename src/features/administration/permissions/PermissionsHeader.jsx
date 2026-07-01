@@ -13,8 +13,11 @@ import TableOperations from '../../../ui/TableOperations';
 import Select from '../../../ui/Select';
 import Input from '../../../ui/Input';
 import Stat from '../../dashboard/Stat';
+
 import SortBy from '../../../ui/SortBy';
 import NewPermissions from './NewPermissions';
+import { usePermissions } from './usePermissions';
+import { useRole } from '../roles/useRole';
 
 function PermissionsHeader() {
   const navigate = useNavigate();
@@ -31,6 +34,12 @@ function PermissionsHeader() {
     { value: 'active', label: 'Actif' },
     { value: 'inactive', label: 'Inactif' },
   ];
+
+  const { permissions } = usePermissions();
+  const { role } = useRole();
+
+  const permissionsCount = permissions?.data?.length;
+  const rolesCount = role?.data?.length;
 
   return (
     <>
@@ -65,10 +74,15 @@ function PermissionsHeader() {
         <Stat
           icon={<HiShieldCheck />}
           title="Permissions totales"
-          value="24"
+          value={permissionsCount}
           color="blue"
         />
-        <Stat icon={<HiUsers />} title="Rôles" value="5" color="green" />
+        <Stat
+          icon={<HiUsers />}
+          title="Rôles"
+          value={rolesCount}
+          color="green"
+        />
         <Stat
           icon={<HiCheckCircle />}
           title="Permissions utilisées"
