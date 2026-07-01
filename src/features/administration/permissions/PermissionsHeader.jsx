@@ -38,8 +38,12 @@ function PermissionsHeader() {
   const { permissions } = usePermissions();
   const { role } = useRole();
 
-  const permissionsCount = permissions?.data?.length;
-  const rolesCount = role?.data?.length;
+const permissionsCount = Array.isArray(permissions)
+  ? permissions.length
+  : (permissions?.data?.length ?? permissions?.permissions?.length ?? 0);
+const rolesCount = Array.isArray(role)
+  ? role.length
+  : (role?.data?.length ?? role?.roles?.length ?? 0);
 
   return (
     <>
