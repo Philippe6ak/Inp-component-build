@@ -34,7 +34,8 @@ import ConsultationType from './pages/ConsultationType';
 import ListUsers from './features/administration/users/ListUsers';
 import Permissions from './pages/Permissions';
 import Roles from './pages/Roles';
-import RolePermissions from './features/administration/roles/RolePermissions';
+import EtsReferent from './pages/EtsReferent';
+import Service from './pages/Service';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -97,10 +98,8 @@ function App() {
               <Route path="users" element={<ListUsers />} />
               <Route path="permissions" element={<Permissions />} />
               <Route path="roles" element={<Roles />} />
-              <Route
-                path="roles/:roleId/permissions"
-                element={<RolePermissions />}
-              />
+              <Route path="etablissementsreferents" element={<EtsReferent />} />
+              <Route path="services" element={<Service />} />
             </Route>
 
             <Route path="login" element={<Login />} />
