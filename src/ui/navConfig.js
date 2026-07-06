@@ -123,8 +123,13 @@ export const menuItems = [
     items: [
       {
         title: 'Références',
-        path: '/referrals',
+        path: '/etablissementsreferents',
         icon: HiOutlineArrowRightCircle,
+      },
+      {
+        title: 'Librairie des services',
+        path: '/services',
+        icon: HiOutlineMicroscope,
       },
     ],
   },
