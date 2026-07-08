@@ -71,8 +71,7 @@ export const API_ENDPOINTS = {
 
   //TYPE EXAMEN
 
-  // TYPE EXAMEN
-  // TYPE EXAMEN
+  //EXAMEN
   GETSEXAMEN: '/typesexamens',
   ADDEXAMEN: '/typesexamens/ajouter',
   UPDATEEXAMEN: `/typesexamens/update`,
@@ -94,8 +93,7 @@ export const API_ENDPOINTS = {
   ADDMEDECINE: '/medicaments/ajouter',
   UPDATEMEDECINE: `/medicaments/update`,
   DELETEMEDECINE: `/medicaments/delete`,
-  //PERMISSIONS
-  //PERMISSIONS
+
   GETPERMISSIONS: '/permissions',
   ADDPERMISSIONS: '/permissions/ajouter',
   UPDATEPERMISSIONS: `/permissions/update`,
@@ -106,35 +104,4 @@ export const API_ENDPOINTS = {
   UPDATEROLES: `/roles/update`,
   DELETEROLES: `/roles/delete`,
   ASSIGNPERMISSIONSTOROLE: `/roles/permissions`,
-
-  GETSERVICES: '/services',
-  ADDSERVICES: '/services/ajouter',
-  UPDATESERVICES: `/services/update`,
-  DELETESERVICES: `/services/delete`,
-
-  //ETABLISSEMENTS DE REFERENCEMENT
-
-  GETETABLISSEMENTSREF: '/etablissementsreferents',
-  ADDETABLISSEMENTSREF: '/etablissementsreferents/ajouter',
-  UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
-  DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
-
-  GETSERVICES: '/services',
-  ADDSERVICES: '/services/ajouter',
-  UPDATESERVICES: `/services/update`,
-  DELETESERVICES: `/services/delete`,
-
-  //ETABLISSEMENTS DE REFERENCEMENT
-
-  GETETABLISSEMENTSREF: '/etablissementsreferents',
-  ADDETABLISSEMENTSREF: '/etablissementsreferents/ajouter',
-  UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
-  DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
-
-  //Quatier
-
-  GETQUARTIERS: '/quartiers',
-  ADDQUARTIERS: '/quartiers/ajouter',
-  UPDATEQUARTIERS: `/quartiers/update`,
-  DELETEQUARTIERS: `/quartiers/delete`,
 };

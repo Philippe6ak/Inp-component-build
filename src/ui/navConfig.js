@@ -123,13 +123,8 @@ export const menuItems = [
     items: [
       {
         title: 'Références',
-        path: '/etablissementsreferents',
+        path: '/referrals',
         icon: HiOutlineArrowRightCircle,
-      },
-      {
-        title: 'Librairie des services',
-        path: '/services',
-        icon: HiOutlineMicroscope,
       },
     ],
   },
@@ -166,7 +161,7 @@ export const menuItems = [
     items: [
       { title: 'Utilisateurs', path: '/users', icon: HiOutlineUsers },
       { title: 'Spécialités', path: '/specialties', icon: HiOutlineClipboard },
-      { title: 'Quartiers', path: '/quartiers', icon: HiOutlineBuildingOffice },
+
       { title: 'Permissions', path: '/permissions', icon: GiPadlock },
 
       {
