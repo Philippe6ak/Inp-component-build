@@ -166,7 +166,7 @@ export const menuItems = [
     items: [
       { title: 'Utilisateurs', path: '/users', icon: HiOutlineUsers },
       { title: 'Spécialités', path: '/specialties', icon: HiOutlineClipboard },
-
+      { title: 'Quartiers', path: '/quartiers', icon: HiOutlineBuildingOffice },
       { title: 'Permissions', path: '/permissions', icon: GiPadlock },
 
       {
