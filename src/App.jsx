@@ -33,6 +33,7 @@ import Medicament from './pages/Medicament';
 import ConsultationType from './pages/ConsultationType';
 import ListUsers from './features/administration/users/ListUsers';
 import Permissions from './pages/Permissions';
+import Quartiers from './pages/Quartiers';
 import Roles from './pages/Roles';
 import EtsReferent from './pages/EtsReferent';
 import Service from './pages/Service';
@@ -97,6 +98,7 @@ function App() {
               <Route path="medicaments" element={<Medicament />} />
               <Route path="users" element={<ListUsers />} />
               <Route path="permissions" element={<Permissions />} />
+              <Route path="quartiers" element={<Quartiers />} />
               <Route path="roles" element={<Roles />} />
               <Route path="etablissementsreferents" element={<EtsReferent />} />
               <Route path="services" element={<Service />} />

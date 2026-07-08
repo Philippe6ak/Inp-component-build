@@ -130,4 +130,11 @@ export const API_ENDPOINTS = {
   ADDETABLISSEMENTSREF: '/etablissementsreferents/ajouter',
   UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
   DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
+
+  //Quatier
+
+  GETQUARTIERS: '/quartiers',
+  ADDQUARTIERS: '/quartiers/ajouter',
+  UPDATEQUARTIERS: `/quartiers/update`,
+  DELETEQUARTIERS: `/quartiers/delete`,
 };
