@@ -29,36 +29,36 @@ function LoginForm() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl">
-      <Form onSubmit={handleSubmit}>
-        <FormRowVertical label="Email address">
-          <Input
-            type="email"
-            id="email"
-            // This makes this form better for password managers
-            autoComplete="username"
-            value={email}
-            disabled={isLoggingIn}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormRowVertical>
-        <FormRowVertical label="Password">
-          <Input
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            disabled={isLoggingIn}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormRowVertical>
-        <FormRowVertical>
-          <Button size="large" disabled={isLoggingIn}>
-            {isLoggingIn ? <SpinnerMini /> : 'Log in'}
-          </Button>
-        </FormRowVertical>
-      </Form>
-    </div>
+    <Form type="login" onSubmit={handleSubmit}>
+      <FormRowVertical label="Adresse email">
+        <Input
+          type="email"
+          id="email"
+          // This makes this form better for password managers
+          autoComplete="username"
+          value={email}
+          disabled={isLoggingIn}
+          size="large"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </FormRowVertical>
+      <FormRowVertical label="Mot de passe">
+        <Input
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={password}
+          disabled={isLoggingIn}
+          size="large"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </FormRowVertical>
+      <FormRowVertical>
+        <Button size="large" disabled={isLoggingIn}>
+          {isLoggingIn ? <SpinnerMini /> : 'Se connecter'}
+        </Button>
+      </FormRowVertical>
+    </Form>
   );
 }
 

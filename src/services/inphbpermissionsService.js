@@ -1,7 +1,7 @@
 import api from '../api/client';
 import { API_ENDPOINTS } from '../api/endpoints';
 
-export const PermissionsService = {
+export const permissionsService = {
   getPermissions: async () => {
     const data = await api.get(API_ENDPOINTS.GETPERMISSIONS);
     if (data?.status === 'error' || data?.success === false) {
