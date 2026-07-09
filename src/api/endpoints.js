@@ -119,22 +119,45 @@ export const API_ENDPOINTS = {
   UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
   DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
 
-  GETSERVICES: '/services',
-  ADDSERVICES: '/services/ajouter',
-  UPDATESERVICES: `/services/update`,
-  DELETESERVICES: `/services/delete`,
-
-  //ETABLISSEMENTS DE REFERENCEMENT
-
-  GETETABLISSEMENTSREF: '/etablissementsreferents',
-  ADDETABLISSEMENTSREF: '/etablissementsreferents/ajouter',
-  UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
-  DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
-
   //Quatier
 
   GETQUARTIERS: '/quartiers',
   ADDQUARTIERS: '/quartiers/ajouter',
   UPDATEQUARTIERS: `/quartiers/update`,
   DELETEQUARTIERS: `/quartiers/delete`,
+
+  /*Approvisionnement
+
+  GETAPPROVISIONNEMENTS: '/approvisionnements',
+  ADDAPPROVISIONNEMENTS: '/approvisionnements/ajouter',
+  UPDATEAPPROVISIONNEMENTS: `/approvisionnements/update`,
+  DELETEAPPROVISIONNEMENTS: `/approvisionnements/delete`,
+
+  //approvisionnement medicaments
+
+  GETAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs',
+  ADDAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs/ajouter',
+  UPDATEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/update`,
+  DELETEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/delete`,
+*/
+  //etats grossesses
+
+  GETETATSGROSSESSES: '/etatgrossesse',
+  ADDETATSGROSSESSES: '/etatgrossesse/ajouter',
+  UPDATEETATSGROSSESSES: `/etatgrossesse/update`,
+  DELETEETATSGROSSESSES: `/etatgrossesse/delete`,
+
+  //types grossesses
+
+  GETTYPEGROSSESSES: '/typesgrossesse',
+  ADDTYPEGROSSESSES: '/typesgrossesse/ajouter',
+  UPDATETYPEGROSSESSES: `/typesgrossesse/update`,
+  DELETETYPEGROSSESSES: `/typesgrossesse/delete`,
+
+  //Methode de depistage
+
+  GETMETHODESDEP: '/methodesdepistages',
+  ADDMETHODESDEP: '/methodesdepistages/ajouter',
+  UPDATEMETHODESDEP: `/methodesdepistages/update`,
+  DELETEMETHODESDEP: `/methodesdepistages/delete`,
 };

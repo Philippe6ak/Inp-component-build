@@ -37,6 +37,9 @@ import Quartiers from './pages/Quartiers';
 import Roles from './pages/Roles';
 import EtsReferent from './pages/EtsReferent';
 import Service from './pages/Service';
+import Approvisionnement from './pages/Approvisionnement';
+import EtatGrossesse from './pages/EtatGrossesse';
+import TypeGrossesse from './pages/TypeGrossesse';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -101,7 +104,13 @@ function App() {
               <Route path="quartiers" element={<Quartiers />} />
               <Route path="roles" element={<Roles />} />
               <Route path="etablissementsreferents" element={<EtsReferent />} />
+              <Route path="etatgrossesse" element={<EtatGrossesse />} />
+              <Route path="typesgrossesse" element={<TypeGrossesse />} />
               <Route path="services" element={<Service />} />
+              <Route
+                path="approvisionnements"
+                element={<Approvisionnement />}
+              />
             </Route>
 
             <Route path="login" element={<Login />} />
