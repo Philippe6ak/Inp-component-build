@@ -4,28 +4,28 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
-
-import NewExamen from './NewExamen';
-import ExamensRow from './ExamensRow';
-import { UseExamen } from './useExam';
+import NewQuartier from './NewQuartier';
+import QuartierRow from './QuartierRow';
+import { UseQuartiers } from './UseQuartiers';
 import { useSearchParams } from 'react-router-dom';
 
-function ListExamen() {
-  const { isLoading, error, examen } = UseExamen();
+function ListQuartiers() {
+  const { isLoading, error, quartiers } = UseQuartiers();
   const [searchParams] = useSearchParams();
+
   if (isLoading) return <Spinner />;
 
   if (error) {
-    return <p>Erreur lors du chargement des Examens.</p>;
+    return <p>Erreur lors du chargement des quartiers.</p>;
   }
 
-  const examensData = Array.isArray(examen)
-    ? examen
-    : examen?.data || examen?.examens || [];
+  const quartiersData = Array.isArray(quartiers)
+    ? quartiers
+    : quartiers?.data || quartiers?.quartiers || [];
 
-  const SortBy = searchParams.get('sortBy') || 'code-asc';
-  const [field, direction] = SortBy.split('-');
-  const sortedExamens = [...examensData].sort((a, b) => {
+  const sortBy = searchParams.get('sortBy') || 'name-asc';
+  const [field, direction] = sortBy.split('-');
+  const sortedQuartiers = [...quartiersData].sort((a, b) => {
     if (!['code', 'libelle'].includes(field)) return 0;
     const firstValue = String(a?.[field] ?? '');
     const secondValue = String(b?.[field] ?? '');
@@ -35,36 +35,35 @@ function ListExamen() {
     });
     return direction === 'desc' ? -result : result;
   });
+
   return (
     <Menus>
       <div className="mb-[1.6rem] flex justify-end">
         <Modal>
-          <Modal.Open opens="create-examen">
-            <Button>Nouvel Examen</Button>
+          <Modal.Open opens="create-quartier">
+            <Button>Nouveau quartier</Button>
           </Modal.Open>
 
-          <Modal.Window name="create-examen">
-            <NewExamen />
+          <Modal.Window name="create-quartier">
+            <NewQuartier />
           </Modal.Window>
         </Modal>
       </div>
 
-      {!sortedExamens.length ? (
-        <Empty ressourceName="examens" />
+      {!sortedQuartiers.length ? (
+        <Empty ressourceName="quartiers" />
       ) : (
-        <Table columns="1fr 2fr 2fr 1.5fr 0.5fr ">
+        <Table columns="2fr 2fr 0.5fr">
           <Table.Header>
             <div>Code</div>
-            <div>Libelle</div>
-            <div>Type Examen</div>
-            <div>Couts Examen</div>
-            <div></div>
+            <div>Libellé</div>
+            <div>Actions</div>
           </Table.Header>
 
           <Table.Body
-            data={sortedExamens}
-            render={(examen) => (
-              <ExamensRow examen={examen} key={examen.examens_id} />
+            data={sortedQuartiers}
+            render={(quartiers) => (
+              <QuartierRow quartier={quartiers} key={quartiers.quartiers_id} />
             )}
           />
         </Table>
@@ -73,4 +72,4 @@ function ListExamen() {
   );
 }
 
-export default ListExamen;
+export default ListQuartiers;
