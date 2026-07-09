@@ -40,6 +40,7 @@ import Service from './pages/Service';
 import Approvisionnement from './pages/Approvisionnement';
 import EtatGrossesse from './pages/EtatGrossesse';
 import TypeGrossesse from './pages/TypeGrossesse';
+import MethodeDepistage from './pages/MethodeDepistage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -106,6 +107,7 @@ function App() {
               <Route path="etablissementsreferents" element={<EtsReferent />} />
               <Route path="etatgrossesse" element={<EtatGrossesse />} />
               <Route path="typesgrossesse" element={<TypeGrossesse />} />
+              <Route path="methodesdepistage" element={<MethodeDepistage />} />
               <Route path="services" element={<Service />} />
               <Route
                 path="approvisionnements"

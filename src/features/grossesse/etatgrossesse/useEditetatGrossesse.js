@@ -13,7 +13,9 @@ export function useEditetatGrossesse() {
       toast.success("Mise à jour de l'etat de grossesse reussi");
     },
     onError: (err) => {
-      toast.error(err.message || "Échec de la mise à jour de l'etat de grossesse");
+      toast.error(
+        err.message || "Échec de la mise à jour de l'etat de grossesse"
+      );
     },
   });
 

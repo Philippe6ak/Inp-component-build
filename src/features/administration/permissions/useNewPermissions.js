@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { permissionsService } from '../../../services/inphbPermissionsService';
+import { permissionsService } from '../../../services/inphbpermissionsService';
 
 export function useNewPermissions() {
   const queryClient = useQueryClient();
