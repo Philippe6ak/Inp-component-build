@@ -1,9 +1,8 @@
-import Form from '../../ui/Form';
-import FormRow from '../../ui/FormRow';
 import Heading from '../../ui/Heading';
-import Input from '../../ui/Input';
+import Button from '../../ui/Button';
+import Field from '../../ui/Field';
 
-function AgentForm({ data }) {
+function AgentForm({ data, onConfirm }) {
   const {
     civilite,
     nom,
@@ -14,66 +13,37 @@ function AgentForm({ data }) {
     telephone,
     dateNaissance,
     emploi,
-  } = data.data.personne ?? {};
-
-  console.log('AgentForm data:', data.data.personne);
+  } = data?.data?.personne ?? {};
 
   return (
-    <>
-      <Heading as="h1">
+    <div className="flex flex-col gap-6">
+      <Heading as="h3">
         {civilite} {nom} {prenom}
       </Heading>
-      <Form onSubmit={() => {}}>
-        <FormRow label="Type agent">
-          <Input
-            type="text"
-            id="typeAgent"
-            defaultValue={typeAgent ?? ''}
-            disabled={true}
-          />
-        </FormRow>
-        <FormRow label="Fonction">
-          <Input
-            type="text"
-            id="fonction"
-            defaultValue={fonction ?? ''}
-            disabled={true}
-          />
-        </FormRow>
-        <FormRow label="Email">
-          <Input
-            type="email"
-            id="email"
-            defaultValue={email ?? ''}
-            disabled={true}
-          />
-        </FormRow>
-        <FormRow label="Telephone">
-          <Input
-            type="tel"
-            id="tel"
-            defaultValue={telephone ?? ''}
-            disabled={true}
-          />
-        </FormRow>
-        <FormRow label="Date Naissance">
-          <Input
-            type="date"
-            id="dateNaissance"
-            defaultValue={dateNaissance ?? ''}
-            disabled={true}
-          />
-        </FormRow>
-        <FormRow label="Emploi">
-          <Input
-            type="text"
-            id="emploi"
-            defaultValue={emploi ?? ''}
-            disabled={true}
-          />
-        </FormRow>
-      </Form>
-    </>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '2rem 3rem',
+        }}
+      >
+        <Field label="Type agent" value={typeAgent} />
+        <Field label="Fonction" value={fonction} />
+
+        <Field label="Emploi" value={emploi} />
+        <Field label="Date de naissance" value={dateNaissance} />
+
+        <Field label="Téléphone" value={telephone} />
+        <Field label="Email" value={email} />
+      </div>
+
+      <div>
+        <Button type="button" onClick={onConfirm}>
+          Confirmer et continuer
+        </Button>
+      </div>
+    </div>
   );
 }
 

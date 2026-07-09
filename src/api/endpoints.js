@@ -109,34 +109,21 @@ export const API_ENDPOINTS = {
   DELETEROLES: `/roles/delete`,
   ASSIGNPERMISSIONSTOROLE: `/roles/permissions`,
 
-  GETSERVICES: '/services',
-  ADDSERVICES: '/services/ajouter',
-  UPDATESERVICES: `/services/update`,
-  DELETESERVICES: `/services/delete`,
+  // METHODES DEPISTAGES
+  GETMETHODESDEPISTAGES: '/methodesdepistages',
+  ADDMETHODESDEPISTAGES: '/methodesdepistages/ajouter',
+  UPDATEMETHODESDEPISTAGES: `/methodesdepistages/update`,
+  DELETEMETHODESDEPISTAGES: `/methodesdepistages/delete`,
 
-  //ETABLISSEMENTS DE REFERENCEMENT
+  // ETAT GROSSESSES
+  GETETATGROSSESSES: '/etatgrossesses',
+  ADDETATGROSSESSES: '/etatgrossesses/ajouter',
+  UPDATEETATGROSSESSES: `/etatgrossesses/update`,
+  DELETEETATGROSSESSES: `/etatgrossesses/delete`,
 
-  GETETABLISSEMENTSREF: '/etablissementsreferents',
-  ADDETABLISSEMENTSREF: '/etablissementsreferents/ajouter',
-  UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
-  DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
-
-  GETSERVICES: '/services',
-  ADDSERVICES: '/services/ajouter',
-  UPDATESERVICES: `/services/update`,
-  DELETESERVICES: `/services/delete`,
-
-  //ETABLISSEMENTS DE REFERENCEMENT
-
-  GETETABLISSEMENTSREF: '/etablissementsreferents',
-  ADDETABLISSEMENTSREF: '/etablissementsreferents/ajouter',
-  UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
-  DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
-
-  //Quatier
-
-  GETQUARTIERS: '/quartiers',
-  ADDQUARTIERS: '/quartiers/ajouter',
-  UPDATEQUARTIERS: `/quartiers/update`,
-  DELETEQUARTIERS: `/quartiers/delete`,
+  // TYPE GROSSESSES
+  GETTYPEGROSSESSES: '/typegrossesses',
+  ADDTYPEGROSSESSES: '/typegrossesses/ajouter',
+  UPDATETYPEGROSSESSES: `/typegrossesses/update`,
+  DELETETYPEGROSSESSES: `/typegrossesses/delete`,
 };

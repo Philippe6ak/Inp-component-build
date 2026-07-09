@@ -23,12 +23,8 @@ function AddNewConsultation() {
   const needsMatricule =
     Boolean(typePersonne?.value) && typePersonne.value !== 'autre';
 
-  // isLocked is true once the user has searched — drives disabled state
-  // and swaps "Rechercher" for "Effacer"
   const isLocked = Boolean(submittedSearch);
 
-  // Hook only fetches when submittedSearch is set (isLocked)
-  // Setting submittedSearch back to null stops any refetch naturally
   const { patientSearch, isLoading: isSearching } = useSearchPatient(
     submittedSearch?.type_personne,
     submittedSearch?.matricule
@@ -51,16 +47,13 @@ function AddNewConsultation() {
     setTypePersonne(null);
     setMatricule('');
     setSubmittedSearch(null);
-    // react-query stops fetching automatically because
-    // submittedSearch becomes null → enabled becomes false in the hook
   }
 
   const showRestOfForm =
     typePersonne?.value === 'autre' || (!isSearching && patientSearch);
 
   return (
-    <div>
-      {/* ── Part 1: Search form — disabled once locked ── */}
+    <div className="flex flex-col gap-6">
       <Form onSubmit={handleSearch}>
         <FormRow label="Type de patient">
           <Select
@@ -112,7 +105,6 @@ function AddNewConsultation() {
         )}
       </Form>
 
-      {/* ── Part 2: Patient form — only shown when search is resolved ── */}
       {showRestOfForm && typePersonne?.value === 'agent' && (
         <AgentForm data={patientSearch} />
       )}
