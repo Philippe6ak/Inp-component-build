@@ -106,4 +106,22 @@ export const API_ENDPOINTS = {
   UPDATEROLES: `/roles/update`,
   DELETEROLES: `/roles/delete`,
   ASSIGNPERMISSIONSTOROLE: `/roles/permissions`,
+
+  // METHODES DEPISTAGES
+  GETMETHODESDEPISTAGES: '/methodesdepistages',
+  ADDMETHODESDEPISTAGES: '/methodesdepistages/ajouter',
+  UPDATEMETHODESDEPISTAGES: `/methodesdepistages/update`,
+  DELETEMETHODESDEPISTAGES: `/methodesdepistages/delete`,
+
+  // ETAT GROSSESSES
+  GETETATGROSSESSES: '/etatgrossesses',
+  ADDETATGROSSESSES: '/etatgrossesses/ajouter',
+  UPDATEETATGROSSESSES: `/etatgrossesses/update`,
+  DELETEETATGROSSESSES: `/etatgrossesses/delete`,
+
+  // TYPE GROSSESSES
+  GETTYPEGROSSESSES: '/typegrossesses',
+  ADDTYPEGROSSESSES: '/typegrossesses/ajouter',
+  UPDATETYPEGROSSESSES: `/typegrossesses/update`,
+  DELETETYPEGROSSESSES: `/typegrossesses/delete`,
 };

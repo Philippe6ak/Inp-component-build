@@ -1,33 +1,43 @@
-import Form from '../../ui/Form';
-import FormRow from '../../ui/FormRow';
 import Heading from '../../ui/Heading';
-import Input from '../../ui/Input';
+import Button from '../../ui/Button';
+import Field from '../../ui/Field';
 
-function StudentForm() {
+function StudentForm({ data, onConfirm }) {
+  const {
+    civilite,
+    nom,
+    prenoms,
+    codeEcole,
+    libelleFiliere,
+    specialite,
+    email,
+    telephone,
+    dateNaissance,
+  } = data?.data?.personne ?? {};
+
   return (
-    <>
-      <Heading as="h1">Sexe Nom Prenom (from api)</Heading>
-      <Form onSubmit={() => {}}>
-        <FormRow label="Ecole">
-          <Input type="text" id="ecole" disabled={true} />
-        </FormRow>
-        <FormRow label="Filiere">
-          <Input type="text" id="filiere" disabled={true} />
-        </FormRow>
-        <FormRow label="Specialite">
-          <Input type="text" id="specialite" disabled={true} />
-        </FormRow>
-        <FormRow label="Email">
-          <Input type="email" id="email" disabled={true} />
-        </FormRow>
-        <FormRow label="Telephone">
-          <Input type="tel" id="tel" disabled={true} />
-        </FormRow>
-        <FormRow label="Date Naissance">
-          <Input type="date" id="dateNaissance" disabled={true} />
-        </FormRow>
-      </Form>
-    </>
+    <div className="flex flex-col gap-6">
+      <Heading as="h3">
+        {civilite} {nom} {prenoms}
+      </Heading>
+
+      <div className="grid gap-[2rem_3rem] grid-cols-2">
+        <Field label="École" value={codeEcole} />
+        <Field label="Filière" value={libelleFiliere} />
+
+        <Field label="Spécialité" value={specialite} />
+        <Field label="Date de naissance" value={dateNaissance} />
+
+        <Field label="Téléphone" value={telephone} />
+        <Field label="Email" value={email} />
+      </div>
+
+      <div>
+        <Button type="button" onClick={onConfirm}>
+          Confirmer et continuer
+        </Button>
+      </div>
+    </div>
   );
 }
 
