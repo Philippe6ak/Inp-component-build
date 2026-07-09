@@ -1,136 +1,128 @@
 import { useState } from 'react';
 import Select from 'react-select';
-import CreatableSelect from 'react-select/creatable';
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
-import Spinner from '../../ui/Spinner';
-import { useSettings } from './useSettings';
-import { useUpdateSetting } from './useUpdateSetting';
+import { useSearchPatient } from './useSearchPatient';
+import Button from '../../ui/Button';
+import AgentForm from './AgentForm';
+import StudentForm from './StudentForm';
+import GeneralForm from './GeneralForm';
 
-const patientTypeOptions = [
+const typePersonneOptions = [
   { value: 'etudiant', label: 'Étudiant' },
-  { value: 'fonctionnaire', label: 'Fonctionnaire' },
+  { value: 'agent', label: 'Agent/personnel' },
   { value: 'autre', label: 'Autre' },
 ];
 
 function AddNewConsultation() {
-  const {
-    isLoading,
-    settings: {
-      minBookingLength,
-      maxBookingLength,
-      maxGuestsPerBooking,
-      breakfastPrice,
-    } = {},
-  } = useSettings();
-
-  const { isUpdating, updateSetting } = useUpdateSetting();
-
-  const [patientType, setPatientType] = useState(null);
-  const [matriculeOptions, setMatriculeOptions] = useState([]);
-  const [matricule, setMatricule] = useState(null);
-
-  if (isLoading) return <Spinner />;
-
-  function handleUpdate(e, field) {
-    const { value } = e.target;
-
-    if (!value) return;
-    updateSetting({ [field]: value });
-    console.log(value);
-  }
-
-  function handleCreateMatricule(inputValue) {
-    const newOption = {
-      value: inputValue.toLowerCase().trim().replace(/\s+/g, '-'),
-      label: inputValue.trim(),
-    };
-
-    setMatriculeOptions((current) => [...current, newOption]);
-    setMatricule(newOption);
-  }
-
-  function handlePatientTypeChange(selected) {
-    setPatientType(selected);
-    setMatricule(null);
-  }
+  const [typePersonne, setTypePersonne] = useState(null);
+  const [matricule, setMatricule] = useState('');
+  const [submittedSearch, setSubmittedSearch] = useState(null);
 
   const needsMatricule =
-    patientType?.value === 'etudiant' || patientType?.value === 'fonctionnaire';
+    Boolean(typePersonne?.value) && typePersonne.value !== 'autre';
+
+  // isLocked is true once the user has searched — drives disabled state
+  // and swaps "Rechercher" for "Effacer"
+  const isLocked = Boolean(submittedSearch);
+
+  // Hook only fetches when submittedSearch is set (isLocked)
+  // Setting submittedSearch back to null stops any refetch naturally
+  const { patientSearch, isLoading: isSearching } = useSearchPatient(
+    submittedSearch?.type_personne,
+    submittedSearch?.matricule
+  );
+
+  function handleTypePersonneChange(selected) {
+    if (isLocked) return;
+    setTypePersonne(selected);
+    setMatricule('');
+    setSubmittedSearch(null);
+  }
+
+  function handleSearch(e) {
+    e?.preventDefault?.();
+    if (!typePersonne?.value || !matricule || isLocked) return;
+    setSubmittedSearch({ type_personne: typePersonne.value, matricule });
+  }
+
+  function handleClear() {
+    setTypePersonne(null);
+    setMatricule('');
+    setSubmittedSearch(null);
+    // react-query stops fetching automatically because
+    // submittedSearch becomes null → enabled becomes false in the hook
+  }
 
   const showRestOfForm =
-    patientType?.value === 'autre' || (needsMatricule && matricule);
+    typePersonne?.value === 'autre' || (!isSearching && patientSearch);
 
   return (
-    <Form>
-      <FormRow label="Type de patient">
-        <Select
-          inputId="patient-type"
-          options={patientTypeOptions}
-          value={patientType}
-          onChange={handlePatientTypeChange}
-          menuPosition="fixed"
-          menuShouldScrollIntoView={false}
-        />
-      </FormRow>
-
-      {needsMatricule && (
-        <FormRow label="Matricule">
-          <CreatableSelect
-            inputId="matricule"
-            isClearable
-            options={matriculeOptions}
-            value={matricule}
-            onChange={setMatricule}
-            onCreateOption={handleCreateMatricule}
+    <div>
+      {/* ── Part 1: Search form — disabled once locked ── */}
+      <Form onSubmit={handleSearch}>
+        <FormRow label="Type de patient">
+          <Select
+            inputId="patient-type"
+            options={typePersonneOptions}
+            value={typePersonne}
+            onChange={handleTypePersonneChange}
+            isDisabled={isLocked}
             menuPosition="fixed"
             menuShouldScrollIntoView={false}
           />
         </FormRow>
+
+        {needsMatricule && (
+          <FormRow label="Matricule">
+            <Input
+              type="text"
+              id="matricule"
+              value={matricule}
+              disabled={isLocked}
+              onChange={(e) => setMatricule(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch(e)}
+            />
+          </FormRow>
+        )}
+
+        {Boolean(typePersonne) && needsMatricule && (
+          <FormRow>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <Button
+                type="button"
+                onClick={handleSearch}
+                disabled={!matricule || isSearching || isLocked}
+              >
+                {isSearching ? 'Recherche...' : 'Rechercher'}
+              </Button>
+
+              {isLocked && (
+                <Button
+                  type="button"
+                  variation="secondary"
+                  onClick={handleClear}
+                >
+                  Effacer
+                </Button>
+              )}
+            </div>
+          </FormRow>
+        )}
+      </Form>
+
+      {/* ── Part 2: Patient form — only shown when search is resolved ── */}
+      {showRestOfForm && typePersonne?.value === 'agent' && (
+        <AgentForm data={patientSearch} />
       )}
 
-      {showRestOfForm && (
-        <>
-          <FormRow label="Minimum nights/booking">
-            <Input
-              type="number"
-              id="min-nights"
-              disabled={isUpdating}
-              defaultValue={minBookingLength}
-              onBlur={(e) => handleUpdate(e, 'minBookingLength')}
-            />
-          </FormRow>
-          <FormRow label="Maximum nights/booking">
-            <Input
-              type="number"
-              id="max-nights"
-              defaultValue={maxBookingLength}
-              disabled={isUpdating}
-              onBlur={(e) => handleUpdate(e, 'maxBookingLength')}
-            />
-          </FormRow>
-          <FormRow label="Maximum guests/booking">
-            <Input
-              type="number"
-              id="max-guests"
-              defaultValue={maxGuestsPerBooking}
-              disabled={isUpdating}
-              onBlur={(e) => handleUpdate(e, 'maxGuestsPerBooking')}
-            />
-          </FormRow>
-          <FormRow label="Breakfast price">
-            <Input
-              type="number"
-              id="breakfast-price"
-              defaultValue={breakfastPrice}
-              disabled={isUpdating}
-              onBlur={(e) => handleUpdate(e, 'breakfastPrice')}
-            />
-          </FormRow>
-        </>
+      {showRestOfForm && typePersonne?.value === 'etudiant' && (
+        <StudentForm data={patientSearch} />
       )}
-    </Form>
+
+      {showRestOfForm && typePersonne?.value === 'autre' && <GeneralForm />}
+    </div>
   );
 }
 

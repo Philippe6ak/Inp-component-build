@@ -11,6 +11,8 @@ export const API_ENDPOINTS = {
   // A ajouter plus tard
   //   PATIENTS: '/patients',
   //   PATIENT: (id) => `/patients/${id}`,
+  SEARCHPATIENT: '/patients/rechercher',
+  SUBMITPATIENTDATA: '/patients/recevoir',
 
   //   // Consultations
   GETTYPECONSULTATIONS: '/typesconsultations',
