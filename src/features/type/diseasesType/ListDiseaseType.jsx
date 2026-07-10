@@ -7,12 +7,15 @@ import Table from '../../../ui/Table';
 import { useSearchParams } from 'react-router-dom';
 import NewDiseaseType from './NewDiseaseType';
 
-import { useDiseaseType } from './useDiseaseType';
+import { typeDiseaseHooks } from '../../../hooks/hookIndex';
 import DiseaseTypeRow from './DiseaseTypeRow';
 
 function ListDiseaseType() {
   const [searchParams] = useSearchParams();
-  const { isLoading, error, diseaseType: diseases } = useDiseaseType();
+  // const { isLoading, error, diseaseType: diseases } = useDiseaseType();
+
+  const { useGetAll } = typeDiseaseHooks;
+  const { isLoading, error, data: diseases } = useGetAll();
 
   if (isLoading) return <Spinner />;
 

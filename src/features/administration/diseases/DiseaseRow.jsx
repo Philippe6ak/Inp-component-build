@@ -6,6 +6,7 @@ import Table from '../../../ui/Table';
 import { useDeleteDisease } from './useDeleteDisease';
 import { useNewDisease } from './useNewDisease';
 import NewDisease from './NewDisease';
+import { diseaseHooks } from '../../../hooks/hookIndex';
 
 function DiseaseRow({ disease }) {
   const diseaseId = disease.maladies_id;
@@ -14,16 +15,9 @@ function DiseaseRow({ disease }) {
   const libelleTypeMaladie = disease?.type_maladie_libelle ?? '';
   const menuId = diseaseId;
 
-  const { isDeleting, deleteDisease } = useDeleteDisease();
-  const { createDisease } = useNewDisease();
+  const { useDelete } = diseaseHooks;
 
-  function handleDuplicate() {
-    createDisease({
-      libelle: libelle ? `Copy of ${libelle}` : 'Copy',
-      code: code ? `${code}-COPY` : '',
-      typesmaladies_id: disease.typesmaladies_id,
-    });
-  }
+  const { delete: deleteDisease, isDeleting } = useDelete();
 
   return (
     <Table.Row>
@@ -36,10 +30,6 @@ function DiseaseRow({ disease }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

@@ -1,8 +1,17 @@
+import { useState } from 'react';
+import CreatableSelect from 'react-select/creatable';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import Field from '../../ui/Field';
+import { useQuartiers } from '../administration/quartiers/useQuartiers';
+import { useNewQuartier } from '../administration/quartiers/useNewQuartier';
 
 function AgentForm({ data, onConfirm }) {
+  const [quartier, setQuartier] = useState(null);
+
+  const { quartiers, isLoading: isLoadingQuartiers } = useQuartiers();
+  const { createQuartier, isCreating } = useNewQuartier();
+
   const {
     civilite,
     nom,
@@ -14,6 +23,31 @@ function AgentForm({ data, onConfirm }) {
     dateNaissance,
     emploi,
   } = data?.data?.personne ?? {};
+
+  const quartiersData = Array.isArray(quartiers)
+    ? quartiers
+    : quartiers?.data || quartiers?.quartiers || [];
+
+  const quartierOptions = quartiersData.map((q) => ({
+    value: q.quartiers_id,
+    label: q.libelle,
+  }));
+
+  function handleCreateQuartier(inputValue) {
+    setQuartier({ value: inputValue, label: inputValue });
+    createQuartier(
+      { libelle: inputValue, code: inputValue },
+      {
+        onSuccess: (responseData) => {
+          const newId =
+            responseData?.data?.quartiers_id ??
+            responseData?.quartiers_id ??
+            inputValue;
+          setQuartier({ value: newId, label: inputValue });
+        },
+      }
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -36,6 +70,25 @@ function AgentForm({ data, onConfirm }) {
 
         <Field label="Téléphone" value={telephone} />
         <Field label="Email" value={email} />
+
+        <div className="flex flex-col gap-1" style={{ gridColumn: '1 / -1' }}>
+          <span className="text-xl font-medium text-grey-500 uppercase tracking-wide">
+            Quartier
+          </span>
+          <CreatableSelect
+            inputId="quartier"
+            options={quartierOptions}
+            value={quartier}
+            onChange={setQuartier}
+            onCreateOption={handleCreateQuartier}
+            isLoading={isLoadingQuartiers || isCreating}
+            isDisabled={isCreating}
+            menuPosition="fixed"
+            menuShouldScrollIntoView={false}
+            placeholder="Sélectionner ou créer un quartier..."
+            formatCreateLabel={(inputValue) => `Créer "${inputValue}"`}
+          />
+        </div>
       </div>
 
       <div>

@@ -6,11 +6,16 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import NewDisease from './NewDisease';
 import DiseaseRow from './DiseaseRow';
-import { useDisease } from './useDisease';
+import { diseaseHooks } from '../../../hooks/hookIndex';
 import { useSearchParams } from 'react-router-dom';
 
 function ListDisease() {
-  const { isLoading, error, disease } = useDisease();
+  // nouvelle facon d'utiliser les custom hooks
+  const { useGetAll } = diseaseHooks;
+  const { isLoading, error, data: disease } = useGetAll();
+
+  console.log(disease);
+
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
@@ -19,9 +24,7 @@ function ListDisease() {
     return <p>Erreur lors du chargement des maladies.</p>;
   }
 
-  const diseasesData = Array.isArray(disease)
-    ? disease
-    : disease?.data || disease?.maladies || [];
+  const diseasesData = Array.isArray(disease) ? disease : [];
 
   const sortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = sortBy.split('-');
