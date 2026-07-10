@@ -6,11 +6,11 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 import { UseNewExamen } from './useNewExamen';
-import { useTypeExam } from '../../type/examenType/useTypeExam';
 //import { UseCreateCost } from '../couts/useCreateCost';
 import { UseCosts } from '../couts/useCosts';
 import { UseEditExamen } from './useEditExamen';
 import CreatableSelect from 'react-select/creatable';
+import { typeExamensHooks } from '../../../hooks/hookIndex';
 
 function NewExamen({ examenToEdit = {}, onCloseModal }) {
   const { examens_id: editId, ...editValues } = examenToEdit;
@@ -18,7 +18,10 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
 
   const { createExamen, isCreating } = UseNewExamen();
   const { editExamen, isEditing } = UseEditExamen();
-  const { examens: typeExamen, isLoading } = useTypeExam();
+
+  const { useGetAll } = typeExamensHooks;
+  const { data: typeExamen, isLoading: isLoadingTypeExam } = useGetAll();
+  // const { examens: typeExamen, isLoading } = useTypeExam();
   const { couts, isLoading: isLoadingCost } = UseCosts();
 
   const navigate = useNavigate();
@@ -134,8 +137,8 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
               <Select
                 inputId="typesexamens_id"
                 options={typeOptions}
-                isLoading={isLoading}
-                isDisabled={isWorking || isLoading}
+                isLoading={isLoadingTypeExam}
+                isDisabled={isWorking || isLoadingTypeExam}
                 defaultValue={defaultTypeOption}
                 styles={{ menuPortal: (base) => ({ ...base, zIndex: 2000 }) }}
                 menuPosition="fixed"

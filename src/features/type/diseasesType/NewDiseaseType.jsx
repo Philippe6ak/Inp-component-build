@@ -6,15 +6,15 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { useEditDiseaseType } from './useEditDiseaseType';
-import { useNewDiseaseType } from './useNewDiseaseType';
+import { typeDiseaseHooks } from '../../../hooks/hookIndex';
 
 function NewDiseaseType({ diseaseToEdit = {}, onCloseModal }) {
   const { typesmaladies_id: editId, ...editValues } = diseaseToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createDiseaseType, isCreating } = useNewDiseaseType();
-  const { editDiseaseType: editDisease, isEditing } = useEditDiseaseType();
+  const { useCreateEdit } = typeDiseaseHooks;
+  const { createEdit, isWorking } = useCreateEdit();
+
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -25,12 +25,11 @@ function NewDiseaseType({ diseaseToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editDisease(
-        { newDiseaseData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,14 +41,17 @@ function NewDiseaseType({ diseaseToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createDiseaseType(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/diseases');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/diseases');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

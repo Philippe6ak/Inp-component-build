@@ -5,15 +5,18 @@ import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useEditExam } from './useEditTypeExam';
-import { useNewTypeExamen } from './useNewTypeExam';
+import { typeExamensHooks } from '../../../hooks/hookIndex';
 
 function NewTypeExamen({ typexamToEdit = {}, onCloseModal }) {
   const { typesexamens_id: editId, ...editValues } = typexamToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createTypeExam, isCreating } = useNewTypeExamen();
-  const { editExamen, isEditing } = useEditExam();
+  // const { createTypeExam, isCreating } = useNewTypeExamen();
+  // const { editExamen, isEditing } = useEditExam();
+
+  const { useCreateEdit } = typeExamensHooks;
+  const { createEdit, isWorking } = useCreateEdit();
+
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -24,12 +27,12 @@ function NewTypeExamen({ typexamToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
+  // const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editExamen(
-        { newTypeExamData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -41,14 +44,17 @@ function NewTypeExamen({ typexamToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createTypeExam(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/typesexamens');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/typesexamens');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

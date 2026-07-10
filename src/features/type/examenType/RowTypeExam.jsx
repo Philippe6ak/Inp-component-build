@@ -3,8 +3,7 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import { useDeleteTypeExam } from './useDeleteTypeExam';
-import { useNewTypeExamen } from './useNewTypeExam';
+import { typeExamensHooks } from '../../../hooks/hookIndex';
 import NewTypeExamen from './NewTypeExam';
 
 function RowTypeExam({ examens }) {
@@ -14,18 +13,8 @@ function RowTypeExam({ examens }) {
   const libelle = examens?.libelle ?? '';
   const menuId = examensId;
 
-  const { isDeleting, deleteExamen } = useDeleteTypeExam();
-  const { createTypeExam } = useNewTypeExamen();
-
-  function handleDuplicate() {
-    const duplicatedCode = code ? `${code}-COPY` : '';
-    const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
-
-    createTypeExam({
-      code: duplicatedCode,
-      libelle: duplicatedLibelle,
-    });
-  }
+  const { useDelete } = typeExamensHooks;
+  const { isDeleting, delete: deleteExamen } = useDelete();
 
   return (
     <Table.Row>
@@ -37,10 +26,6 @@ function RowTypeExam({ examens }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

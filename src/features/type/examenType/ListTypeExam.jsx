@@ -6,12 +6,16 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 
 import NewTypeExam from './NewTypeExam';
-import { useTypeExam } from './useTypeExam';
+
+import { typeExamensHooks } from '../../../hooks/hookIndex';
+
 import RowTypeExam from './RowTypeExam';
 import { useSearchParams } from 'react-router-dom';
 
 function ListTypeExam() {
-  const { isLoading, error, examens } = useTypeExam();
+  const { useGetAll } = typeExamensHooks;
+  const { isLoading, error, data: examens } = useGetAll();
+
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
@@ -20,9 +24,7 @@ function ListTypeExam() {
     return <p>Erreur lors du chargement des examens.</p>;
   }
 
-  const typexamData = Array.isArray(examens)
-    ? examens
-    : examens?.data || examens?.examens || [];
+  const typexamData = Array.isArray(examens) ? examens : [];
 
   const sortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = sortBy.split('-');
