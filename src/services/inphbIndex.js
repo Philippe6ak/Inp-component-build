@@ -40,3 +40,11 @@ export const diseaseService = createCrudService({
   deleteEndpoint: API_ENDPOINTS.DELETEDISEASES,
   idField: 'maladies_id',
 });
+
+export const typeExamensService = createCrudService({
+  getEndpoint: '/typesexamens',
+  addEndpoint: '/typesexamens/ajouter',
+  updateEndpoint: `/typesexamens/update`,
+  deleteEndpoint: `/typesexamens/delete`,
+  idField: 'typesexamens_id',
+});

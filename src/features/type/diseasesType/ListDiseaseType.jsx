@@ -12,7 +12,6 @@ import DiseaseTypeRow from './DiseaseTypeRow';
 
 function ListDiseaseType() {
   const [searchParams] = useSearchParams();
-  // const { isLoading, error, diseaseType: diseases } = useDiseaseType();
 
   const { useGetAll } = typeDiseaseHooks;
   const { isLoading, error, data: diseases } = useGetAll();
