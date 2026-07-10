@@ -107,7 +107,7 @@ function App() {
               <Route path="etablissementsreferents" element={<EtsReferent />} />
               <Route path="etatgrossesse" element={<EtatGrossesse />} />
               <Route path="typesgrossesse" element={<TypeGrossesse />} />
-              <Route path="methodesdepistage" element={<MethodeDepistage />} />
+              <Route path="methodesdepistages" element={<MethodeDepistage />} />
               <Route path="services" element={<Service />} />
               <Route
                 path="approvisionnements"

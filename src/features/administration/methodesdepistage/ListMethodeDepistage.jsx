@@ -54,7 +54,7 @@ function ListMethodeDepistage() {
       {!sortedMethodeDepistage.length ? (
         <Empty ressourceName="methode_depistage" />
       ) : (
-        <Table columns="2fr 1fr">
+        <Table columns="3.5fr 0.5fr">
           <Table.Header>
             <div>Libelle</div>
             <div>Actions</div>

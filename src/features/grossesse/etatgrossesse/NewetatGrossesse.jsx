@@ -6,7 +6,7 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { useEditetatGrossesse } from './useEditetatgrossesse';
+import { useEditetatGrossesse } from './useEditetatGrossesse';
 import { useNewetatGrossesse } from './useNewetatGrossesse';
 
 function NewetatGrossesse({ etatGrossesseToEdit = {}, onCloseModal }) {
@@ -85,8 +85,8 @@ function NewetatGrossesse({ etatGrossesseToEdit = {}, onCloseModal }) {
         <Button type="submit" disabled={isWorking}>
           {isWorking
             ? isEditSession
-              ? 'Updating...'
-              : 'Creating...'
+              ? 'Modification...'
+              : 'Creation...'
             : isEditSession
               ? "Mise a jour de l'etat de grossesse"
               : "Création de l'etat de grossesse"}

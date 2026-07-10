@@ -85,8 +85,8 @@ function NewtypeGrossesse({ typeGrossesseToEdit = {}, onCloseModal }) {
         <Button type="submit" disabled={isWorking}>
           {isWorking
             ? isEditSession
-              ? 'Updating...'
-              : 'Creating...'
+              ? 'Modification...'
+              : 'Creation...'
             : isEditSession
               ? 'Mise a jour du type de grossesse'
               : 'Création du type de grossesse'}

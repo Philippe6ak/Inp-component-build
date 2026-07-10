@@ -43,7 +43,7 @@ function ListTypeGrossesse() {
       <div className="mb-[1.6rem] flex justify-end">
         <Modal>
           <Modal.Open opens="create-typegrossesse">
-            <Button>Nouvel Type de grossesse</Button>
+            <Button>Nouveau Type de grossesse</Button>
           </Modal.Open>
 
           <Modal.Window name="create-typegrossesse">

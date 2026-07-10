@@ -195,11 +195,11 @@ export const menuItems = [
         path: '/examens',
         icon: HiOutlineMicroscope,
       },
-      // {
-      //   title: "Librairie d'examen",
-      //   path: '/typesexamens',
-      //   icon: GiMedicalThermometer,
-      // },
+      {
+        title: 'Methode de depistage',
+        path: '/methodesdepistages',
+        icon: GiMedicalThermometer,
+      },
       {
         title: 'Tarification',
         path: '/pricing',
