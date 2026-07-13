@@ -6,17 +6,17 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { useEditMethodeDepistage } from './useEditMethodeDepistage';
-import { useNewMethodeDepistage } from './useNewMethodeDepistage';
+import { methodesDepistageHooks } from '../../../hooks/hookIndex';
 
 function NewMethodeDepistage({ methodeDepistageToEdit = {}, onCloseModal }) {
   const { methodesdepistages_id: editId, ...editValues } =
     methodeDepistageToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createMethodeDepistage, isCreating } = useNewMethodeDepistage();
-  const { editMethodeDepistage, isEditing } = useEditMethodeDepistage();
+  const { useCreateEdit } = methodesDepistageHooks;
+  const { createEdit, isWorking } = useCreateEdit();
   const navigate = useNavigate();
+
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
       ? {
@@ -25,12 +25,11 @@ function NewMethodeDepistage({ methodeDepistageToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editMethodeDepistage(
-        { newMethodeDepistageData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,7 +41,7 @@ function NewMethodeDepistage({ methodeDepistageToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createMethodeDepistage(data, {
+    createEdit({ formData: data , id: undefined}, {
       onSuccess: () => {
         reset();
 

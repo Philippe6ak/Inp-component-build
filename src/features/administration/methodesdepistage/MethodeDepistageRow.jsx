@@ -4,8 +4,7 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
 
-import { useDeleteMethodeDepistage } from './useDeleteMethodeDepistage';
-import { useNewMethodeDepistage } from './useNewMethodeDepistage';
+import { methodesDepistageHooks } from '../../../hooks/hookIndex';
 import NewMethodeDepistage from './NewMethodeDepistage';
 
 function MethodeDepistageRow({ methodeDepistage }) {
@@ -13,16 +12,8 @@ function MethodeDepistageRow({ methodeDepistage }) {
   const libelle = methodeDepistage?.libelle ?? '';
   const menuId = methodeDepistagerefId;
 
-  const { isDeleting, deleteMethodeDepistage } = useDeleteMethodeDepistage();
-  const { createMethodeDepistage } = useNewMethodeDepistage();
-
-  function handleDuplicate() {
-    const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
-
-    createMethodeDepistage({
-      libelle: duplicatedLibelle,
-    });
-  }
+  const { useDelete } = methodesDepistageHooks;
+  const { delete: deleteMethodeDepistage, isDeleting } = useDelete();
 
   return (
     <Table.Row>
@@ -33,10 +24,6 @@ function MethodeDepistageRow({ methodeDepistage }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

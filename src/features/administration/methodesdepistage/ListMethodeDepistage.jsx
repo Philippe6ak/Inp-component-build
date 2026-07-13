@@ -8,11 +8,13 @@ import { useSearchParams } from 'react-router-dom';
 
 import NewMethodeDepistage from './NewMethodeDepistage';
 import MethodeDepistageRow from './MethodeDepistageRow';
-import { useMethodeDepistage } from './useMethodeDepistage';
+import { methodesDepistageHooks } from '../../../hooks/hookIndex';
 
 function ListMethodeDepistage() {
   const [searchParams] = useSearchParams();
-  const { isLoading, error, methodesdepistages } = useMethodeDepistage();
+
+  const { useGetAll } = methodesDepistageHooks;
+  const { isLoading, error, data: methodesdepistages } = useGetAll();
 
   if (isLoading) return <Spinner />;
 
@@ -22,8 +24,7 @@ function ListMethodeDepistage() {
 
   const methodeDepistageData = Array.isArray(methodesdepistages)
     ? methodesdepistages
-    : methodesdepistages?.data || methodesdepistages?.methodesdepistages || [];
-
+    : [];
   const sortBy = searchParams.get('sortBy') || 'libelle-asc';
   const [field, direction] = sortBy.split('-');
   const sortedMethodeDepistage = [...methodeDepistageData].sort((a, b) => {

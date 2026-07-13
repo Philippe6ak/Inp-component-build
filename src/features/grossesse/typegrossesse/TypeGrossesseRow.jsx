@@ -13,7 +13,7 @@ function TypeGrossesseRow({ typeGrossesse }) {
   const libelle = typeGrossesse?.libelle ?? '';
   const menuId = typeGrossesserefId;
 
-  const { useDelete, useNewtypeGrossesse } = typeGrossessesHooks;
+  const { useDelete } = typeGrossessesHooks;
   const { isDeleting, delete: deletetypeGrossesse } = useDelete();
 
   return (
