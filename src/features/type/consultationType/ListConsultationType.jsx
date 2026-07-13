@@ -7,13 +7,14 @@ import Table from '../../../ui/Table';
 import { useSearchParams } from 'react-router-dom';
 import NewConsultationType from './NewConsultationType';
 
-import { useConsultationType } from './useConsultationType';
+import { typeConsultationsHooks } from '../../../hooks/hookIndex';
 import ConsultationTypeRow from './ConsultationTypeRow';
 
 function ListConsultationType() {
   const [searchParams] = useSearchParams();
-  const { isLoading, error, consultationType: consultations } =
-    useConsultationType();
+
+  const { useGetAll } = typeConsultationsHooks;
+  const { isLoading, error, data: consultations } = useGetAll();
 
   if (isLoading) return <Spinner />;
 
@@ -21,9 +22,7 @@ function ListConsultationType() {
     return <p>Erreur lors du chargement des types de consultation.</p>;
   }
 
-  const consultationData = Array.isArray(consultations)
-    ? consultations
-    : consultations?.data || consultations?.typesconsultations || [];
+  const consultationData = Array.isArray(consultations) ? consultations : [];
 
   const sortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = sortBy.split('-');

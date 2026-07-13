@@ -6,15 +6,15 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { useEditConsultationType } from './useEditConsultationType';
-import { useNewConsultationType } from './useNewConsultationType';
+import { typeConsultationsHooks } from '../../../hooks/hookIndex';
 
 function NewConsultationType({ consultationToEdit = {}, onCloseModal }) {
   const { typesconsultations_id: editId, ...editValues } = consultationToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createConsultationType, isCreating } = useNewConsultationType();
-  const { editConsultationType, isEditing } = useEditConsultationType();
+  const { useCreateEdit } = typeConsultationsHooks;
+  const { createEdit, isWorking } = useCreateEdit;
+
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -25,12 +25,11 @@ function NewConsultationType({ consultationToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editConsultationType(
-        { newConsultationData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,14 +41,17 @@ function NewConsultationType({ consultationToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createConsultationType(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { forData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/typesconsultations');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/typesconsultations');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

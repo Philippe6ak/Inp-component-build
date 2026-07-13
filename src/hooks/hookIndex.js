@@ -6,16 +6,22 @@ import {
   typeDiseaseService,
   diseaseService,
   typeExamensService,
+  typeConsultationsService,
+  typeMedecinesService,
 } from '../services/inphbIndex';
 
-export const methodesDepistageHooks = createCrudHooks(
-  methodesDepistageService,
-  'methodesdepistages'
+// types here
+
+export const typeConsultationsHooks = createCrudHooks(
+  typeConsultationsService,
+  'typesconsultations'
 );
-export const etatGrossessesHooks = createCrudHooks(
-  etatGrossessesService,
-  'etatgrossesses'
+
+export const typeExamensHooks = createCrudHooks(
+  typeExamensService,
+  'typesexamens'
 );
+
 export const typeGrossessesHooks = createCrudHooks(
   typeGrossessesService,
   'typegrossesses'
@@ -26,9 +32,21 @@ export const typeDiseaseHooks = createCrudHooks(
   'typesmaladies'
 );
 
-export const diseaseHooks = createCrudHooks(diseaseService, 'maladies');
-
-export const typeExamensHooks = createCrudHooks(
-  typeExamensService,
-  'typesexamens'
+export const typeMedecinesHooks = createCrudHooks(
+  typeMedecinesService,
+  'typemedicines'
 );
+
+// REST
+
+export const methodesDepistageHooks = createCrudHooks(
+  methodesDepistageService,
+  'methodesdepistages'
+);
+
+export const etatGrossessesHooks = createCrudHooks(
+  etatGrossessesService,
+  'etatgrossesses'
+);
+
+export const diseaseHooks = createCrudHooks(diseaseService, 'maladies');

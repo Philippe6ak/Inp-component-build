@@ -8,7 +8,7 @@ import Input from '../../../ui/Input';
 
 import { UseNewMedications } from './useNewMedicament';
 import CreatableSelect from 'react-select/creatable';
-import { useMedecineType } from '../../type/medecineType/useMedecineType';
+import { typeMedecinesHooks } from '../../../hooks/hookIndex';
 import { UseEditMedications } from './useEditMedicament';
 import { UseCosts } from '../../administration/couts/useCosts';
 
@@ -18,7 +18,9 @@ function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
 
   const { createMedication, isCreating } = UseNewMedications();
   const { editMedication, isEditing } = UseEditMedications();
-  const { medecineType, isLoading } = useMedecineType();
+  // const { medecineType, isLoading } = useMedecineType();
+  const { useGetAll } = typeMedecinesHooks;
+  const { isLoading, data: medecineType } = useGetAll();
   const { couts, isLoading: isLoadingCost } = UseCosts();
 
   const navigate = useNavigate();
