@@ -4,8 +4,7 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
 
-import { useDeletetypeGrossesse } from './useDeletetypeGrossesse';
-import { useNewtypeGrossesse } from './useNewtypeGrossesse';
+import { typeGrossessesHooks } from '../../../hooks/hookIndex';
 import NewtypeGrossesse from './NewtypeGrossesse';
 
 function TypeGrossesseRow({ typeGrossesse }) {
@@ -14,16 +13,8 @@ function TypeGrossesseRow({ typeGrossesse }) {
   const libelle = typeGrossesse?.libelle ?? '';
   const menuId = typeGrossesserefId;
 
-  const { isDeleting, deletetypeGrossesse } = useDeletetypeGrossesse();
-  const { createtypeGrossesse } = useNewtypeGrossesse();
-
-  function handleDuplicate() {
-    const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
-
-    createtypeGrossesse({
-      libelle: duplicatedLibelle,
-    });
-  }
+  const { useDelete, useNewtypeGrossesse } = typeGrossessesHooks;
+  const { isDeleting, delete: deletetypeGrossesse } = useDelete();
 
   return (
     <Table.Row>
@@ -34,10 +25,6 @@ function TypeGrossesseRow({ typeGrossesse }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

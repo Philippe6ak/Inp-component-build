@@ -6,13 +6,15 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import { useSearchParams } from 'react-router-dom';
 
-import NewetatGrossesse from './NewetatGrossesse';
+import NewEtatGrossesse from './NewetatGrossesse';
 import EtatgrossesseRow from './EtatGrossesseRow';
-import { useEtatGrossesse } from './useEtatGrossesse';
+import { etatGrossessesHooks } from '../../../hooks/hookIndex';
 
 function ListEtatGrossesse() {
   const [searchParams] = useSearchParams();
-  const { isLoading, error, etatsgrossesses } = useEtatGrossesse();
+  const { useGetAll } = etatGrossessesHooks;
+
+  const { isLoading, error, data: etatsgrossesses } = useGetAll();
 
   if (isLoading) return <Spinner />;
 
@@ -22,7 +24,7 @@ function ListEtatGrossesse() {
 
   const etatgrossesseData = Array.isArray(etatsgrossesses)
     ? etatsgrossesses
-    : etatsgrossesses?.data || etatsgrossesses?.etatgrossesse || [];
+    : [];
 
   //the following is sorting shenenegans for sorting using values, just take it at face value and don't ask :D
   const sortBy = searchParams.get('sortBy') || 'code-asc';
@@ -47,7 +49,7 @@ function ListEtatGrossesse() {
           </Modal.Open>
 
           <Modal.Window name="create-etatgrossesse">
-            <NewetatGrossesse />
+            <NewEtatGrossesse />
           </Modal.Window>
         </Modal>
       </div>

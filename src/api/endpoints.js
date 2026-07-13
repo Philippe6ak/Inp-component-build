@@ -11,6 +11,8 @@ export const API_ENDPOINTS = {
   // A ajouter plus tard
   //   PATIENTS: '/patients',
   //   PATIENT: (id) => `/patients/${id}`,
+  SEARCHPATIENT: '/patients/rechercher',
+  SUBMITPATIENTDATA: '/patients/recevoir',
 
   //   // Consultations
   GETTYPECONSULTATIONS: '/typesconsultations',
@@ -107,18 +109,28 @@ export const API_ENDPOINTS = {
   DELETEROLES: `/roles/delete`,
   ASSIGNPERMISSIONSTOROLE: `/roles/permissions`,
 
+  // METHODES DEPISTAGES
+  GETMETHODESDEPISTAGES: '/methodesdepistages',
+  ADDMETHODESDEPISTAGES: '/methodesdepistages/ajouter',
+  UPDATEMETHODESDEPISTAGES: `/methodesdepistages/update`,
+  DELETEMETHODESDEPISTAGES: `/methodesdepistages/delete`,
+
   GETSERVICES: '/services',
   ADDSERVICES: '/services/ajouter',
   UPDATESERVICES: `/services/update`,
   DELETESERVICES: `/services/delete`,
 
-  //ETABLISSEMENTS DE REFERENCEMENT
+  // ETAT GROSSESSES
+  GETETATGROSSESSES: '/etatgrossesse',
+  ADDETATGROSSESSES: '/etatgrossesse/ajouter',
+  UPDATEETATGROSSESSES: `/etatgrossesse/update`,
+  DELETEETATGROSSESSES: `/etatgrossesse/delete`,
 
-  GETETABLISSEMENTSREF: '/etablissementsreferents',
-  ADDETABLISSEMENTSREF: '/etablissementsreferents/ajouter',
-  UPDATEETABLISSEMENTSREF: `/etablissementsreferents/update`,
-  DELETEETABLISSEMENTSREF: `/etablissementsreferents/delete`,
-
+  // TYPE GROSSESSES
+  GETTYPEGROSSESSES: '/typesgrossesse',
+  ADDTYPEGROSSESSES: '/typesgrossesse/ajouter',
+  UPDATETYPEGROSSESSES: `/typesgrossesse/update`,
+  DELETETYPEGROSSESSES: `/typesgrossesse/delete`,
   //Quatier
 
   GETQUARTIERS: '/quartiers',
@@ -140,24 +152,4 @@ export const API_ENDPOINTS = {
   UPDATEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/update`,
   DELETEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/delete`,
 */
-  //etats grossesses
-
-  GETETATSGROSSESSES: '/etatgrossesse',
-  ADDETATSGROSSESSES: '/etatgrossesse/ajouter',
-  UPDATEETATSGROSSESSES: `/etatgrossesse/update`,
-  DELETEETATSGROSSESSES: `/etatgrossesse/delete`,
-
-  //types grossesses
-
-  GETTYPEGROSSESSES: '/typesgrossesse',
-  ADDTYPEGROSSESSES: '/typesgrossesse/ajouter',
-  UPDATETYPEGROSSESSES: `/typesgrossesse/update`,
-  DELETETYPEGROSSESSES: `/typesgrossesse/delete`,
-
-  //Methode de depistage
-
-  GETMETHODESDEP: '/methodesdepistages',
-  ADDMETHODESDEP: '/methodesdepistages/ajouter',
-  UPDATEMETHODESDEP: `/methodesdepistages/update`,
-  DELETEMETHODESDEP: `/methodesdepistages/delete`,
 };

@@ -41,6 +41,7 @@ import Approvisionnement from './pages/Approvisionnement';
 import EtatGrossesse from './pages/EtatGrossesse';
 import TypeGrossesse from './pages/TypeGrossesse';
 import MethodeDepistage from './pages/MethodeDepistage';
+//import RolePermissions from './pages/RolePermissions';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -104,6 +105,10 @@ function App() {
               <Route path="permissions" element={<Permissions />} />
               <Route path="quartiers" element={<Quartiers />} />
               <Route path="roles" element={<Roles />} />
+              {/*<Route
+                path="roles/:roleId/permissions"
+                element={<RolePermissions />}
+              />*/}
               <Route path="etablissementsreferents" element={<EtsReferent />} />
               <Route path="etatgrossesse" element={<EtatGrossesse />} />
               <Route path="typesgrossesse" element={<TypeGrossesse />} />

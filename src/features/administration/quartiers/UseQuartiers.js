@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { quartierService } from '../../../services/inphbquartiersService';
 
-export function UseQuartiers() {
+export function useQuartiers() {
   const {
     isLoading,
     error,

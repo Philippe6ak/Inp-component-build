@@ -6,15 +6,15 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { useEdittypeGrossesse } from './useEdittypeGrossesse';
-import { useNewtypeGrossesse } from './useNewtypeGrossesse';
+import { typeGrossessesHooks } from '../../../hooks/hookIndex';
 
 function NewtypeGrossesse({ typeGrossesseToEdit = {}, onCloseModal }) {
   const { typegrossesses_id: editId, ...editValues } = typeGrossesseToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createtypeGrossesse, isCreating } = useNewtypeGrossesse();
-  const { edittypeGrossesse, isEditing } = useEdittypeGrossesse();
+  const { useCreateEdit } = typeGrossessesHooks;
+  const { createEdit, isWorking } = useCreateEdit();
+
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -24,12 +24,11 @@ function NewtypeGrossesse({ typeGrossesseToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      edittypeGrossesse(
-        { newtypeGrossesseData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -41,14 +40,17 @@ function NewtypeGrossesse({ typeGrossesseToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createtypeGrossesse(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/typesgrossesse');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/typesgrossesse');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

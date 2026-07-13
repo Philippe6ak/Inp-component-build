@@ -1,28 +1,32 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
+import { diseaseHooks, typeDiseaseHooks } from '../../../hooks/hookIndex';
 
 import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useEditDisease } from './useEditDisease';
-import { useNewDisease } from './useNewDisease';
-import { useDiseaseType } from '../../type/diseasesType/useDiseaseType';
 
 function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
   const { maladies_id: editId, ...editValues } = diseaseToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createDisease, isCreating } = useNewDisease();
-  const { editDisease, isEditing } = useEditDisease();
-  const { diseaseType, isLoading: isLoadingTypes } = useDiseaseType();
+  // nouvelle facon d'utiliser les custom hooks
+  const { useCreateEdit } = diseaseHooks;
+  const { useGetAll: useGetAllTypes } = typeDiseaseHooks;
+
+  const { createEdit, isWorking: isSaving } = useCreateEdit();
+  const { data: diseaseType, isLoading: isLoadingTypes } = useGetAllTypes();
+
+  console.log(diseaseType);
+
   const navigate = useNavigate();
 
   const typeOptions =
-    diseaseType?.data?.map((t) => ({
-      value: t.typesmaladies_id,
-      label: t.libelle,
+    diseaseType?.map((type) => ({
+      value: type.typesmaladies_id,
+      label: type.libelle,
     })) ?? [];
 
   const defaultTypeOption = isEditSession
@@ -39,13 +43,13 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
+  const isWorking = isSaving || isLoadingTypes;
   const menuPortalTarget = typeof window !== 'undefined' ? document.body : null;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editDisease(
-        { newDiseaseData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -56,13 +60,16 @@ function NewDisease({ diseaseToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createDisease(data, {
-      onSuccess: () => {
-        reset();
-        if (onCloseModal) onCloseModal();
-        else navigate('/diseases');
-      },
-    });
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
+          if (onCloseModal) onCloseModal();
+          else navigate('/diseases');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

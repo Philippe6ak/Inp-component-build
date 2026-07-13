@@ -6,11 +6,11 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import NewQuartier from './NewQuartier';
 import QuartierRow from './QuartierRow';
-import { UseQuartiers } from './UseQuartiers';
+import { useQuartiers } from './useQuartiers';
 import { useSearchParams } from 'react-router-dom';
 
 function ListQuartiers() {
-  const { isLoading, error, quartiers } = UseQuartiers();
+  const { isLoading, error, quartiers } = useQuartiers();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;

@@ -11,96 +11,6 @@ import Heading from '../../../ui/Heading';
 import Row from '../../../ui/Row';
 import Spinner from '../../../ui/Spinner';
 
-function normalizePermissionsResponse(permissions) {
-  if (Array.isArray(permissions)) return permissions;
-  if (Array.isArray(permissions?.data)) return permissions.data;
-  if (Array.isArray(permissions?.permissions)) return permissions.permissions;
-  return [];
-}
-
-function normalizeRolesResponse(role) {
-  if (Array.isArray(role)) return role;
-  if (Array.isArray(role?.data)) return role.data;
-  if (Array.isArray(role?.roles)) return role.roles;
-  return [];
-}
-
-function extractAssignedPermissionKeys(role) {
-  if (!role) return [];
-
-  const candidates = [
-    role.permissions,
-    role.role_permissions,
-    role.assigned_permissions,
-    role.permissions_ids,
-    role.permission_ids,
-  ].filter(Boolean);
-
-  const permissionKeys = candidates.flatMap((candidate) => {
-    if (!Array.isArray(candidate)) return [];
-
-    return candidate
-      .map((permission) => {
-        if (
-          permission &&
-          typeof permission === 'object' &&
-          permission.permissions_id !== undefined
-        ) {
-          return String(permission.permissions_id);
-        }
-
-        if (
-          permission &&
-          typeof permission === 'object' &&
-          permission.permission_id !== undefined
-        ) {
-          return String(permission.permission_id);
-        }
-
-        if (
-          permission &&
-          typeof permission === 'object' &&
-          permission.id !== undefined
-        ) {
-          return String(permission.id);
-        }
-
-        if (permission !== undefined && permission !== null) {
-          return String(permission);
-        }
-
-        return null;
-      })
-      .filter(Boolean);
-  });
-
-  return [...new Set(permissionKeys)];
-}
-
-function getPermissionId(permission) {
-  if (!permission || typeof permission !== 'object') return null;
-
-  if (
-    permission.permissions_id !== undefined &&
-    permission.permissions_id !== null
-  ) {
-    return permission.permissions_id;
-  }
-
-  if (
-    permission.permission_id !== undefined &&
-    permission.permission_id !== null
-  ) {
-    return permission.permission_id;
-  }
-
-  if (permission.id !== undefined && permission.id !== null) {
-    return permission.id;
-  }
-
-  return null;
-}
-
 function RolePermissions() {
   const navigate = useNavigate();
   const { roleId } = useParams();
@@ -115,11 +25,8 @@ function RolePermissions() {
 
   const [selectedPermissionKeys, setSelectedPermissionKeys] = useState([]);
 
-  const rolesData = useMemo(() => normalizeRolesResponse(role), [role]);
-  const permissionsData = useMemo(
-    () => normalizePermissionsResponse(permissions),
-    [permissions]
-  );
+  const rolesData = useMemo(() => role?.data ?? [], [role]);
+  const permissionsData = useMemo(() => permissions?.data ?? [], [permissions]);
 
   const selectedRole = useMemo(
     () =>
@@ -133,9 +40,9 @@ function RolePermissions() {
     const normalizedPermissions = permissionsData
       .map((permission) => ({
         ...permission,
-        __permissionId: getPermissionId(permission),
+        __permissionId: String(permission?.permissions_id ?? ''),
       }))
-      .filter((permission) => permission.__permissionId !== null);
+      .filter((permission) => permission.__permissionId);
 
     return normalizedPermissions.sort((firstPermission, secondPermission) =>
       String(firstPermission?.name ?? '').localeCompare(
@@ -146,17 +53,6 @@ function RolePermissions() {
     );
   }, [permissionsData]);
 
-  const permissionIdMap = useMemo(
-    () =>
-      new Map(
-        sortedPermissions.map((permission) => [
-          String(permission.__permissionId),
-          permission.__permissionId,
-        ])
-      ),
-    [sortedPermissions]
-  );
-
   const availablePermissionKeys = useMemo(
     () =>
       sortedPermissions.map((permission) => String(permission.__permissionId)),
@@ -164,12 +60,16 @@ function RolePermissions() {
   );
 
   useEffect(() => {
-    const nextSelectedPermissions = extractAssignedPermissionKeys(
-      selectedRole
-    ).filter((permissionKey) => permissionIdMap.has(permissionKey));
+    const nextSelectedPermissions =
+      selectedRole?.permissions
+        ?.map((permission) => String(permission?.permissions_id ?? ''))
+        .filter(Boolean)
+        .filter((permissionKey) =>
+          availablePermissionKeys.includes(permissionKey)
+        ) ?? [];
 
     setSelectedPermissionKeys(nextSelectedPermissions);
-  }, [selectedRole, permissionIdMap]);
+  }, [selectedRole, availablePermissionKeys]);
 
   if (isLoadingRoles || isLoadingPermissions) return <Spinner />;
 
@@ -195,8 +95,6 @@ function RolePermissions() {
 
   const totalPermissions = availablePermissionKeys.length;
   const selectedCount = selectedPermissionKeys.length;
-  const areAllSelected =
-    totalPermissions > 0 && selectedCount === totalPermissions;
 
   function handleTogglePermission(permissionKey) {
     setSelectedPermissionKeys((currentSelection) =>
@@ -206,18 +104,19 @@ function RolePermissions() {
     );
   }
 
-  function handleToggleAll() {
-    setSelectedPermissionKeys(
-      areAllSelected ? [] : [...availablePermissionKeys]
-    );
-  }
+  // const areAllSelected =
+  //   totalPermissions > 0 && selectedCount === totalPermissions;
+
+  // function handleToggleAll() {
+  //   setSelectedPermissionKeys(
+  //     areAllSelected ? [] : [...availablePermissionKeys]
+  //   );
+  // }
 
   function handleSubmit() {
     assignPermissions({
       roles_id: selectedRole.roles_id,
-      permissions_id: selectedPermissionKeys
-        .map((permissionKey) => permissionIdMap.get(permissionKey))
-        .filter((permissionId) => permissionId !== undefined),
+      permissions_id: selectedPermissionKeys,
     });
   }
 
@@ -236,26 +135,14 @@ function RolePermissions() {
 
           <div>
             <Heading as="h1">Attribuer des permissions</Heading>
-            <p className="text-sm text-grey-600">
+            <p className="text-grey-600">
               Selectionnez les permissions a associer au role{' '}
-              <span className="font-semibold text-grey-700">
+              <span className="font-semibold text-grey-700 uppercase">
                 {selectedRole?.name ?? 'Sans nom'}
               </span>
               .
             </p>
           </div>
-        </div>
-
-        <div className="rounded-md border border-grey-200 bg-grey-0 px-4 py-3 shadow-sm">
-          <div className="flex items-center gap-2 text-sm font-medium text-grey-700">
-            <HiShieldCheck className="h-5 w-5 text-brand-600" />
-            {selectedCount} permission{selectedCount > 1 ? 's' : ''}{' '}
-            selectionnee{selectedCount > 1 ? 's' : ''}
-          </div>
-          <p className="mt-1 text-xs text-grey-500">
-            {totalPermissions} permission{totalPermissions > 1 ? 's' : ''}{' '}
-            disponible{totalPermissions > 1 ? 's' : ''}
-          </p>
         </div>
       </div>
 
@@ -265,30 +152,28 @@ function RolePermissions() {
         <>
           <div className="overflow-hidden rounded-md border border-grey-200 bg-grey-0 shadow-sm">
             <div className="border-b border-grey-200 bg-grey-50 px-6 py-4">
-              <div className="grid gap-4 md:grid-cols-[minmax(220px,1.3fr)_minmax(160px,0.8fr)_120px] md:items-center">
-                <div>
-                  <Heading as="h3" className="text-base">
+              <div className="flex items-center gap-6">
+                <div className="shrink-0">
+                  <Heading as="h1" className="text-base">
                     Liste des permissions
                   </Heading>
-                  <p className="mt-1 text-sm text-grey-600">
+                  <p className="mt-1 text-xl text-grey-600">
                     Cochez une ou plusieurs permissions puis validez
                     l&apos;attribution.
                   </p>
                 </div>
 
-                <div className="text-sm text-grey-600">
-                  Role ID: {selectedRole.roles_id}
-                </div>
-
-                <div className="flex justify-start md:justify-end">
-                  <Checkbox
-                    id="select-all-permissions"
-                    checked={areAllSelected}
-                    onChange={handleToggleAll}
-                    disabled={isAssigning}
-                  >
-                    Tout selectionner
-                  </Checkbox>
+                <div className="ml-auto flex items-center gap-4 rounded-md border border-grey-200 bg-grey-0 px-4 py-3 shadow-sm">
+                  <div className="flex items-center gap-2 font-medium text-grey-700">
+                    <HiShieldCheck className="h-5 w-5 text-brand-600" />
+                    {selectedCount} permission{selectedCount > 1 ? 's' : ''}{' '}
+                    sélectionnée{selectedCount > 1 ? 's' : ''}
+                  </div>
+                  <p className="text-sm text-grey-500">
+                    {totalPermissions} permission
+                    {totalPermissions > 1 ? 's' : ''} disponible
+                    {totalPermissions > 1 ? 's' : ''}
+                  </p>
                 </div>
               </div>
             </div>
@@ -313,7 +198,7 @@ function RolePermissions() {
                         className="grid grid-cols-[minmax(280px,1.4fr)_minmax(180px,0.9fr)_140px] items-center gap-4 px-6 py-4"
                       >
                         <div className="min-w-0">
-                          <p className="font-medium text-grey-700">
+                          <p className="font-medium text-grey-700 lowercase first-letter:uppercase">
                             {permission?.name ?? 'Permission sans nom'}
                           </p>
                         </div>
@@ -340,7 +225,7 @@ function RolePermissions() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 justify-end">
+          <div className="flex gap-3 justify-end">
             <div className="flex gap-3">
               <Button
                 type="button"
@@ -355,7 +240,7 @@ function RolePermissions() {
                 onClick={handleSubmit}
                 disabled={isAssigning}
               >
-                {isAssigning ? 'Envoi...' : 'Attribuer les permissions'}
+                {isAssigning ? 'Envoi...' : "Terminer l'attribution"}
               </Button>
             </div>
           </div>

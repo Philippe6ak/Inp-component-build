@@ -6,28 +6,30 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import { useSearchParams } from 'react-router-dom';
 
+import TypegrossesseRow from './TypeGrossesseRow';
+import { typeGrossessesHooks } from '../../../hooks/hookIndex';
 import NewtypeGrossesse from './NewtypeGrossesse';
-import TypeGrossesseRow from './TypeGrossesseRow';
-import { Usetypegrossesse } from './usetypeGrossesse';
 
 function ListTypeGrossesse() {
   const [searchParams] = useSearchParams();
-  const { isLoading, error, typegrossesses } = Usetypegrossesse();
+  const { useGetAll } = typeGrossessesHooks;
+
+  const { isLoading, error, data: typegrossesses } = useGetAll();
 
   if (isLoading) return <Spinner />;
 
   if (error) {
-    return <p>Erreur lors du chargement des typegrossesses referents.</p>;
+    return <p>Erreur lors du chargement des types de grossesse referents.</p>;
   }
 
-  const typegrossesseData = Array.isArray(typegrossesses)
+  const typegrossessesData = Array.isArray(typegrossesses)
     ? typegrossesses
-    : typegrossesses?.data || typegrossesses?.typegrossesses || [];
+    : [];
 
   //the following is sorting shenenegans for sorting using values, just take it at face value and don't ask :D
   const sortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = sortBy.split('-');
-  const sortedTypeGrossesse = [...typegrossesseData].sort((a, b) => {
+  const sortedTypeGrossesse = [...typegrossessesData].sort((a, b) => {
     if (!['libelle'].includes(field)) return 0;
     const firstValue = String(a?.[field] ?? '');
     const secondValue = String(b?.[field] ?? '');
@@ -55,18 +57,18 @@ function ListTypeGrossesse() {
       {!sortedTypeGrossesse.length ? (
         <Empty ressourceName="type_grossesse" />
       ) : (
-        <Table columns=" 2fr 1fr">
+        <Table columns="1fr 3fr 0.5fr">
           <Table.Header>
             <div>Libelle</div>
-            <div>Actions</div>
+            <div></div>
           </Table.Header>
 
           <Table.Body
             data={sortedTypeGrossesse}
-            render={(typegrossesses) => (
-              <TypeGrossesseRow
-                typeGrossesse={typegrossesses}
-                key={typegrossesses.typeGrossesses_id}
+            render={(typegrossesse) => (
+              <TypegrossesseRow
+                typegrossesse={typegrossesse}
+                key={typegrossesse.typegrossesse_id}
               />
             )}
           />

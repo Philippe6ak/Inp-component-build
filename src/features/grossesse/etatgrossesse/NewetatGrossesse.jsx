@@ -6,15 +6,15 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { useEditetatGrossesse } from './useEditetatGrossesse';
-import { useNewetatGrossesse } from './useNewetatGrossesse';
+import { etatGrossessesHooks } from '../../../hooks/hookIndex';
 
-function NewetatGrossesse({ etatGrossesseToEdit = {}, onCloseModal }) {
+function NewEtatGrossesse({ etatGrossesseToEdit = {}, onCloseModal }) {
   const { etatsgrossesses_id: editId, ...editValues } = etatGrossesseToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createetatGrossesse, isCreating } = useNewetatGrossesse();
-  const { editetatGrossesse, isEditing } = useEditetatGrossesse();
+  const { useCreateEdit } = etatGrossessesHooks;
+  const { createEdit, isWorking } = useCreateEdit();
+
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -24,12 +24,11 @@ function NewetatGrossesse({ etatGrossesseToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editetatGrossesse(
-        { newetatGrossesseData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -41,14 +40,17 @@ function NewetatGrossesse({ etatGrossesseToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createetatGrossesse(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { FormData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/etatgrossesse');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/etatgrossesses');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {
@@ -96,4 +98,4 @@ function NewetatGrossesse({ etatGrossesseToEdit = {}, onCloseModal }) {
   );
 }
 
-export default NewetatGrossesse;
+export default NewEtatGrossesse;

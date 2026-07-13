@@ -4,26 +4,16 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
 
-import { useDeleteetatGrossesse } from './useDeleteetatGrossesse';
-import { useNewetatGrossesse } from './useNewetatGrossesse';
-import Newetatgrossesse from './NewetatGrossesse';
-
+import { etatGrossessesHooks } from '../../../hooks/hookIndex';
+import NewEtatgrossesse from './NewetatGrossesse';
 function EtatgrossesseRow({ etatgrossesse }) {
   const etatgrossesserefId = etatgrossesse.etatgrossesse;
 
   const libelle = etatgrossesse?.libelle ?? '';
   const menuId = etatgrossesserefId;
 
-  const { isDeleting, deleteetatgrossesse } = useDeleteetatGrossesse();
-  const { createetatgrossesse } = useNewetatGrossesse();
-
-  function handleDuplicate() {
-    const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
-
-    createetatgrossesse({
-      libelle: duplicatedLibelle,
-    });
-  }
+  const { useDelete } = etatGrossessesHooks;
+  const { isDeleting, delete: deleteEtatGrossesse } = useDelete();
 
   return (
     <Table.Row>
@@ -34,10 +24,6 @@ function EtatgrossesseRow({ etatgrossesse }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
@@ -48,14 +34,14 @@ function EtatgrossesseRow({ etatgrossesse }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <Newetatgrossesse etatgrossesseToEdit={etatgrossesse} />
+              <NewEtatgrossesse etatgrossesseToEdit={etatgrossesse} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
-                resourceName="etatgrossessesreferents"
+                resourceName="etatgrossesses"
                 disabled={isDeleting}
-                onConfirm={() => deleteetatgrossesse(etatgrossesserefId)}
+                onConfirm={() => deleteEtatGrossesse(etatgrossesserefId)}
               />
             </Modal.Window>
           </Menus.Menu>

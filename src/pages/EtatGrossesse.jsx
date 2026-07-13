@@ -10,7 +10,7 @@ function EtatGrossesse() {
         <Heading as="h1">Tous les etats de grossesse</Heading>
         <GrossesseOperations />
       </Row>
-      {/*<ListEtatGrossesse />*/}
+      <ListEtatGrossesse />
     </>
   );
 }
