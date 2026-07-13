@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { examenService } from '../../../services/inphbExamenService';
+import { examenService } from '../../../services/inphbexamenService';
 
 export function UseDeleteExamen() {
   const queryClient = useQueryClient();

@@ -14,11 +14,11 @@ export const methodesDepistageHooks = createCrudHooks(
 );
 export const etatGrossessesHooks = createCrudHooks(
   etatGrossessesService,
-  'etatgrossesses'
+  'etatgrossesse'
 );
 export const typeGrossessesHooks = createCrudHooks(
   typeGrossessesService,
-  'typegrossesses'
+  'typesgrossesse'
 );
 
 export const typeDiseaseHooks = createCrudHooks(
