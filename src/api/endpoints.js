@@ -115,15 +115,41 @@ export const API_ENDPOINTS = {
   UPDATEMETHODESDEPISTAGES: `/methodesdepistages/update`,
   DELETEMETHODESDEPISTAGES: `/methodesdepistages/delete`,
 
+  GETSERVICES: '/services',
+  ADDSERVICES: '/services/ajouter',
+  UPDATESERVICES: `/services/update`,
+  DELETESERVICES: `/services/delete`,
+
   // ETAT GROSSESSES
-  GETETATGROSSESSES: '/etatgrossesses',
-  ADDETATGROSSESSES: '/etatgrossesses/ajouter',
-  UPDATEETATGROSSESSES: `/etatgrossesses/update`,
-  DELETEETATGROSSESSES: `/etatgrossesses/delete`,
+  GETETATGROSSESSES: '/etatgrossesse',
+  ADDETATGROSSESSES: '/etatgrossesse/ajouter',
+  UPDATEETATGROSSESSES: `/etatgrossesse/update`,
+  DELETEETATGROSSESSES: `/etatgrossesse/delete`,
 
   // TYPE GROSSESSES
-  GETTYPEGROSSESSES: '/typegrossesses',
-  ADDTYPEGROSSESSES: '/typegrossesses/ajouter',
-  UPDATETYPEGROSSESSES: `/typegrossesses/update`,
-  DELETETYPEGROSSESSES: `/typegrossesses/delete`,
+  GETTYPEGROSSESSES: '/typesgrossesse',
+  ADDTYPEGROSSESSES: '/typesgrossesse/ajouter',
+  UPDATETYPEGROSSESSES: `/typesgrossesse/update`,
+  DELETETYPEGROSSESSES: `/typesgrossesse/delete`,
+  //Quatier
+
+  GETQUARTIERS: '/quartiers',
+  ADDQUARTIERS: '/quartiers/ajouter',
+  UPDATEQUARTIERS: `/quartiers/update`,
+  DELETEQUARTIERS: `/quartiers/delete`,
+
+  /*Approvisionnement
+
+  GETAPPROVISIONNEMENTS: '/approvisionnements',
+  ADDAPPROVISIONNEMENTS: '/approvisionnements/ajouter',
+  UPDATEAPPROVISIONNEMENTS: `/approvisionnements/update`,
+  DELETEAPPROVISIONNEMENTS: `/approvisionnements/delete`,
+
+  //approvisionnement medicaments
+
+  GETAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs',
+  ADDAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs/ajouter',
+  UPDATEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/update`,
+  DELETEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/delete`,
+*/
 };

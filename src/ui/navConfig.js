@@ -17,6 +17,7 @@ import {
   HiOutlineUsers,
 } from 'react-icons/hi2';
 import { GiMedicalThermometer, GiPadlock } from 'react-icons/gi';
+import { MdOutlinePregnantWoman } from 'react-icons/md';
 
 // Aliases for semantic naming
 const HiOutlineClipboard = HiOutlineClipboardDocumentList;
@@ -74,6 +75,11 @@ export const menuItems = [
       },
       { title: 'Medicaments', path: '/medicaments', icon: HiOutlineBeaker },
       { title: 'Gestion du stock', path: '/stock', icon: HiOutlineCube },
+      {
+        title: 'approvisionnements',
+        path: '/approvisionnements',
+        icon: HiOutlineBeaker,
+      },
       { title: 'Ventes', path: '/sales', icon: HiOutlineShoppingCart },
     ],
   },
@@ -114,6 +120,16 @@ export const menuItems = [
     icon: HiOutlineHeart,
     items: [
       { title: 'Grossesses', path: '/pregnancies', icon: HiOutlineHeart },
+      {
+        title: 'Etat de grossesse',
+        path: '/etatgrossesse',
+        icon: HiOutlineHeart,
+      },
+      {
+        title: 'Types de grossesse',
+        path: '/typesgrossesse',
+        icon: MdOutlinePregnantWoman,
+      },
       { title: 'Visites prénatales', path: '/prenatal', icon: HiOutlineHeart },
     ],
   },
@@ -179,11 +195,11 @@ export const menuItems = [
         path: '/examens',
         icon: HiOutlineMicroscope,
       },
-      // {
-      //   title: "Librairie d'examen",
-      //   path: '/typesexamens',
-      //   icon: GiMedicalThermometer,
-      // },
+      {
+        title: 'Methode de depistage',
+        path: '/methodesdepistages',
+        icon: GiMedicalThermometer,
+      },
       {
         title: 'Tarification',
         path: '/pricing',

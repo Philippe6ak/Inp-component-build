@@ -24,7 +24,7 @@ export const typeExamensHooks = createCrudHooks(
 
 export const typeGrossessesHooks = createCrudHooks(
   typeGrossessesService,
-  'typegrossesses'
+  'typesgrossesse'
 );
 
 export const typeDiseaseHooks = createCrudHooks(

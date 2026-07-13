@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { examenService } from '../../../services/inphbExamenService';
+import { examenService } from '../../../services/inphbexamenService';
 
 export function UseExamen() {
   const {
