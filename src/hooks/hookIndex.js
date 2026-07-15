@@ -6,6 +6,9 @@ import {
   typeDiseaseService,
   diseaseService,
   typeExamensService,
+  approvisionnementsService,
+  medicamentServices,
+  //approvMedocService,
 } from '../services/inphbIndex';
 
 export const methodesDepistageHooks = createCrudHooks(
@@ -31,4 +34,14 @@ export const diseaseHooks = createCrudHooks(diseaseService, 'maladies');
 export const typeExamensHooks = createCrudHooks(
   typeExamensService,
   'typesexamens'
+);
+
+export const approvisionnementsHooks = createCrudHooks(
+  approvisionnementsService,
+  'approvisionnements'
+);
+
+export const medicamentHooks = createCrudHooks(
+  medicamentServices,
+  'medicaments'
 );

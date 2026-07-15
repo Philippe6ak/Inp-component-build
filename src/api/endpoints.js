@@ -138,15 +138,15 @@ export const API_ENDPOINTS = {
   UPDATEQUARTIERS: `/quartiers/update`,
   DELETEQUARTIERS: `/quartiers/delete`,
 
-  /*Approvisionnement
+  //Approvisionnement
 
   GETAPPROVISIONNEMENTS: '/approvisionnements',
   ADDAPPROVISIONNEMENTS: '/approvisionnements/ajouter',
-  UPDATEAPPROVISIONNEMENTS: `/approvisionnements/update`,
-  DELETEAPPROVISIONNEMENTS: `/approvisionnements/delete`,
+  // UPDATEAPPROVISIONNEMENTS: `/approvisionnements/update`,
+  // DELETEAPPROVISIONNEMENTS: `/approvisionnements/delete`,
 
   //approvisionnement medicaments
-
+  /*
   GETAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs',
   ADDAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs/ajouter',
   UPDATEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/update`,

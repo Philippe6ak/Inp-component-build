@@ -1,7 +1,7 @@
 import React from 'react';
 import Heading from '../ui/Heading';
 import Row from '../ui/Row';
-//import ApprovisionnementTable from '../features/Pharmacie/approvisionnement/ListApprov';
+import ApprovisionnementTable from '../features/Pharmacie/approvisionnement/ListApprov';
 
 function Approvisionnement() {
   return (
@@ -9,7 +9,7 @@ function Approvisionnement() {
       <Row type="horizontal">
         <Heading as="h1">Tous les Approvisionnements</Heading>
       </Row>
-      {/*<ApprovisionnementTable />*/}
+      <ApprovisionnementTable />
     </div>
   );
 }
