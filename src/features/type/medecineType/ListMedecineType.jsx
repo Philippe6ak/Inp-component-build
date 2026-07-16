@@ -5,14 +5,16 @@ import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import NewMedecineType from './NewMedecineType';
-
-import { useMedecineType } from './useMedecineType';
 import MedecineTypeRow from './MedecineTypeRow';
+
+import { typeMedecinesHooks } from '../../../hooks/hookIndex';
 import { useSearchParams } from 'react-router-dom';
 
 function ListMedecineType() {
-  const { isLoading, error, medecineType: medecines } = useMedecineType();
   const [searchParams] = useSearchParams();
+
+  const { useGetAll } = typeMedecinesHooks;
+  const { isLoading, error, data: medecines } = useGetAll();
 
   if (isLoading) return <Spinner />;
 
@@ -20,9 +22,7 @@ function ListMedecineType() {
     return <p>Erreur lors du chargement des types de médicaments.</p>;
   }
 
-  const medecinesData = Array.isArray(medecines)
-    ? medecines
-    : medecines?.data || medecines?.typesmedicaments || [];
+  const medecinesData = Array.isArray(medecines) ? medecines : [];
 
   const sortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = sortBy.split('-');

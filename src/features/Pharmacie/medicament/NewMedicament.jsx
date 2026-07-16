@@ -7,17 +7,19 @@ import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
 import CreatableSelect from 'react-select/creatable';
-import { useMedecineType } from '../../type/medecineType/useMedecineType';
-import { medicamentHooks } from '../../../hooks/hookIndex';
+import { typeMedecinesHooks } from '../../../hooks/hookIndex';
+import { UseEditMedications } from './useEditMedicament';
 import { UseCosts } from '../../administration/couts/useCosts';
 
 function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
   const { medicaments_id: editId, ...editValues } = medicamentToEdit;
   const isEditSession = Boolean(editId);
 
-  const { useCreateEdit } = medicamentHooks;
-  const { createEdit: createMedication, isWorking } = useCreateEdit;
-  const { medecineType, isLoading } = useMedecineType();
+  const { createMedication, isCreating } = UseNewMedications();
+  const { editMedication, isEditing } = UseEditMedications();
+  // const { medecineType, isLoading } = useMedecineType();
+  const { useGetAll } = typeMedecinesHooks;
+  const { isLoading, data: medecineType } = useGetAll();
   const { couts, isLoading: isLoadingCost } = UseCosts();
 
   const navigate = useNavigate();

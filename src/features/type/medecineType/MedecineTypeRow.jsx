@@ -5,8 +5,7 @@ import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
 import NewMedecineType from './NewMedecineType';
 
-import { useDeleteMedecineType } from './useDeleteMedecineType';
-import { useNewMedecineType } from './useNewMedecineType';
+import { typeMedecinesHooks } from '../../../hooks/hookIndex';
 
 function MedecineTypeRow({ medecine }) {
   const medecineId = medecine.typesmedicaments_id;
@@ -15,18 +14,8 @@ function MedecineTypeRow({ medecine }) {
   const libelle = medecine?.libelle ?? '';
   const menuId = medecineId;
 
-  const { isDeleting, deleteMedecineType } = useDeleteMedecineType();
-  const { createMedecineType } = useNewMedecineType();
-
-  function handleDuplicate() {
-    const duplicatedCode = code ? `${code}-COPY` : '';
-    const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
-
-    createMedecineType({
-      code: duplicatedCode,
-      libelle: duplicatedLibelle,
-    });
-  }
+  const { useDelete } = typeMedecinesHooks;
+  const { delete: deleteMedecineType, isDeleting } = useDelete();
 
   return (
     <Table.Row>
@@ -38,10 +27,6 @@ function MedecineTypeRow({ medecine }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

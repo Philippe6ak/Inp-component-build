@@ -6,15 +6,15 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { useEditMedecineType } from './useEditMedecineType';
-import { useNewMedecineType } from './useNewMedecineType';
+import { typeMedecinesHooks } from '../../../hooks/hookIndex';
 
 function NewMedecineType({ medecineToEdit = {}, onCloseModal }) {
   const { typesmedicaments_id: editId, ...editValues } = medecineToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createMedecineType, isCreating } = useNewMedecineType();
-  const { editMedecineType, isEditing } = useEditMedecineType();
+  const { useCreateEdit } = typeMedecinesHooks;
+  const { createEdit, isWorking } = useCreateEdit();
+
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -25,12 +25,11 @@ function NewMedecineType({ medecineToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editMedecineType(
-        { newMedecineData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,14 +41,17 @@ function NewMedecineType({ medecineToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createMedecineType(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/typesmedecine');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/typesmedecine');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

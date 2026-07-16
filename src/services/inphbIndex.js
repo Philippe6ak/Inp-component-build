@@ -18,6 +18,8 @@ export const etatGrossessesService = createCrudService({
   idField: 'etatgrossesses_id',
 });
 
+// types here
+
 export const typeGrossessesService = createCrudService({
   getEndpoint: API_ENDPOINTS.GETTYPEGROSSESSES,
   addEndpoint: API_ENDPOINTS.ADDTYPEGROSSESSES,
@@ -48,6 +50,22 @@ export const typeExamensService = createCrudService({
   updateEndpoint: `/typesexamens/update`,
   deleteEndpoint: `/typesexamens/delete`,
   idField: 'typesexamens_id',
+});
+
+export const typeConsultationsService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETTYPECONSULTATIONS,
+  addEndpoint: API_ENDPOINTS.ADDTYPECONSULTATIONS,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPECONSULTATIONS,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPECONSULTATIONS,
+  idField: 'typesconsultations_id',
+});
+
+export const typeMedecinesService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETTYPEMEDECINE,
+  addEndpoint: API_ENDPOINTS.ADDTYPEMEDECINE,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPEMEDECINE,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPEMEDECINE,
+  idField: 'typesmedicaments_id',
 });
 
 export const approvisionnementsService = createCrudService({

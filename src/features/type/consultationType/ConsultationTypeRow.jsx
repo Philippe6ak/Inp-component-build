@@ -5,8 +5,7 @@ import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
 import NewConsultationType from './NewConsultationType';
 
-import { useDeleteConsultationType } from './useDeleteConsultationType';
-import { useNewConsultationType } from './useNewConsultationType';
+import { typeConsultationsHooks } from '../../../hooks/hookIndex';
 
 function ConsultationTypeRow({ consultation }) {
   const consultationId = consultation.typesconsultations_id;
@@ -15,18 +14,8 @@ function ConsultationTypeRow({ consultation }) {
   const libelle = consultation?.libelle ?? '';
   const menuId = consultationId;
 
-  const { isDeleting, deleteConsultationType } = useDeleteConsultationType();
-  const { createConsultationType } = useNewConsultationType();
-
-  function handleDuplicate() {
-    const duplicatedCode = code ? `${code}-COPY` : '';
-    const duplicatedLibelle = libelle ? `Copy of ${libelle}` : 'Copy';
-
-    createConsultationType({
-      code: duplicatedCode,
-      libelle: duplicatedLibelle,
-    });
-  }
+  const { useDelete } = typeConsultationsHooks;
+  const { delete: deleteConsultationType, isDeleting } = useDelete();
 
   return (
     <Table.Row>
@@ -38,10 +27,6 @@ function ConsultationTypeRow({ consultation }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
