@@ -40,7 +40,7 @@ function ListExamen() {
       <div className="mb-[1.6rem] flex justify-end">
         <Modal>
           <Modal.Open opens="create-examen">
-            <Button>Nouvel Examen</Button>
+            <Button>Nouveau Examen</Button>
           </Modal.Open>
 
           <Modal.Window name="create-examen">

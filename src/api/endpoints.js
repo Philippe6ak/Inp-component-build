@@ -73,8 +73,7 @@ export const API_ENDPOINTS = {
 
   //TYPE EXAMEN
 
-  // TYPE EXAMEN
-  // TYPE EXAMEN
+  //EXAMEN
   GETSEXAMEN: '/typesexamens',
   ADDEXAMEN: '/typesexamens/ajouter',
   UPDATEEXAMEN: `/typesexamens/update`,
@@ -96,8 +95,7 @@ export const API_ENDPOINTS = {
   ADDMEDECINE: '/medicaments/ajouter',
   UPDATEMEDECINE: `/medicaments/update`,
   DELETEMEDECINE: `/medicaments/delete`,
-  //PERMISSIONS
-  //PERMISSIONS
+
   GETPERMISSIONS: '/permissions',
   ADDPERMISSIONS: '/permissions/ajouter',
   UPDATEPERMISSIONS: `/permissions/update`,
