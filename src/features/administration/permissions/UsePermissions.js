@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { permissionsService } from '../../../services/inphbPermissionsService';
+import { permissionsService } from '../../../services/inphbpermissionsService';
 
 export function usePermissions() {
   const {

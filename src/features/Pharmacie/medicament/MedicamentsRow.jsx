@@ -3,8 +3,7 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import { UseDeleteMedication } from './useDeleteMedicament';
-import { UseNewMedications } from './useNewMedicament';
+import { medicamentHooks } from '../../../hooks/hookIndex';
 import NewMedicament from './NewMedicament';
 
 function MedicamentRow({ medicament }) {
@@ -15,17 +14,8 @@ function MedicamentRow({ medicament }) {
   const coutsmontant = medicament?.cout_montant ?? '';
   const menuId = medicamentId;
 
-  const { isDeleting, deleteMedicament } = UseDeleteMedication();
-  const { createMedication } = UseNewMedications();
-
-  function handleDuplicate() {
-    createMedication({
-      libelle: libelle ? `Copy of ${libelle}` : 'Copy',
-      code: code ? `${code}-COPY` : '',
-      typesmedicaments_id: Number(medicament.typesmedicaments_id),
-      montant: medicament.cout_montant,
-    });
-  }
+  const { useDelete } = medicamentHooks;
+  const { isDeleting, delete: deleteMedicament } = useDelete();
 
   return (
     <Table.Row>
@@ -39,10 +29,6 @@ function MedicamentRow({ medicament }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

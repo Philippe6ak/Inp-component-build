@@ -11,6 +11,8 @@ export const API_ENDPOINTS = {
   // A ajouter plus tard
   //   PATIENTS: '/patients',
   //   PATIENT: (id) => `/patients/${id}`,
+  SEARCHPATIENT: '/patients/rechercher',
+  SUBMITPATIENTDATA: '/patients/recevoir',
 
   //   // Consultations
   GETTYPECONSULTATIONS: '/typesconsultations',
@@ -104,4 +106,48 @@ export const API_ENDPOINTS = {
   UPDATEROLES: `/roles/update`,
   DELETEROLES: `/roles/delete`,
   ASSIGNPERMISSIONSTOROLE: `/roles/permissions`,
+
+  // METHODES DEPISTAGES
+  GETMETHODESDEPISTAGES: '/methodesdepistages',
+  ADDMETHODESDEPISTAGES: '/methodesdepistages/ajouter',
+  UPDATEMETHODESDEPISTAGES: `/methodesdepistages/update`,
+  DELETEMETHODESDEPISTAGES: `/methodesdepistages/delete`,
+
+  GETSERVICES: '/services',
+  ADDSERVICES: '/services/ajouter',
+  UPDATESERVICES: `/services/update`,
+  DELETESERVICES: `/services/delete`,
+
+  // ETAT GROSSESSES
+  GETETATGROSSESSES: '/etatgrossesse',
+  ADDETATGROSSESSES: '/etatgrossesse/ajouter',
+  UPDATEETATGROSSESSES: `/etatgrossesse/update`,
+  DELETEETATGROSSESSES: `/etatgrossesse/delete`,
+
+  // TYPE GROSSESSES
+  GETTYPEGROSSESSES: '/typesgrossesse',
+  ADDTYPEGROSSESSES: '/typesgrossesse/ajouter',
+  UPDATETYPEGROSSESSES: `/typesgrossesse/update`,
+  DELETETYPEGROSSESSES: `/typesgrossesse/delete`,
+  //Quatier
+
+  GETQUARTIERS: '/quartiers',
+  ADDQUARTIERS: '/quartiers/ajouter',
+  UPDATEQUARTIERS: `/quartiers/update`,
+  DELETEQUARTIERS: `/quartiers/delete`,
+
+  //Approvisionnement
+
+  GETAPPROVISIONNEMENTS: '/approvisionnements',
+  ADDAPPROVISIONNEMENTS: '/approvisionnements/ajouter',
+  // UPDATEAPPROVISIONNEMENTS: `/approvisionnements/update`,
+  // DELETEAPPROVISIONNEMENTS: `/approvisionnements/delete`,
+
+  //approvisionnement medicaments
+  /*
+  GETAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs',
+  ADDAPPROVISIONNEMENTSMDCS: '/approvisionnementsmdcs/ajouter',
+  UPDATEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/update`,
+  DELETEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/delete`,
+*/
 };

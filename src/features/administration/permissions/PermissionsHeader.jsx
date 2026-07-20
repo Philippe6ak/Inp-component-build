@@ -16,7 +16,7 @@ import Stat from '../../dashboard/Stat';
 
 import SortBy from '../../../ui/SortBy';
 import NewPermissions from './NewPermissions';
-import { usePermissions } from './usePermissions';
+import { usePermissions } from './UsePermissions';
 import { useRole } from '../roles/useRole';
 
 function PermissionsHeader() {
@@ -38,12 +38,12 @@ function PermissionsHeader() {
   const { permissions } = usePermissions();
   const { role } = useRole();
 
-const permissionsCount = Array.isArray(permissions)
-  ? permissions.length
-  : (permissions?.data?.length ?? permissions?.permissions?.length ?? 0);
-const rolesCount = Array.isArray(role)
-  ? role.length
-  : (role?.data?.length ?? role?.roles?.length ?? 0);
+  const permissionsCount = Array.isArray(permissions)
+    ? permissions.length
+    : (permissions?.data?.length ?? permissions?.permissions?.length ?? 0);
+  const rolesCount = Array.isArray(role)
+    ? role.length
+    : (role?.data?.length ?? role?.roles?.length ?? 0);
 
   return (
     <>

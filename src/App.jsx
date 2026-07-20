@@ -35,6 +35,12 @@ import ListUsers from './features/administration/users/ListUsers';
 import Permissions from './pages/Permissions';
 import Roles from './pages/Roles';
 import RolePermissions from './features/administration/roles/RolePermissions';
+import EtsReferent from './pages/EtsReferent';
+import Service from './pages/Service';
+import Approvisionnement from './pages/Approvisionnement';
+import EtatGrossesse from './pages/EtatGrossesse';
+import TypeGrossesse from './pages/TypeGrossesse';
+import MethodeDepistage from './pages/MethodeDepistage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -100,6 +106,15 @@ function App() {
               <Route
                 path="roles/:roleId/permissions"
                 element={<RolePermissions />}
+              />
+              <Route path="etablissementsreferents" element={<EtsReferent />} />
+              <Route path="etatgrossesse" element={<EtatGrossesse />} />
+              <Route path="typesgrossesse" element={<TypeGrossesse />} />
+              <Route path="methodesdepistages" element={<MethodeDepistage />} />
+              <Route path="services" element={<Service />} />
+              <Route
+                path="approvisionnements"
+                element={<Approvisionnement />}
               />
             </Route>
 

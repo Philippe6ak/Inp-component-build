@@ -7,11 +7,13 @@ import Table from '../../../ui/Table';
 
 import NewMedicament from './NewMedicament';
 import MedicamentRow from './MedicamentsRow';
-import { UseMedications } from './useMedicament';
 import { useSearchParams } from 'react-router-dom';
+import { medicamentHooks } from '../../../hooks/hookIndex';
 
 function ListMedicament() {
-  const { isLoading, error, medicament } = UseMedications();
+  const { useGetAll } = medicamentHooks;
+  const { isLoading, error, data: medicament } = useGetAll();
+
   const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
 
@@ -19,9 +21,7 @@ function ListMedicament() {
     return <p>Erreur lors du chargement des Medicaments.</p>;
   }
 
-  const medicamentData = Array.isArray(medicament)
-    ? medicament
-    : medicament?.data || medicament?.medicaments || [];
+  const medicamentData = Array.isArray(medicament) ? medicament : [];
 
   const SortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = SortBy.split('-');
