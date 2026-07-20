@@ -15,11 +15,13 @@ export const patientsService = {
     return data;
   },
 
-  submitPatientData: async () => {
-    const data = await api.post(API_ENDPOINTS.SUBMITPATIENTDATA, {});
+  submitPatientData: async (patientData) => {
+    const data = await api.post(API_ENDPOINTS.SUBMITPATIENTDATA, patientData);
+
     if (data?.status === 'error' || data?.success === false) {
       throw new Error(data.message || 'Failed to submit patient data');
     }
+
     return data;
   },
 };

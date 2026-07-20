@@ -6,27 +6,26 @@ import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
 
-import { UseNewMedications } from './useNewMedicament';
 import CreatableSelect from 'react-select/creatable';
 import { typeMedecinesHooks } from '../../../hooks/hookIndex';
-import { UseEditMedications } from './useEditMedicament';
+import { medicamentHooks } from '../../../hooks/hookIndex';
 import { UseCosts } from '../../administration/couts/useCosts';
 
 function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
   const { medicaments_id: editId, ...editValues } = medicamentToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createMedication, isCreating } = UseNewMedications();
-  const { editMedication, isEditing } = UseEditMedications();
-  // const { medecineType, isLoading } = useMedecineType();
+  const { useCreateEdit } = medicamentHooks;
+  const { createEdit: createMedication, isWorking } = useCreateEdit();
+
   const { useGetAll } = typeMedecinesHooks;
-  const { isLoading, data: medecineType } = useGetAll();
+  const { isLoading, error, data: medecineType } = useGetAll();
   const { couts, isLoading: isLoadingCost } = UseCosts();
 
   const navigate = useNavigate();
 
   const typeOptions =
-    medecineType?.data?.map((t) => ({
+    medecineType?.map((t) => ({
       value: t.typesmedicaments_id,
       label: t.libelle,
     })) ?? [];
@@ -37,9 +36,9 @@ function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
     : null;
 
   const costOptions =
-    couts?.data?.map((t) => ({
-      value: t.couts_id,
-      label: t.montant,
+    couts?.data?.map((c) => ({
+      value: c.couts_id,
+      label: c.montant,
     })) ?? [];
 
   const defaultCostOption = isEditSession
@@ -57,7 +56,6 @@ function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     const payload = {
@@ -68,9 +66,9 @@ function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
     };
 
     if (isEditSession) {
-      editMedication(
+      createMedication(
         {
-          newMedicationsData: payload,
+          formData: payload,
           id: editId,
         },
         {
@@ -84,14 +82,17 @@ function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createMedication(payload, {
-      onSuccess: () => {
-        reset();
+    createMedication(
+      { formData: payload, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/medicament');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/medicament');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

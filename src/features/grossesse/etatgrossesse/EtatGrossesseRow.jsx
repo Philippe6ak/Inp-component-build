@@ -7,7 +7,7 @@ import Table from '../../../ui/Table';
 import { etatGrossessesHooks } from '../../../hooks/hookIndex';
 import NewEtatgrossesse from './NewetatGrossesse';
 function EtatgrossesseRow({ etatgrossesse }) {
-  const etatgrossesserefId = etatgrossesse.etatgrossesse;
+  const etatgrossesserefId = etatgrossesse.etatsgrossesses_id;
 
   const libelle = etatgrossesse?.libelle ?? '';
   const menuId = etatgrossesserefId;
