@@ -5,30 +5,28 @@ import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 
-import NewApprov from './NewApprov';
-import ApprovisionnementRow from './ApprovisionnementRow';
-import { approvisionnementsHooks } from '../../../hooks/hookIndex';
+import NewVente from './NewVente';
+import VenteRow from './VenteRow';
+import { venteHooks } from '../../../hooks/hookIndex';
 
 import { useSearchParams } from 'react-router-dom';
 
-function ListApprov() {
-  const { useGetAll } = approvisionnementsHooks;
-  const { isLoading, error, data: approvisionnements } = useGetAll();
+function VenteTable() {
+  const { useGetAll } = venteHooks;
+  const { isLoading, error, data: vente } = useGetAll();
 
   const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
 
   if (error) {
-    return <p>Erreur lors du chargement des approvisionnements.</p>;
+    return <p>Erreur lors du chargement des vente .</p>;
   }
 
-  const approvisionnementData = Array.isArray(approvisionnements)
-    ? approvisionnements
-    : [];
+  const VenteData = Array.isArray(vente) ? vente : [];
 
   const sortBy = searchParams.get('sortBy') || 'libelle-asc';
   const [field, direction] = sortBy.split('-');
-  const sortedApprovisionnements = [...approvisionnementData].sort((a, b) => {
+  const sortedApprovisionnements = [...VenteData].sort((a, b) => {
     if (!['libelle'].includes(field)) return 0;
     const firstValue = String(a?.[field] ?? '');
     const secondValue = String(b?.[field] ?? '');
@@ -43,18 +41,18 @@ function ListApprov() {
     <Menus>
       <div className="mb-[1.6rem] flex justify-end">
         <Modal>
-          <Modal.Open opens="create-approvisionnement">
-            <Button>Nouvel approvisionnement</Button>
+          <Modal.Open opens="create-vente">
+            <Button>Nouvel Vente</Button>
           </Modal.Open>
 
-          <Modal.Window name="create-approvisionnement">
-            <NewApprov />
+          <Modal.Window name="create-vente">
+            <NewVente />
           </Modal.Window>
         </Modal>
       </div>
 
       {!sortedApprovisionnements.length ? (
-        <Empty ressourceName="approvisionnement" />
+        <Empty ressourceName="vente" />
       ) : (
         <Table columns="2fr 2fr 1fr 0.6fr">
           <Table.Header>
@@ -67,7 +65,7 @@ function ListApprov() {
           <Table.Body
             data={sortedApprovisionnements}
             render={(approvisionnement) => (
-              <ApprovisionnementRow
+              <VenteRow
                 approvisionnement={approvisionnement}
                 key={approvisionnement.approvisionnements_id}
               />
@@ -79,4 +77,4 @@ function ListApprov() {
   );
 }
 
-export default ListApprov;
+export default VenteTable;

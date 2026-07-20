@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Table from '../../../ui/Table';
 
-function ApprovDetails({ approvisionnement }) {
+function VenteDetails({ approvisionnement }) {
   const lignes = approvisionnement.approvisionnementsmedicaments ?? [];
 
   return (
@@ -42,7 +42,7 @@ function ApprovDetails({ approvisionnement }) {
   );
 }
 
-ApprovDetails.propTypes = {
+VenteDetails.propTypes = {
   approvisionnement: PropTypes.shape({
     approvisionnements_id: PropTypes.oneOfType([
       PropTypes.string,
@@ -53,4 +53,4 @@ ApprovDetails.propTypes = {
   }).isRequired,
 };
 
-export default ApprovDetails;
+export default VenteDetails;

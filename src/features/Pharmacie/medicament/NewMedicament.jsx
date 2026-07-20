@@ -8,13 +8,14 @@ import Input from '../../../ui/Input';
 
 import CreatableSelect from 'react-select/creatable';
 import { typeMedecinesHooks } from '../../../hooks/hookIndex';
+import { medicamentHooks } from '../../../hooks/hookIndex';
 import { UseCosts } from '../../administration/couts/useCosts';
 
 function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
   const { medicaments_id: editId, ...editValues } = medicamentToEdit;
   const isEditSession = Boolean(editId);
 
-  const { useCreateEdit } = typeMedecinesHooks;
+  const { useCreateEdit } = medicamentHooks;
   const { createEdit: createMedication, isWorking } = useCreateEdit();
 
   const { useGetAll } = typeMedecinesHooks;
@@ -24,7 +25,7 @@ function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
   const navigate = useNavigate();
 
   const typeOptions =
-    medecineType?.data?.map((t) => ({
+    medecineType?.map((t) => ({
       value: t.typesmedicaments_id,
       label: t.libelle,
     })) ?? [];
@@ -35,9 +36,9 @@ function NewMedicament({ medicamentToEdit = {}, onCloseModal }) {
     : null;
 
   const costOptions =
-    couts?.data?.map((t) => ({
-      value: t.couts_id,
-      label: t.montant,
+    couts?.data?.map((c) => ({
+      value: c.couts_id,
+      label: c.montant,
     })) ?? [];
 
   const defaultCostOption = isEditSession

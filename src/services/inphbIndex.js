@@ -82,3 +82,11 @@ export const medicamentServices = createCrudService({
   deleteEndpoint: `/medicaments/delete`,
   idField: 'medicaments_id',
 });
+
+export const venteServices = createCrudService({
+  getEndpoint: '/ventes',
+  addEndpoint: '/ventes/ajouter',
+  updateEndpoint: '/ventes/update',
+  deleteEndpoint: '/ventes/delete',
+  idField: 'ventes_id',
+});

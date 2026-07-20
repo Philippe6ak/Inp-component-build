@@ -4,8 +4,8 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import ApprovDetails from './ApprovDetails';
-import NewApprov from './NewApprov';
+import ApprovDetails from './VenteDetails';
+import NewApprov from './NewVente';
 import { approvisionnementsHooks } from '../../../hooks/hookIndex';
 
 const MAX_FULL_NAMES = 3;
@@ -31,7 +31,7 @@ function getMedicamentsSummary(lignes) {
   return `${displayed} +${remaining}`;
 }
 
-function ApprovisionnementRow({ approvisionnement }) {
+function VenteRow({ approvisionnement }) {
   const approvisionnementId = approvisionnement.approvisionnements_id;
   const lignes = approvisionnement.approvisionnementsmedicaments ?? [];
   const totalQty = lignes.reduce((sum, l) => sum + Number(l.quantite || 0), 0);
@@ -88,8 +88,7 @@ function ApprovisionnementRow({ approvisionnement }) {
   );
 }
 
-ApprovisionnementRow.propTypes = {
-  approvisionnement: PropTypes.shape({
+    VenteRow: PropTypes.shape({
     approvisionnements_id: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
@@ -99,4 +98,4 @@ ApprovisionnementRow.propTypes = {
   }).isRequired,
 };
 
-export default ApprovisionnementRow;
+export default VenteRow;

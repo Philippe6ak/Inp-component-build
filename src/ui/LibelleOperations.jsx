@@ -1,7 +1,7 @@
-import SortBy from '../../../ui/SortBy';
-import TableOperations from '../../../ui/TableOperations';
+import SortBy from './SortBy';
+import TableOperations from './TableOperations';
 
-function GrossesseOperations() {
+function LibelleOperations() {
   return (
     <>
       <TableOperations>
@@ -16,4 +16,4 @@ function GrossesseOperations() {
   );
 }
 
-export default GrossesseOperations;
+export default LibelleOperations;

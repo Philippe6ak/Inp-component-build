@@ -8,7 +8,7 @@ import { typeGrossessesHooks } from '../../../hooks/hookIndex';
 import NewtypeGrossesse from './NewtypeGrossesse';
 
 function TypeGrossesseRow({ typeGrossesse }) {
-  const typeGrossesserefId = typeGrossesse.typeGrossesse;
+  const typeGrossesserefId = typeGrossesse.typesgrossesses_id;
 
   const libelle = typeGrossesse?.libelle ?? '';
   const menuId = typeGrossesserefId;

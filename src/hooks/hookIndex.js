@@ -10,7 +10,7 @@ import {
   typeMedecinesService,
   approvisionnementsService,
   medicamentServices,
-  //approvMedocService,
+  venteServices,
 } from '../services/inphbIndex';
 
 // types here
@@ -37,7 +37,7 @@ export const typeDiseaseHooks = createCrudHooks(
 
 export const typeMedecinesHooks = createCrudHooks(
   typeMedecinesService,
-  'typemedicines'
+  'typesmedicaments'
 );
 
 // REST
@@ -63,3 +63,4 @@ export const medicamentHooks = createCrudHooks(
   medicamentServices,
   'medicaments'
 );
+export const venteHooks = createCrudHooks(venteServices, 'ventes');

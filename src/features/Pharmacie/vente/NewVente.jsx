@@ -13,7 +13,7 @@ import { approvisionnementsHooks } from '../../../hooks/hookIndex';
 
 // Phase 1: saisie du libellé + des lignes (médicament / quantité)
 // Phase 2: récapitulatif à confirmer avant l'envoi réel
-function NewApprov({ approvisionnementToEdit = {}, onCloseModal }) {
+function NewVente({ approvisionnementToEdit = {}, onCloseModal }) {
   const { approvisionnements_id: editId, ...editValues } =
     approvisionnementToEdit;
   const isEditSession = Boolean(editId);
@@ -282,7 +282,7 @@ function NewApprov({ approvisionnementToEdit = {}, onCloseModal }) {
   );
 }
 
-NewApprov.propTypes = {
+NewVente.propTypes = {
   approvisionnementToEdit: PropTypes.shape({
     approvisionnements_id: PropTypes.oneOfType([
       PropTypes.string,
@@ -294,4 +294,4 @@ NewApprov.propTypes = {
   onCloseModal: PropTypes.func,
 };
 
-export default NewApprov;
+export default NewVente;
