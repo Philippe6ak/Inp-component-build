@@ -3,14 +3,15 @@ import CreatableSelect from 'react-select/creatable';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import Field from '../../ui/Field';
-import { useQuartiers } from '../administration/quartiers/useQuartiers';
-import { useNewQuartier } from '../administration/quartiers/useNewQuartier';
+import { quartierHooks } from '../../hooks/hookIndex';
 
 function StudentForm({ data, onConfirm }) {
   const [quartier, setQuartier] = useState(null);
 
-  const { quartiers, isLoading: isLoadingQuartiers } = useQuartiers();
-  const { createQuartier, isCreating } = useNewQuartier();
+  const { useGetAll, useCreateEdit } = quartierHooks;
+
+  const { data: quartiers, isLoading: isLoadingQuartiers } = useGetAll();
+  const { createEdit: createQuartier, isWorking: isCreating } = useCreateEdit();
 
   const {
     civilite,

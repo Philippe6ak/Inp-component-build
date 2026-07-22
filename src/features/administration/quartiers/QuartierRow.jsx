@@ -1,27 +1,26 @@
-import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
+import { HiPencil, HiTrash } from 'react-icons/hi2';
 import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import NewDisease from './NewDisease';
-import { diseaseHooks } from '../../../hooks/hookIndex';
+import NewQuartier from './NewQuartier';
 
-function DiseaseRow({ disease }) {
-  const diseaseId = disease.maladies_id;
-  const code = disease?.code ?? '';
-  const libelle = disease?.libelle ?? '';
-  const libelleTypeMaladie = disease?.type_maladie_libelle ?? '';
-  const menuId = diseaseId;
+import { quartierHooks } from '../../../hooks/hookIndex';
 
-  const { useDelete } = diseaseHooks;
+function QuartierRow({ quartier }) {
+  const quartierId = quartier.quartiers_id;
 
-  const { delete: deleteDisease, isDeleting } = useDelete();
+  const code = quartier?.code ?? '';
+  const libelle = quartier?.libelle ?? '';
+  const menuId = quartierId;
+
+  const { useDelete } = quartierHooks;
+  const { isDeleting, delete: deleteQuartier } = useDelete();
 
   return (
     <Table.Row>
       <div>{code}</div>
       <div>{libelle}</div>
-      <div>{libelleTypeMaladie}</div>
       <div>
         <Modal>
           <Menus.Menu>
@@ -38,14 +37,14 @@ function DiseaseRow({ disease }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <NewDisease diseaseToEdit={disease} />
+              <NewQuartier quartierToEdit={quartier} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
-                resourceName="diseases"
+                resourceName="quartier"
                 disabled={isDeleting}
-                onConfirm={() => deleteDisease(diseaseId)}
+                onConfirm={() => deleteQuartier(quartierId)}
               />
             </Modal.Window>
           </Menus.Menu>
@@ -55,4 +54,4 @@ function DiseaseRow({ disease }) {
   );
 }
 
-export default DiseaseRow;
+export default QuartierRow;

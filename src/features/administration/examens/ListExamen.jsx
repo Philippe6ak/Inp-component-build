@@ -7,21 +7,22 @@ import Table from '../../../ui/Table';
 
 import NewExamen from './NewExamen';
 import ExamensRow from './ExamensRow';
-import { UseExamen } from './useExam';
 import { useSearchParams } from 'react-router-dom';
+import { examensHooks } from '../../../hooks/hookIndex';
 
 function ListExamen() {
-  const { isLoading, error, examen } = UseExamen();
+  const { useGetAll } = examensHooks;
+  const { isLoading, error, data: examen } = useGetAll();
+
   const [searchParams] = useSearchParams();
+
   if (isLoading) return <Spinner />;
 
   if (error) {
     return <p>Erreur lors du chargement des Examens.</p>;
   }
 
-  const examensData = Array.isArray(examen)
-    ? examen
-    : examen?.data || examen?.examens || [];
+  const examensData = Array.isArray(examen) ? examen : [];
 
   const SortBy = searchParams.get('sortBy') || 'code-asc';
   const [field, direction] = SortBy.split('-');

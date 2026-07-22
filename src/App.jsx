@@ -13,7 +13,6 @@ import Dashboard from './pages/Dashboard';
 import DragDrop from './pages/DragDrop';
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
-import ReusableButtons from './pages/ReusableButtons';
 import Settings from './pages/Settings';
 import Table from './pages/Table';
 import Users from './pages/Users';
@@ -35,8 +34,8 @@ import ListUsers from './features/administration/users/ListUsers';
 import Permissions from './pages/Permissions';
 import Roles from './pages/Roles';
 import RolePermissions from './features/administration/roles/RolePermissions';
-import EtsReferent from './pages/EtsReferent';
-import Service from './pages/Service';
+// import EtsReferent from './pages/EtsReferent';
+// import Service from './pages/Service';
 import Approvisionnement from './pages/Approvisionnement';
 import EtatGrossesse from './pages/EtatGrossesse';
 import TypeGrossesse from './pages/TypeGrossesse';
@@ -75,7 +74,6 @@ function App() {
               <Route path="account" element={<Account />} />
               <Route path="table" element={<Table />} />
               <Route path="drag-drop" element={<DragDrop />} />
-              <Route path="reusable-buttons" element={<ReusableButtons />} />
               <Route path="calc" element={<Calc />} />
               <Route path="calcul" element={<Calcul />} />
 
@@ -107,11 +105,11 @@ function App() {
                 path="roles/:roleId/permissions"
                 element={<RolePermissions />}
               />
-              <Route path="etablissementsreferents" element={<EtsReferent />} />
+              {/* <Route path="etablissementsreferents" element={<EtsReferent />} /> */}
               <Route path="etatgrossesse" element={<EtatGrossesse />} />
               <Route path="typesgrossesse" element={<TypeGrossesse />} />
               <Route path="methodesdepistages" element={<MethodeDepistage />} />
-              <Route path="services" element={<Service />} />
+              {/* <Route path="services" element={<Service />} /> */}
               <Route
                 path="approvisionnements"
                 element={<Approvisionnement />}

@@ -45,11 +45,19 @@ export const diseaseService = createCrudService({
 });
 
 export const typeExamensService = createCrudService({
-  getEndpoint: '/typesexamens',
-  addEndpoint: '/typesexamens/ajouter',
-  updateEndpoint: `/typesexamens/update`,
-  deleteEndpoint: `/typesexamens/delete`,
+  getEndpoint: API_ENDPOINTS.GETTYPEEXAMENS,
+  addEndpoint: API_ENDPOINTS.ADDTYPEEXAMENS,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPEEXAMENS,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPEEXAMENS,
   idField: 'typesexamens_id',
+});
+
+export const examensService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETEXAMENS,
+  addEndpoint: API_ENDPOINTS.ADDEXAMENS,
+  updateEndpoint: API_ENDPOINTS.UPDATEEXAMENS,
+  deleteEndpoint: API_ENDPOINTS.DELETEEXAMENS,
+  idField: 'examens_id',
 });
 
 export const typeConsultationsService = createCrudService({
@@ -89,4 +97,12 @@ export const venteServices = createCrudService({
   updateEndpoint: '/ventes/update',
   deleteEndpoint: '/ventes/delete',
   idField: 'ventes_id',
+});
+
+export const quartierServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETQUARTIERS,
+  addEndpoint: API_ENDPOINTS.ADDQUARTIERS,
+  updateEndpoint: API_ENDPOINTS.UPDATEQUARTIERS,
+  deleteEndpoint: API_ENDPOINTS.DELETEQUARTIERS,
+  idField: 'quartiers_id',
 });

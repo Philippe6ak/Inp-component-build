@@ -5,23 +5,21 @@ import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { UseNewExamen } from './useNewExamen';
 //import { UseCreateCost } from '../couts/useCreateCost';
 import { UseCosts } from '../couts/useCosts';
-import { UseEditExamen } from './useEditExamen';
 import CreatableSelect from 'react-select/creatable';
-import { typeExamensHooks } from '../../../hooks/hookIndex';
+import { typeExamensHooks, examensHooks } from '../../../hooks/hookIndex';
 
 function NewExamen({ examenToEdit = {}, onCloseModal }) {
   const { examens_id: editId, ...editValues } = examenToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createExamen, isCreating } = UseNewExamen();
-  const { editExamen, isEditing } = UseEditExamen();
+  const { useGetAll: getTypeExamens } = typeExamensHooks;
+  const { useCreateEdit } = examensHooks;
 
-  const { useGetAll } = typeExamensHooks;
-  const { data: typeExamen, isLoading: isLoadingTypeExam } = useGetAll();
-  // const { examens: typeExamen, isLoading } = useTypeExam();
+  const { createEdit, isWorking: isCreating } = useCreateEdit();
+  const { data: typeExamen, isLoading: isLoadingTypeExam } = getTypeExamens();
+
   const { couts, isLoading: isLoadingCost } = UseCosts();
 
   const navigate = useNavigate();
@@ -57,7 +55,7 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
+  const isWorking = isCreating || isLoadingTypeExam;
 
   function onSubmit(data) {
     const payload = {
@@ -68,7 +66,7 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
     };
 
     if (isEditSession) {
-      editExamen(
+      createEdit(
         {
           newExamenData: payload,
           id: editId,
@@ -84,14 +82,17 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createExamen(payload, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { formData: payload, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/examens');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/examens');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {
@@ -127,6 +128,7 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
+      {/* todo: fix the window pop up */}
       <FormRow label="Type" error={errors?.typesexamens_id?.message}>
         <div onClick={(e) => e.stopPropagation()}>
           <Controller
@@ -152,6 +154,7 @@ function NewExamen({ examenToEdit = {}, onCloseModal }) {
         </div>
       </FormRow>
 
+      {/* todo: fix the window pop up */}
       <FormRow label="Coût" error={errors?.couts_id?.message}>
         <div onClick={(e) => e.stopPropagation()}>
           <Controller

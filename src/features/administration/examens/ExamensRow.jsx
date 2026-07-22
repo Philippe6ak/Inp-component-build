@@ -1,13 +1,12 @@
-import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
+import { HiPencil, HiTrash } from 'react-icons/hi2';
 import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import { UseDeleteExamen } from './useDeleteExamen';
-import { UseNewExamen } from './useNewExamen';
+import { examensHooks } from '../../../hooks/hookIndex';
 import NewExamen from './NewExamen';
 
-function examenRow({ examen }) {
+function ExamensRow({ examen }) {
   const examenId = examen.examens_id;
   const code = examen?.code ?? '';
   const libelle = examen?.libelle ?? '';
@@ -15,17 +14,8 @@ function examenRow({ examen }) {
   const coutsmontant = examen?.cout_montant ?? '';
   const menuId = examenId;
 
-  const { isDeleting, deleteExamen } = UseDeleteExamen();
-  const { createExamen } = UseNewExamen();
-
-  function handleDuplicate() {
-    createExamen({
-      libelle: libelle ? `Copy of ${libelle}` : 'Copy',
-      code: code ? `${code}-COPY` : '',
-      typesexamens_id: examen.typesexamens_id,
-      montant: examen.cout_montant,
-    });
-  }
+  const { useDelete } = examensHooks;
+  const { isDeleting, delete: deleteExamen } = useDelete();
 
   return (
     <Table.Row>
@@ -39,10 +29,6 @@ function examenRow({ examen }) {
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
@@ -70,4 +56,4 @@ function examenRow({ examen }) {
   );
 }
 
-export default examenRow;
+export default ExamensRow;

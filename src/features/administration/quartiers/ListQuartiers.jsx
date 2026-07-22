@@ -1,3 +1,4 @@
+import { quartierHooks } from '../../../hooks/hookIndex';
 import Button from '../../../ui/Button';
 import Empty from '../../../ui/Empty';
 import Menus from '../../../ui/Menus';
@@ -6,11 +7,11 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import NewQuartier from './NewQuartier';
 import QuartierRow from './QuartierRow';
-import { useQuartiers } from './useQuartiers';
 import { useSearchParams } from 'react-router-dom';
 
 function ListQuartiers() {
-  const { isLoading, error, quartiers } = useQuartiers();
+  const { useGetAll } = quartierHooks;
+  const { isLoading, error, data: quartiers } = useGetAll();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
@@ -19,9 +20,7 @@ function ListQuartiers() {
     return <p>Erreur lors du chargement des quartiers.</p>;
   }
 
-  const quartiersData = Array.isArray(quartiers)
-    ? quartiers
-    : quartiers?.data || quartiers?.quartiers || [];
+  const quartiersData = Array.isArray(quartiers) ? quartiers : [];
 
   const sortBy = searchParams.get('sortBy') || 'name-asc';
   const [field, direction] = sortBy.split('-');
