@@ -4,12 +4,14 @@ import Table from '../../../ui/Table';
 import Empty from '../../../ui/Empty';
 import Pagination from '../../../ui/Pagination';
 import Checkbox from '../../../ui/Checkbox';
-import { usePermissions } from './usePermissions';
+
+import { permissionsHooks } from '../../../hooks/hookIndex';
 import PermissionsRow from './PermissionsRow';
 import { useSearchParams } from 'react-router-dom';
 
 function PermissionsLayout() {
-  const { isLoading, error, permissions } = usePermissions();
+  const { useGetAll } = permissionsHooks;
+  const { isLoading, error, data: permissions } = useGetAll();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;

@@ -1,19 +1,18 @@
-import { useForm, Controller } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-
 import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useEditRole } from './useEditRole';
-import { useNewRole } from './useNewRole';
+
+import { useForm, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { rolesHooks } from '../../../hooks/hookIndex';
 
 function NewRole({ roleToEdit = {}, onCloseModal }) {
   const { roles_id: editId, ...editValues } = roleToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createRole, isCreating } = useNewRole();
-  const { editRole, isEditing } = useEditRole();
+  const { useCreateEdit } = rolesHooks;
+  const { createEdit, isWorking } = useCreateEdit();
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset, formState } = useForm({
@@ -24,12 +23,11 @@ function NewRole({ roleToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editRole(
-        { newRoleData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -40,13 +38,16 @@ function NewRole({ roleToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createRole(data, {
-      onSuccess: () => {
-        reset();
-        if (onCloseModal) onCloseModal();
-        else navigate('/roles');
-      },
-    });
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
+          if (onCloseModal) onCloseModal();
+          else navigate('/roles');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

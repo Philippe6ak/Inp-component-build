@@ -1,20 +1,18 @@
-/* eslint-disable react/prop-types */
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-
 import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useNewPermissions } from './useNewPermissions';
-import { useEditPermissions } from './useEditPermissions';
+
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { permissionsHooks } from '../../../hooks/hookIndex';
 
 function NewPermissions({ permissionsToEdit = {}, onCloseModal }) {
   const { permissions_id: editId, ...editValues } = permissionsToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createPermissions, isCreating } = useNewPermissions();
-  const { editPermissions, isEditing } = useEditPermissions();
+  const { useCreateEdit } = permissionsHooks;
+  const { createEdit, isWorking } = useCreateEdit();
 
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
@@ -25,12 +23,11 @@ function NewPermissions({ permissionsToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editPermissions(
-        { newPermissionsData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,14 +39,17 @@ function NewPermissions({ permissionsToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createPermissions(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/permissions');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/permissions');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

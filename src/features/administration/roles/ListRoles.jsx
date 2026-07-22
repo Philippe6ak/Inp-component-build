@@ -4,13 +4,16 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
+
 import NewRole from './NewRole';
 import RoleRow from './RoleRow';
-import { useRole } from './useRole';
+import { rolesHooks } from '../../../hooks/hookIndex';
 import { useSearchParams } from 'react-router-dom';
 
 function ListRoles() {
-  const { isLoading, error, role } = useRole();
+  const { useGetAll } = rolesHooks;
+  const { isLoading, error, data: role } = useGetAll();
+
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;

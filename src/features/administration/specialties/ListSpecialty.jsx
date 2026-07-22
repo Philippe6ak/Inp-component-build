@@ -4,13 +4,15 @@ import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
+
 import NewSpecialty from './NewSpecialty';
-import { useSpecialty } from './useSpecialty';
 import SpecialtyRow from './SpecialtyRow';
+import { specialitesHooks } from '../../../hooks/hookIndex';
 import { useSearchParams } from 'react-router-dom';
 
 function ListSpecialty() {
-  const { isLoading, error, specialties } = useSpecialty();
+  const { useGetAll } = specialitesHooks;
+  const { isLoading, error, data: specialties } = useGetAll();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;

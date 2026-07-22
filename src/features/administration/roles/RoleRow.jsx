@@ -3,17 +3,19 @@ import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
-import { useDeleteRole } from './useDeleteRole';
+
 import NewRole from './NewRole';
 import { useNavigate } from 'react-router-dom';
+import { rolesHooks } from '../../../hooks/hookIndex';
 
-function RolesRow({ role }) {
+function RoleRow({ role }) {
   const roleId = role.roles_id;
   const name = role?.name ?? '';
   const menuId = roleId;
   const navigate = useNavigate();
 
-  const { isDeleting, deleteRole } = useDeleteRole();
+  const { useDelete } = rolesHooks;
+  const { delete: deleteRole, isDeleting } = useDelete();
 
   return (
     <Table.Row>
@@ -32,11 +34,13 @@ function RolesRow({ role }) {
               </Menus.Button>
 
               <Modal.Open opens="edit">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>
+                  Modifier le role
+                </Menus.Button>
               </Modal.Open>
 
               <Modal.Open opens="delete">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Supprimer</Menus.Button>
               </Modal.Open>
             </Menus.List>
 
@@ -58,4 +62,4 @@ function RolesRow({ role }) {
   );
 }
 
-export default RolesRow;
+export default RoleRow;

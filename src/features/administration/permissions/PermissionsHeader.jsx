@@ -4,7 +4,6 @@ import {
   HiCheckCircle,
   HiLockClosed,
 } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
 import Row from '../../../ui/Row';
 import Heading from '../../../ui/Heading';
 import Button from '../../../ui/Button';
@@ -13,11 +12,12 @@ import TableOperations from '../../../ui/TableOperations';
 import Select from '../../../ui/Select';
 import Input from '../../../ui/Input';
 import Stat from '../../dashboard/Stat';
-
 import SortBy from '../../../ui/SortBy';
+
 import NewPermissions from './NewPermissions';
-import { usePermissions } from './UsePermissions';
-import { useRole } from '../roles/useRole';
+
+import { permissionsHooks, rolesHooks } from '../../../hooks/hookIndex';
+import { useNavigate } from 'react-router-dom';
 
 function PermissionsHeader() {
   const navigate = useNavigate();
@@ -35,8 +35,10 @@ function PermissionsHeader() {
     { value: 'inactive', label: 'Inactif' },
   ];
 
-  const { permissions } = usePermissions();
-  const { role } = useRole();
+  const { useGetAll: useGetAllPermissions } = permissionsHooks;
+  const { useGetAll: useGetAllRoles } = rolesHooks;
+  const { data: permissions } = useGetAllPermissions();
+  const { data: role } = useGetAllRoles();
 
   const permissionsCount = Array.isArray(permissions)
     ? permissions.length

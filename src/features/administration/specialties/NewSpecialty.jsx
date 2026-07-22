@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,15 +5,15 @@ import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
 import Input from '../../../ui/Input';
-import { useEditSpecialty } from './useEditSpecialty';
-import { useNewSpecialty } from './useNewSpecialty';
+import { specialitesHooks } from '../../../hooks/hookIndex';
 
 function NewSpecialty({ specialtyToEdit = {}, onCloseModal }) {
   const { specialites_id: editId, ...editValues } = specialtyToEdit;
   const isEditSession = Boolean(editId);
 
-  const { createSpecialty, isCreating } = useNewSpecialty();
-  const { editSpecialty, isEditing } = useEditSpecialty();
+  const { useCreateEdit } = specialitesHooks;
+  const { createEdit, isWorking } = useCreateEdit();
+
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
@@ -25,12 +24,11 @@ function NewSpecialty({ specialtyToEdit = {}, onCloseModal }) {
       : {},
   });
   const { errors } = formState;
-  const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
     if (isEditSession) {
-      editSpecialty(
-        { newSpecialtyData: data, id: editId },
+      createEdit(
+        { formData: data, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,14 +40,17 @@ function NewSpecialty({ specialtyToEdit = {}, onCloseModal }) {
       return;
     }
 
-    createSpecialty(data, {
-      onSuccess: () => {
-        reset();
+    createEdit(
+      { formData: data, id: undefined },
+      {
+        onSuccess: () => {
+          reset();
 
-        if (onCloseModal) onCloseModal();
-        else navigate('/specialties');
-      },
-    });
+          if (onCloseModal) onCloseModal();
+          else navigate('/specialties');
+        },
+      }
+    );
   }
 
   function onError(formErrors) {

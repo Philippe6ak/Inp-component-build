@@ -106,3 +106,27 @@ export const quartierServices = createCrudService({
   deleteEndpoint: API_ENDPOINTS.DELETEQUARTIERS,
   idField: 'quartiers_id',
 });
+
+export const permissionsServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETPERMISSIONS,
+  addEndpoint: API_ENDPOINTS.ADDPERMISSIONS,
+  updateEndpoint: API_ENDPOINTS.UPDATEPERMISSIONS,
+  deleteEndpoint: API_ENDPOINTS.DELETEPERMISSIONS,
+  idField: 'permissions_id',
+});
+
+export const rolesServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETROLES,
+  addEndpoint: API_ENDPOINTS.ADDROLES,
+  updateEndpoint: API_ENDPOINTS.UPDATEROLES,
+  deleteEndpoint: API_ENDPOINTS.DELETEROLES,
+  idField: 'roles_id',
+});
+
+export const specialitesServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETSPECIALITES,
+  addEndpoint: API_ENDPOINTS.ADDSPECIALITES,
+  updateEndpoint: API_ENDPOINTS.UPDATESPECIALITES,
+  deleteEndpoint: API_ENDPOINTS.DELETESPECIALITES,
+  idField: 'specialites_id',
+});

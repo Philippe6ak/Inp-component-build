@@ -1,45 +1,35 @@
-import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
+import { HiPencil, HiTrash } from 'react-icons/hi2';
 import ConfirmDelete from '../../../ui/ConfirmDelete';
 import Menus from '../../../ui/Menus';
 import Modal from '../../../ui/Modal';
 import Table from '../../../ui/Table';
 import Checkbox from '../../../ui/Checkbox';
-import { useDeletePermissions } from './useDeletePermissions';
+
 import NewPermissions from './NewPermissions';
-import { useNewPermissions } from './useNewPermissions';
+import { permissionsHooks } from '../../../hooks/hookIndex';
 
 function PermissionsRow({ permission }) {
   const permissionId = permission.permissions_id;
   const name = permission?.name ?? '';
   const menuId = permissionId;
 
-  const { isDeleting, deletePermissions } = useDeletePermissions();
-  const { createPermissions } = useNewPermissions();
-
-  function handleDuplicate() {
-    createPermissions({
-      name: name ? `Copy of ${name}` : 'Copy',
-    });
-  }
+  const { useDelete } = permissionsHooks;
+  const { isDeleting, delete: deletePermissions } = useDelete();
 
   return (
     <Table.Row>
       <Checkbox id={`permission-${permissionId}`} />
       <div>{name}</div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div>Let&apos;s</div>
+      <div>Think</div>
+      <div>About</div>
+      <div>it</div>
       <div className="flex gap-[0.8rem] justify-end">
         <Modal>
           <Menus.Menu>
             <Menus.Toggle id={menuId} />
 
             <Menus.List id={menuId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

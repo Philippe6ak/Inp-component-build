@@ -1,9 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { HiArrowLeft, HiShieldCheck } from 'react-icons/hi2';
-import { useNavigate, useParams } from 'react-router-dom';
-import { usePermissions } from '../permissions/usePermissions';
-import { useAssignPermissions } from './useAssignPermission';
-import { useRole } from './useRole';
 import Button from '../../../ui/Button';
 import Checkbox from '../../../ui/Checkbox';
 import Empty from '../../../ui/Empty';
@@ -11,22 +7,35 @@ import Heading from '../../../ui/Heading';
 import Row from '../../../ui/Row';
 import Spinner from '../../../ui/Spinner';
 
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAssignPermissions } from './useAssignPermission';
+import { permissionsHooks, rolesHooks } from '../../../hooks/hookIndex';
+
 function RolePermissions() {
   const navigate = useNavigate();
   const { roleId } = useParams();
 
-  const { isLoading: isLoadingRoles, error: rolesError, role } = useRole();
+  // const { isLoading: isLoadingRoles, error: rolesError, role } = useRole();
+  const { useGetAll: useGetAllRoles } = rolesHooks;
+  const {
+    data: role,
+    isLoading: isLoadingRoles,
+    error: rolesError,
+  } = useGetAllRoles();
+
+  const { useGetAll: useGetAllPermissions } = permissionsHooks;
   const {
     isLoading: isLoadingPermissions,
     error: permissionsError,
-    permissions,
-  } = usePermissions();
+    data: permissions,
+  } = useGetAllPermissions();
+
   const { assignPermissions, isAssigning } = useAssignPermissions();
 
   const [selectedPermissionKeys, setSelectedPermissionKeys] = useState([]);
 
-  const rolesData = useMemo(() => role?.data ?? [], [role]);
-  const permissionsData = useMemo(() => permissions?.data ?? [], [permissions]);
+  const rolesData = useMemo(() => role ?? [], [role]);
+  const permissionsData = useMemo(() => permissions ?? [], [permissions]);
 
   const selectedRole = useMemo(
     () =>
@@ -103,15 +112,6 @@ function RolePermissions() {
         : [...currentSelection, permissionKey]
     );
   }
-
-  // const areAllSelected =
-  //   totalPermissions > 0 && selectedCount === totalPermissions;
-
-  // function handleToggleAll() {
-  //   setSelectedPermissionKeys(
-  //     areAllSelected ? [] : [...availablePermissionKeys]
-  //   );
-  // }
 
   function handleSubmit() {
     assignPermissions({

@@ -43,10 +43,10 @@ export const API_ENDPOINTS = {
   //   // Admin
   //   USERS: '/users',
 
-  GETSPECIALTIES: '/specialites',
-  ADDSPECIALTIES: '/specialites/ajouter',
-  UPDATESPECIALTIES: `/specialites/update`,
-  DELETESPECIALTIES: `/specialites/delete`,
+  GETSPECIALITES: '/specialites',
+  ADDSPECIALITES: '/specialites/ajouter',
+  UPDATESPECIALITES: `/specialites/update`,
+  DELETESPECIALITES: `/specialites/delete`,
 
   GETTYPEDISEASES: '/typesmaladies',
   ADDTYPEDISEASES: '/typesmaladies/ajouter',

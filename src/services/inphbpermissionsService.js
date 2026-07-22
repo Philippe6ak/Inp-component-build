@@ -10,9 +10,7 @@ export const permissionsService = {
     return data;
   },
 
-  // create or edit in same function
   createEditPermissions: async ({ name }, permissions_id) => {
-    //CREATE — when no id passed
     if (!permissions_id) {
       const data = await api.post(API_ENDPOINTS.ADDPERMISSIONS, { name });
       if (data?.status === 'error' || data?.success === false) {
@@ -21,7 +19,6 @@ export const permissionsService = {
       return data;
     }
 
-    //EDIT — when id passed
     const data = await api.post(API_ENDPOINTS.UPDATEPERMISSIONS, {
       permissions_id,
       name,
