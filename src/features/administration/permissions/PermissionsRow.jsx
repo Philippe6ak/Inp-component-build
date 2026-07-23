@@ -18,12 +18,9 @@ function PermissionsRow({ permission }) {
 
   return (
     <Table.Row>
-      <Checkbox id={`permission-${permissionId}`} />
       <div>{name}</div>
-      <div>Let&apos;s</div>
-      <div>Think</div>
-      <div>About</div>
-      <div>it</div>
+      <div></div>
+      <div></div>
       <div className="flex gap-[0.8rem] justify-end">
         <Modal>
           <Menus.Menu>

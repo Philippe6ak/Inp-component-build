@@ -10,7 +10,6 @@ export const examenService = {
     return data;
   },
 
-  // create or edit in same function
   createEditexamen: async (
     { libelle, code, typesexamens_id, montant },
     examens_id
