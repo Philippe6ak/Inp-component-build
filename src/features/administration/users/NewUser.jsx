@@ -1,14 +1,13 @@
 import { useMemo, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
 
 import Button from '../../../ui/Button';
 import Form from '../../../ui/Form';
 import FormRow from '../../../ui/FormRow';
-import { specsService } from '../../../services/inphbSpecsService';
+import { specialitesHooks } from '../../../hooks/hookIndex';
 import { userService } from '../../../services/inphbUserService';
 import { useNewUser } from './useNewUser';
 
@@ -26,15 +25,13 @@ function NewUser({ onCloseModal }) {
   });
   const { errors } = formState;
 
+  const { useGetAll } = specialitesHooks;
   const { data: specialtiesResponse, isLoading: isLoadingSpecialties } =
-    useQuery({
-      queryKey: ['specialties'],
-      queryFn: specsService.getSpecialties,
-    });
+    useGetAll();
 
   const specialtyOptions = useMemo(
     () =>
-      (specialtiesResponse?.data ?? []).map((specialty) => ({
+      (specialtiesResponse ?? []).map((specialty) => ({
         value: specialty.specialites_id,
         label: specialty.libelle,
       })),
