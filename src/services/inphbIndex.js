@@ -1,6 +1,5 @@
 import { createCrudService } from './createCrudService';
 import { API_ENDPOINTS } from '../api/endpoints';
-import { approvisionnementService } from './inphbapprovService';
 
 export const methodesDepistageService = createCrudService({
   getEndpoint: API_ENDPOINTS.GETMETHODESDEPISTAGES,
@@ -77,25 +76,25 @@ export const typeMedecinesService = createCrudService({
 });
 
 export const approvisionnementsService = createCrudService({
-  getEndpoint: '/approvisionnements',
-  addEndpoint: '/approvisionnements/ajouter',
+  getEndpoint: API_ENDPOINTS.GETAPPROVISIONNEMENTS,
+  addEndpoint: API_ENDPOINTS.ADDAPPROVISIONNEMENTS,
 
   idField: 'approvisionnements_id',
 });
 
 export const medicamentServices = createCrudService({
-  getEndpoint: '/medicaments',
-  addEndpoint: '/medicaments/ajouter',
-  updateEndpoint: `/medicaments/update`,
-  deleteEndpoint: `/medicaments/delete`,
+  getEndpoint: API_ENDPOINTS.GETMEDECINE,
+  addEndpoint: API_ENDPOINTS.ADDMEDECINE,
+  updateEndpoint: API_ENDPOINTS.UPDATEMEDECINE,
+  deleteEndpoint: API_ENDPOINTS.DELETEMEDECINE,
   idField: 'medicaments_id',
 });
 
 export const venteServices = createCrudService({
-  getEndpoint: '/ventes',
-  addEndpoint: '/ventes/ajouter',
-  updateEndpoint: '/ventes/update',
-  deleteEndpoint: '/ventes/delete',
+  getEndpoint: API_ENDPOINTS.GETVENTES,
+  addEndpoint: API_ENDPOINTS.ADDVENTES,
+  updateEndpoint: API_ENDPOINTS.UPDATEVENTES,
+  deleteEndpoint: API_ENDPOINTS.DELETEVENTES,
   idField: 'ventes_id',
 });
 

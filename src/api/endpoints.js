@@ -20,29 +20,6 @@ export const API_ENDPOINTS = {
   UPDATETYPECONSULTATIONS: `/typesconsultations/update`,
   DELETETYPECONSULTATIONS: `/typesconsultations/delete`,
 
-  //   CONSULTATIONS: '/consultations',
-  //   CONSULTATION: (id) => `/consultations/${id}`,
-
-  //   // Medications
-  //   MEDICATIONS: '/medications',
-  //   MEDICATION: (id) => `/medications/${id}`,
-
-  //   // Stock
-  //   STOCK: '/stock',
-  //   SUPPLIES: '/supplies',
-
-  //   // Appointments
-  //   APPOINTMENTS: '/appointments',
-
-  //   // Hospitalizations
-  //   HOSPITALIZATIONS: '/hospitalizations',
-
-  //   // Referrals
-  //   REFERRALS: '/referrals',
-
-  //   // Admin
-  //   USERS: '/users',
-
   GETSPECIALITES: '/specialites',
   ADDSPECIALITES: '/specialites/ajouter',
   UPDATESPECIALITES: `/specialites/update`,
@@ -100,6 +77,7 @@ export const API_ENDPOINTS = {
   ADDPERMISSIONS: '/permissions/ajouter',
   UPDATEPERMISSIONS: `/permissions/update`,
   DELETEPERMISSIONS: `/permissions/delete`,
+
   // ROLES
   GETROLES: '/roles',
   ADDROLES: '/roles/ajouter',
@@ -150,4 +128,10 @@ export const API_ENDPOINTS = {
   UPDATEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/update`,
   DELETEAPPROVISIONNEMENTSMDCS: `/approvisionnementsmdcs/delete`,
 */
+
+  //Ventes
+  GETVENTES: '/ventes',
+  ADDVENTES: '/ventes/ajouter',
+  UPDATEVENTES: `/ventes/update`,
+  DELETEVENTES: `/ventes/delete`,
 };

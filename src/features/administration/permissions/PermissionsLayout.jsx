@@ -6,9 +6,9 @@ import PermissionsRow from './PermissionsRow';
 import { useSearchParams } from 'react-router-dom';
 
 function PermissionsLayout({ permissions }) {
-  const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams(); //librairie
 
-  const sortBy = searchParams.get('sortBy') || 'name-asc';
+  const sortBy = searchParams.get('sortBy') || 'name-asc'; //librairie
   const [field, direction] = sortBy.split('-');
 
   const sortedPermissions = [...permissions].sort((a, b) => {
