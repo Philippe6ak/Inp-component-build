@@ -16,6 +16,7 @@ import { useCheckout } from '../check-in-out/useCheckout';
 import { useBooking } from './useBooking';
 import { useDeleteBooking } from './useDeleteBooking';
 
+// this is the component of viewing one booking, it is used in Booking.jsx, which is the page of one booking. Booking.jsx is used in App.jsx, which is the main component of the app.
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
   const { status, id: bookingId } = booking || {};

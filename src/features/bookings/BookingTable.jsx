@@ -1,14 +1,12 @@
-import BookingRow from "./BookingRow";
-import Table from "../../ui/Table";
-import Menus from "../../ui/Menus";
-import Empty from "../../ui/Empty";
-import Spinner from "../../ui/Spinner";
-import { useBookings } from "./useBookings";
-import Pagination from "../../ui/Pagination";
+import BookingRow from './BookingRow';
+import Table from '../../ui/Table';
+import Menus from '../../ui/Menus';
+import Empty from '../../ui/Empty';
+import Spinner from '../../ui/Spinner';
+import { useBookings } from './useBookings';
+import Pagination from '../../ui/Pagination';
 
 function BookingTable() {
-  //for testing bug, need to call after the useBookings hook
-
   const { bookings, isLoading, count } = useBookings();
   if (isLoading) return <Spinner />;
 

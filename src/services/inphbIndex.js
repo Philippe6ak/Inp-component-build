@@ -1,0 +1,131 @@
+import { createCrudService } from './createCrudService';
+import { API_ENDPOINTS } from '../api/endpoints';
+
+export const methodesDepistageService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETMETHODESDEPISTAGES,
+  addEndpoint: API_ENDPOINTS.ADDMETHODESDEPISTAGES,
+  updateEndpoint: API_ENDPOINTS.UPDATEMETHODESDEPISTAGES,
+  deleteEndpoint: API_ENDPOINTS.DELETEMETHODESDEPISTAGES,
+  idField: 'methodesdepistages_id',
+});
+
+export const etatGrossessesService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETETATGROSSESSES,
+  addEndpoint: API_ENDPOINTS.ADDETATGROSSESSES,
+  updateEndpoint: API_ENDPOINTS.UPDATEETATGROSSESSES,
+  deleteEndpoint: API_ENDPOINTS.DELETEETATGROSSESSES,
+  idField: 'etatgrossesses_id',
+});
+
+// types here
+
+export const typeGrossessesService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETTYPEGROSSESSES,
+  addEndpoint: API_ENDPOINTS.ADDTYPEGROSSESSES,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPEGROSSESSES,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPEGROSSESSES,
+  idField: 'typegrossesses_id',
+});
+
+export const typeDiseaseService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETTYPEDISEASES,
+  addEndpoint: API_ENDPOINTS.ADDTYPEDISEASES,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPEDISEASES,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPEDISEASES,
+  idField: 'typesmaladies_id',
+});
+
+export const diseaseService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETDISEASES,
+  addEndpoint: API_ENDPOINTS.ADDDISEASES,
+  updateEndpoint: API_ENDPOINTS.UPDATEDISEASES,
+  deleteEndpoint: API_ENDPOINTS.DELETEDISEASES,
+  idField: 'maladies_id',
+});
+
+export const typeExamensService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETTYPEEXAMENS,
+  addEndpoint: API_ENDPOINTS.ADDTYPEEXAMENS,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPEEXAMENS,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPEEXAMENS,
+  idField: 'typesexamens_id',
+});
+
+export const examensService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETEXAMENS,
+  addEndpoint: API_ENDPOINTS.ADDEXAMENS,
+  updateEndpoint: API_ENDPOINTS.UPDATEEXAMENS,
+  deleteEndpoint: API_ENDPOINTS.DELETEEXAMENS,
+  idField: 'examens_id',
+});
+
+export const typeConsultationsService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETTYPECONSULTATIONS,
+  addEndpoint: API_ENDPOINTS.ADDTYPECONSULTATIONS,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPECONSULTATIONS,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPECONSULTATIONS,
+  idField: 'typesconsultations_id',
+});
+
+export const typeMedecinesService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETTYPEMEDECINE,
+  addEndpoint: API_ENDPOINTS.ADDTYPEMEDECINE,
+  updateEndpoint: API_ENDPOINTS.UPDATETYPEMEDECINE,
+  deleteEndpoint: API_ENDPOINTS.DELETETYPEMEDECINE,
+  idField: 'typesmedicaments_id',
+});
+
+export const approvisionnementsService = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETAPPROVISIONNEMENTS,
+  addEndpoint: API_ENDPOINTS.ADDAPPROVISIONNEMENTS,
+
+  idField: 'approvisionnements_id',
+});
+
+export const medicamentServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETMEDECINE,
+  addEndpoint: API_ENDPOINTS.ADDMEDECINE,
+  updateEndpoint: API_ENDPOINTS.UPDATEMEDECINE,
+  deleteEndpoint: API_ENDPOINTS.DELETEMEDECINE,
+  idField: 'medicaments_id',
+});
+
+export const venteServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETVENTES,
+  addEndpoint: API_ENDPOINTS.ADDVENTES,
+  updateEndpoint: API_ENDPOINTS.UPDATEVENTES,
+  deleteEndpoint: API_ENDPOINTS.DELETEVENTES,
+  idField: 'ventes_id',
+});
+
+export const quartierServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETQUARTIERS,
+  addEndpoint: API_ENDPOINTS.ADDQUARTIERS,
+  updateEndpoint: API_ENDPOINTS.UPDATEQUARTIERS,
+  deleteEndpoint: API_ENDPOINTS.DELETEQUARTIERS,
+  idField: 'quartiers_id',
+});
+
+export const permissionsServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETPERMISSIONS,
+  addEndpoint: API_ENDPOINTS.ADDPERMISSIONS,
+  updateEndpoint: API_ENDPOINTS.UPDATEPERMISSIONS,
+  deleteEndpoint: API_ENDPOINTS.DELETEPERMISSIONS,
+  idField: 'permissions_id',
+});
+
+export const rolesServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETROLES,
+  addEndpoint: API_ENDPOINTS.ADDROLES,
+  updateEndpoint: API_ENDPOINTS.UPDATEROLES,
+  deleteEndpoint: API_ENDPOINTS.DELETEROLES,
+  idField: 'roles_id',
+});
+
+export const specialitesServices = createCrudService({
+  getEndpoint: API_ENDPOINTS.GETSPECIALITES,
+  addEndpoint: API_ENDPOINTS.ADDSPECIALITES,
+  updateEndpoint: API_ENDPOINTS.UPDATESPECIALITES,
+  deleteEndpoint: API_ENDPOINTS.DELETESPECIALITES,
+  idField: 'specialites_id',
+});

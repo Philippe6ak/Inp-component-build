@@ -13,12 +13,33 @@ import Dashboard from './pages/Dashboard';
 import DragDrop from './pages/DragDrop';
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
-import ReusableButtons from './pages/ReusableButtons';
 import Settings from './pages/Settings';
 import Table from './pages/Table';
 import Users from './pages/Users';
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
+import Calc from './pages/Calc';
+import Calcul from './pages/Calcul';
+import Patients from './pages/Patients';
+import NewConsultation from './pages/NewConsultations';
+import Specialties from './pages/Specialties';
+import DiseasesType from './pages/DiseasesType';
+import ExamenType from './pages/ExamenType';
+import Diseases from './pages/Diseases';
+import Examen from './pages/Examen';
+import TypeMedecine from './pages/MedecineType';
+import Medicament from './pages/Medicament';
+import ConsultationType from './pages/ConsultationType';
+import ListUsers from './features/administration/users/ListUsers';
+import Permissions from './pages/Permissions';
+import Roles from './pages/Roles';
+import RolePermissions from './features/administration/roles/RolePermissions';
+// import EtsReferent from './pages/EtsReferent';
+// import Service from './pages/Service';
+import Approvisionnement from './pages/Approvisionnement';
+import EtatGrossesse from './pages/EtatGrossesse';
+import TypeGrossesse from './pages/TypeGrossesse';
+import MethodeDepistage from './pages/MethodeDepistage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,12 +69,51 @@ function App() {
               <Route path="booking/:bookingId" element={<Booking />} />
               <Route path="checkin/:bookingId" element={<Checkin />} />
               <Route path="cabins" element={<Cabins />} />
-              <Route path="users" element={<Users />} />
+              <Route path="users" element={<ListUsers />} />
               <Route path="settings" element={<Settings />} />
               <Route path="account" element={<Account />} />
               <Route path="table" element={<Table />} />
               <Route path="drag-drop" element={<DragDrop />} />
-              <Route path="reusable-buttons" element={<ReusableButtons />} />
+              <Route path="calc" element={<Calc />} />
+              <Route path="calcul" element={<Calcul />} />
+
+              {/* TEMPORARY REDIRECTS FOR NEW HEALTHCARE ROUTES */}
+              <Route path="patients" element={<Patients />} />
+              <Route path="patients/new" element={<Users />} />
+              <Route path="consultations" element={<Bookings />} />
+              <Route path="consultations/new" element={<NewConsultation />} />
+              <Route path="prescriptions" element={<Bookings />} />
+              <Route path="medications" element={<Bookings />} />
+              <Route path="stock" element={<Bookings />} />
+              <Route path="appointments" element={<Bookings />} />
+              <Route path="hospitalizations" element={<Bookings />} />
+              <Route path="pregnancies" element={<Bookings />} />
+              <Route path="referrals" element={<Bookings />} />
+              <Route path="specialties" element={<Specialties />} />
+              <Route path="typediseases" element={<DiseasesType />} />
+              <Route path="typesexamens" element={<ExamenType />} />
+              <Route path="typemedicines" element={<TypeMedecine />} />
+              <Route path="typesconsultations" element={<ConsultationType />} />
+              <Route path="diseases" element={<Diseases />} />
+              <Route path="examens" element={<Examen />} />
+              <Route path="pricing" element={<Settings />} />
+              <Route path="medicaments" element={<Medicament />} />
+              <Route path="users" element={<ListUsers />} />
+              <Route path="permissions" element={<Permissions />} />
+              <Route path="roles" element={<Roles />} />
+              <Route
+                path="roles/:roleId/permissions"
+                element={<RolePermissions />}
+              />
+              {/* <Route path="etablissementsreferents" element={<EtsReferent />} /> */}
+              <Route path="etatgrossesse" element={<EtatGrossesse />} />
+              <Route path="typesgrossesse" element={<TypeGrossesse />} />
+              <Route path="methodesdepistages" element={<MethodeDepistage />} />
+              {/* <Route path="services" element={<Service />} /> */}
+              <Route
+                path="approvisionnements"
+                element={<Approvisionnement />}
+              />
             </Route>
 
             <Route path="login" element={<Login />} />
